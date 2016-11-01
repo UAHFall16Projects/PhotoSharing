@@ -11,6 +11,7 @@ GO
 IF SCHEMA_ID(N'photoShare') IS NULL EXECUTE(N'CREATE SCHEMA [photoShare]');
 GO
 
+
 -- --------------------------------------------------
 -- Dropping existing FOREIGN KEY constraints
 -- --------------------------------------------------
