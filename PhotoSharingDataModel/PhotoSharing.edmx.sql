@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 11/01/2016 16:26:02
--- Generated from EDMX file: C:\Users\Rohit\documents\visual studio 2015\Projects\PhotoSharing\PhotoSharingDataModel\PhotoSharing.edmx
+-- Date Created: 11/01/2016 17:22:59
+-- Generated from EDMX file: C:\Users\Rohit\Documents\GitHub\PhotoSharing\PhotoSharingDataModel\PhotoSharing.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
