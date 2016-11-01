@@ -1,0 +1,1301 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="PhotoSharing.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="PhotoSharingStoreContainer">
+    <EntitySet Name="Users" EntityType="PhotoSharing.Store.Users" store:Type="Tables" Schema="photoShare" />
+    <EntitySet Name="Photos1" EntityType="PhotoSharing.Store.Photos1" store:Type="Tables" Schema="photoShare" />
+    <EntitySet Name="Albums" EntityType="PhotoSharing.Store.Albums" store:Type="Tables" Schema="photoShare" />
+    <EntitySet Name="Groups" EntityType="PhotoSharing.Store.Groups" store:Type="Tables" Schema="photoShare" />
+    <EntitySet Name="Logs" EntityType="PhotoSharing.Store.Logs" store:Type="Tables" Schema="photoShare" />
+    <EntitySet Name="TagInformations" EntityType="PhotoSharing.Store.TagInformations" store:Type="Tables" Schema="photoShare" />
+    <EntitySet Name="Followers" EntityType="PhotoSharing.Store.Followers" store:Type="Tables" Schema="photoShare" />
+    <EntitySet Name="UserGroups" EntityType="PhotoSharing.Store.UserGroups" store:Type="Tables" Schema="photoShare" />
+    <EntitySet Name="Notifications" EntityType="PhotoSharing.Store.Notifications" store:Type="Tables" Schema="photoShare" />
+    <EntitySet Name="PhotoAlbums" EntityType="PhotoSharing.Store.PhotoAlbums" store:Type="Tables" Schema="photoShare" />
+    <EntitySet Name="SharePhotoes" EntityType="PhotoSharing.Store.SharePhotoes" store:Type="Tables" Schema="photoShare" />
+    <EntitySet Name="Comments" EntityType="PhotoSharing.Store.Comments" store:Type="Tables" Schema="photoShare" />
+    <EntitySet Name="Likes" EntityType="PhotoSharing.Store.Likes" store:Type="Tables" Schema="photoShare" />
+    <EntitySet Name="ShareWith" EntityType="PhotoSharing.Store.ShareWith" store:Type="Tables" Schema="photoShare" />
+    <AssociationSet Name="UserFollower" Association="PhotoSharing.Store.UserFollower">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Follower" EntitySet="Followers" />
+    </AssociationSet>
+    <AssociationSet Name="UserFollower1" Association="PhotoSharing.Store.UserFollower1">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Follower" EntitySet="Followers" />
+    </AssociationSet>
+    <AssociationSet Name="UserUserGroup" Association="PhotoSharing.Store.UserUserGroup">
+      <End Role="User" EntitySet="Users" />
+      <End Role="UserGroup" EntitySet="UserGroups" />
+    </AssociationSet>
+    <AssociationSet Name="UserGroupGroup" Association="PhotoSharing.Store.UserGroupGroup">
+      <End Role="UserGroup" EntitySet="UserGroups" />
+      <End Role="Group" EntitySet="Groups" />
+    </AssociationSet>
+    <AssociationSet Name="UserGroupOwner" Association="PhotoSharing.Store.UserGroupOwner">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Group" EntitySet="Groups" />
+    </AssociationSet>
+    <AssociationSet Name="AlbumUser" Association="PhotoSharing.Store.AlbumUser">
+      <End Role="Album" EntitySet="Albums" />
+      <End Role="User" EntitySet="Users" />
+    </AssociationSet>
+    <AssociationSet Name="UserTagInformation" Association="PhotoSharing.Store.UserTagInformation">
+      <End Role="User" EntitySet="Users" />
+      <End Role="TagInformation" EntitySet="TagInformations" />
+    </AssociationSet>
+    <AssociationSet Name="PhotoTagInformation" Association="PhotoSharing.Store.PhotoTagInformation">
+      <End Role="Photo" EntitySet="Photos1" />
+      <End Role="TagInformation" EntitySet="TagInformations" />
+    </AssociationSet>
+    <AssociationSet Name="UserNotification" Association="PhotoSharing.Store.UserNotification">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Notification" EntitySet="Notifications" />
+    </AssociationSet>
+    <AssociationSet Name="LogNotification" Association="PhotoSharing.Store.LogNotification">
+      <End Role="Log" EntitySet="Logs" />
+      <End Role="Notification" EntitySet="Notifications" />
+    </AssociationSet>
+    <AssociationSet Name="UserLog" Association="PhotoSharing.Store.UserLog">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Log" EntitySet="Logs" />
+    </AssociationSet>
+    <AssociationSet Name="LogPhoto" Association="PhotoSharing.Store.LogPhoto">
+      <End Role="Log" EntitySet="Logs" />
+      <End Role="Photo" EntitySet="Photos1" />
+    </AssociationSet>
+    <AssociationSet Name="AlbumPhoto" Association="PhotoSharing.Store.AlbumPhoto">
+      <End Role="Album" EntitySet="Albums" />
+      <End Role="Photo" EntitySet="Photos1" />
+    </AssociationSet>
+    <AssociationSet Name="PhotoAlbumPhoto" Association="PhotoSharing.Store.PhotoAlbumPhoto">
+      <End Role="PhotoAlbum" EntitySet="PhotoAlbums" />
+      <End Role="Photo" EntitySet="Photos1" />
+    </AssociationSet>
+    <AssociationSet Name="AlbumPhotoAlbum" Association="PhotoSharing.Store.AlbumPhotoAlbum">
+      <End Role="Album" EntitySet="Albums" />
+      <End Role="PhotoAlbum" EntitySet="PhotoAlbums" />
+    </AssociationSet>
+    <AssociationSet Name="UserPhoto" Association="PhotoSharing.Store.UserPhoto">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Photo" EntitySet="Photos1" />
+    </AssociationSet>
+    <AssociationSet Name="UserPhoto1" Association="PhotoSharing.Store.UserPhoto1">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Photo" EntitySet="Photos1" />
+    </AssociationSet>
+    <AssociationSet Name="UserShareUserPhoto" Association="PhotoSharing.Store.UserShareUserPhoto">
+      <End Role="User" EntitySet="Users" />
+      <End Role="ShareUserPhoto" EntitySet="SharePhotoes" />
+    </AssociationSet>
+    <AssociationSet Name="ShareUserPhotoPhoto" Association="PhotoSharing.Store.ShareUserPhotoPhoto">
+      <End Role="ShareUserPhoto" EntitySet="SharePhotoes" />
+      <End Role="Photo" EntitySet="Photos1" />
+    </AssociationSet>
+    <AssociationSet Name="UserComment" Association="PhotoSharing.Store.UserComment">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Comment" EntitySet="Comments" />
+    </AssociationSet>
+    <AssociationSet Name="CommentPhoto" Association="PhotoSharing.Store.CommentPhoto">
+      <End Role="Comment" EntitySet="Comments" />
+      <End Role="Photo" EntitySet="Photos1" />
+    </AssociationSet>
+    <AssociationSet Name="UserLike" Association="PhotoSharing.Store.UserLike">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Like" EntitySet="Likes" />
+    </AssociationSet>
+    <AssociationSet Name="LikePhoto" Association="PhotoSharing.Store.LikePhoto">
+      <End Role="Like" EntitySet="Likes" />
+      <End Role="Photo" EntitySet="Photos1" />
+    </AssociationSet>
+    <AssociationSet Name="GroupSharePhoto" Association="PhotoSharing.Store.GroupSharePhoto">
+      <End Role="Group" EntitySet="Groups" />
+      <End Role="SharePhoto" EntitySet="SharePhotoes" />
+    </AssociationSet>
+    <AssociationSet Name="AlbumShareWith" Association="PhotoSharing.Store.AlbumShareWith">
+      <End Role="Album" EntitySet="Albums" />
+      <End Role="ShareWith" EntitySet="ShareWith" />
+    </AssociationSet>
+    <AssociationSet Name="ShareWithPhoto" Association="PhotoSharing.Store.ShareWithPhoto">
+      <End Role="ShareWith" EntitySet="ShareWith" />
+      <End Role="Photo" EntitySet="Photos1" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FirstName" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="LastName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Password" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="LastLoginTime" Type="datetime" Nullable="true" />
+    <Property Name="DateOfBirth" Type="datetime" Nullable="true" />
+    <Property Name="Sex" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Phone" Type="int" Nullable="false" />
+    <Property Name="ProfilePicId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Photos1">
+    <Key>
+      <PropertyRef Name="PhotoID" />
+    </Key>
+    <Property Name="PhotoID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="GeoTag" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="TotalLikes" Type="int" Nullable="true" />
+    <Property Name="UploadedUserId" Type="int" Nullable="false" />
+    <Property Name="SharedWithId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Albums">
+    <Key>
+      <PropertyRef Name="AlbumID" />
+    </Key>
+    <Property Name="AlbumID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="OwnerId" Type="int" Nullable="false" />
+    <Property Name="CoverPicId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Groups">
+    <Key>
+      <PropertyRef Name="GroupID" />
+    </Key>
+    <Property Name="GroupID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="OwnerId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Logs">
+    <Key>
+      <PropertyRef Name="LogID" />
+    </Key>
+    <Property Name="LogID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Date" Type="datetime" Nullable="true" />
+    <Property Name="LoggerId" Type="int" Nullable="false" />
+    <Property Name="PhotoId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TagInformations">
+    <Key>
+      <PropertyRef Name="TagInformationID" />
+    </Key>
+    <Property Name="TagInformationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserUserID" Type="int" Nullable="false" />
+    <Property Name="PhotoId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Followers">
+    <Key>
+      <PropertyRef Name="FollowerID" />
+    </Key>
+    <Property Name="FollowerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="UserFollowerId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UserGroups">
+    <Key>
+      <PropertyRef Name="UserGroupID" />
+    </Key>
+    <Property Name="UserGroupID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="GroupId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Notifications">
+    <Key>
+      <PropertyRef Name="NotificationID" />
+    </Key>
+    <Property Name="NotificationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserID" Type="int" Nullable="false" />
+    <Property Name="LogLogID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PhotoAlbums">
+    <Key>
+      <PropertyRef Name="PhotoAlbumID" />
+    </Key>
+    <Property Name="PhotoAlbumID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PhotoId" Type="int" Nullable="false" />
+    <Property Name="AlbumId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SharePhotoes">
+    <Key>
+      <PropertyRef Name="ShareUserPhotoID" />
+    </Key>
+    <Property Name="ShareUserPhotoID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="true" />
+    <Property Name="GroupId" Type="int" Nullable="true" />
+    <Property Name="PhotoId" Type="int" Nullable="true" />
+    <Property Name="AlbumId" Type="int" Nullable="true" />
+    <Property Name="GroupSharePhoto_SharePhoto_GroupID" Type="int" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Comments">
+    <Key>
+      <PropertyRef Name="CommentID" />
+    </Key>
+    <Property Name="CommentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="PhotoId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Likes">
+    <Key>
+      <PropertyRef Name="LikeID" />
+    </Key>
+    <Property Name="LikeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="PhotoId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ShareWith">
+    <Key>
+      <PropertyRef Name="SharerWithId" />
+    </Key>
+    <Property Name="SharerWithId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="AlbumShareWith_ShareWith_AlbumID" Type="int" Nullable="true" />
+  </EntityType>
+  <Association Name="UserFollower">
+    <End Role="User" Type="PhotoSharing.Store.Users" Multiplicity="1" />
+    <End Role="Follower" Type="PhotoSharing.Store.Followers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="Follower">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UserFollower1">
+    <End Role="User" Type="PhotoSharing.Store.Users" Multiplicity="1" />
+    <End Role="Follower" Type="PhotoSharing.Store.Followers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="Follower">
+        <PropertyRef Name="UserFollowerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UserUserGroup">
+    <End Role="User" Type="PhotoSharing.Store.Users" Multiplicity="1" />
+    <End Role="UserGroup" Type="PhotoSharing.Store.UserGroups" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="UserGroup">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UserGroupGroup">
+    <End Role="UserGroup" Type="PhotoSharing.Store.UserGroups" Multiplicity="*" />
+    <End Role="Group" Type="PhotoSharing.Store.Groups" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Group">
+        <PropertyRef Name="GroupID" />
+      </Principal>
+      <Dependent Role="UserGroup">
+        <PropertyRef Name="GroupId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UserGroupOwner">
+    <End Role="User" Type="PhotoSharing.Store.Users" Multiplicity="1" />
+    <End Role="Group" Type="PhotoSharing.Store.Groups" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="Group">
+        <PropertyRef Name="OwnerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="AlbumUser">
+    <End Role="Album" Type="PhotoSharing.Store.Albums" Multiplicity="*" />
+    <End Role="User" Type="PhotoSharing.Store.Users" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="Album">
+        <PropertyRef Name="OwnerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UserTagInformation">
+    <End Role="User" Type="PhotoSharing.Store.Users" Multiplicity="1" />
+    <End Role="TagInformation" Type="PhotoSharing.Store.TagInformations" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="TagInformation">
+        <PropertyRef Name="UserUserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PhotoTagInformation">
+    <End Role="Photo" Type="PhotoSharing.Store.Photos1" Multiplicity="1" />
+    <End Role="TagInformation" Type="PhotoSharing.Store.TagInformations" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Photo">
+        <PropertyRef Name="PhotoID" />
+      </Principal>
+      <Dependent Role="TagInformation">
+        <PropertyRef Name="PhotoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UserNotification">
+    <End Role="User" Type="PhotoSharing.Store.Users" Multiplicity="1" />
+    <End Role="Notification" Type="PhotoSharing.Store.Notifications" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="Notification">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="LogNotification">
+    <End Role="Log" Type="PhotoSharing.Store.Logs" Multiplicity="1" />
+    <End Role="Notification" Type="PhotoSharing.Store.Notifications" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Log">
+        <PropertyRef Name="LogID" />
+      </Principal>
+      <Dependent Role="Notification">
+        <PropertyRef Name="LogLogID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UserLog">
+    <End Role="User" Type="PhotoSharing.Store.Users" Multiplicity="1" />
+    <End Role="Log" Type="PhotoSharing.Store.Logs" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="Log">
+        <PropertyRef Name="LoggerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="LogPhoto">
+    <End Role="Log" Type="PhotoSharing.Store.Logs" Multiplicity="*" />
+    <End Role="Photo" Type="PhotoSharing.Store.Photos1" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Photo">
+        <PropertyRef Name="PhotoID" />
+      </Principal>
+      <Dependent Role="Log">
+        <PropertyRef Name="PhotoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="AlbumPhoto">
+    <End Role="Album" Type="PhotoSharing.Store.Albums" Multiplicity="*" />
+    <End Role="Photo" Type="PhotoSharing.Store.Photos1" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Photo">
+        <PropertyRef Name="PhotoID" />
+      </Principal>
+      <Dependent Role="Album">
+        <PropertyRef Name="CoverPicId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PhotoAlbumPhoto">
+    <End Role="PhotoAlbum" Type="PhotoSharing.Store.PhotoAlbums" Multiplicity="*" />
+    <End Role="Photo" Type="PhotoSharing.Store.Photos1" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Photo">
+        <PropertyRef Name="PhotoID" />
+      </Principal>
+      <Dependent Role="PhotoAlbum">
+        <PropertyRef Name="PhotoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="AlbumPhotoAlbum">
+    <End Role="Album" Type="PhotoSharing.Store.Albums" Multiplicity="1" />
+    <End Role="PhotoAlbum" Type="PhotoSharing.Store.PhotoAlbums" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Album">
+        <PropertyRef Name="AlbumID" />
+      </Principal>
+      <Dependent Role="PhotoAlbum">
+        <PropertyRef Name="AlbumId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UserPhoto">
+    <End Role="User" Type="PhotoSharing.Store.Users" Multiplicity="*" />
+    <End Role="Photo" Type="PhotoSharing.Store.Photos1" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Photo">
+        <PropertyRef Name="PhotoID" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="ProfilePicId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UserPhoto1">
+    <End Role="User" Type="PhotoSharing.Store.Users" Multiplicity="1" />
+    <End Role="Photo" Type="PhotoSharing.Store.Photos1" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="Photo">
+        <PropertyRef Name="UploadedUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UserShareUserPhoto">
+    <End Role="User" Type="PhotoSharing.Store.Users" Multiplicity="0..1" />
+    <End Role="ShareUserPhoto" Type="PhotoSharing.Store.SharePhotoes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="ShareUserPhoto">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ShareUserPhotoPhoto">
+    <End Role="ShareUserPhoto" Type="PhotoSharing.Store.SharePhotoes" Multiplicity="*" />
+    <End Role="Photo" Type="PhotoSharing.Store.Photos1" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Photo">
+        <PropertyRef Name="PhotoID" />
+      </Principal>
+      <Dependent Role="ShareUserPhoto">
+        <PropertyRef Name="PhotoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UserComment">
+    <End Role="User" Type="PhotoSharing.Store.Users" Multiplicity="1" />
+    <End Role="Comment" Type="PhotoSharing.Store.Comments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="Comment">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CommentPhoto">
+    <End Role="Comment" Type="PhotoSharing.Store.Comments" Multiplicity="*" />
+    <End Role="Photo" Type="PhotoSharing.Store.Photos1" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Photo">
+        <PropertyRef Name="PhotoID" />
+      </Principal>
+      <Dependent Role="Comment">
+        <PropertyRef Name="PhotoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UserLike">
+    <End Role="User" Type="PhotoSharing.Store.Users" Multiplicity="1" />
+    <End Role="Like" Type="PhotoSharing.Store.Likes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="Like">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="LikePhoto">
+    <End Role="Like" Type="PhotoSharing.Store.Likes" Multiplicity="*" />
+    <End Role="Photo" Type="PhotoSharing.Store.Photos1" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Photo">
+        <PropertyRef Name="PhotoID" />
+      </Principal>
+      <Dependent Role="Like">
+        <PropertyRef Name="PhotoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="GroupSharePhoto">
+    <End Role="Group" Type="PhotoSharing.Store.Groups" Multiplicity="0..1" />
+    <End Role="SharePhoto" Type="PhotoSharing.Store.SharePhotoes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Group">
+        <PropertyRef Name="GroupID" />
+      </Principal>
+      <Dependent Role="SharePhoto">
+        <PropertyRef Name="GroupSharePhoto_SharePhoto_GroupID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="AlbumShareWith">
+    <End Role="Album" Type="PhotoSharing.Store.Albums" Multiplicity="0..1" />
+    <End Role="ShareWith" Type="PhotoSharing.Store.ShareWith" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Album">
+        <PropertyRef Name="AlbumID" />
+      </Principal>
+      <Dependent Role="ShareWith">
+        <PropertyRef Name="AlbumShareWith_ShareWith_AlbumID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ShareWithPhoto">
+    <End Role="ShareWith" Type="PhotoSharing.Store.ShareWith" Multiplicity="1" />
+    <End Role="Photo" Type="PhotoSharing.Store.Photos1" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ShareWith">
+        <PropertyRef Name="SharerWithId" />
+      </Principal>
+      <Dependent Role="Photo">
+        <PropertyRef Name="SharedWithId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="PhotoSharing" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="PhotoSharingContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Users" EntityType="PhotoSharing.User" />
+          <EntitySet Name="Photos1" EntityType="PhotoSharing.Photo" />
+          <EntitySet Name="Albums" EntityType="PhotoSharing.Album" />
+          <EntitySet Name="Groups" EntityType="PhotoSharing.Group" />
+          <EntitySet Name="Logs" EntityType="PhotoSharing.Log" />
+          <EntitySet Name="TagInformations" EntityType="PhotoSharing.TagInformation" />
+          <EntitySet Name="Followers" EntityType="PhotoSharing.Follower" />
+          <AssociationSet Name="UserFollower" Association="PhotoSharing.UserFollower">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Follower" EntitySet="Followers" />
+          </AssociationSet>
+          <AssociationSet Name="UserFollower1" Association="PhotoSharing.UserFollower1">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Follower" EntitySet="Followers" />
+          </AssociationSet>
+          <EntitySet Name="UserGroups" EntityType="PhotoSharing.UserGroup" />
+          <AssociationSet Name="UserUserGroup" Association="PhotoSharing.UserUserGroup">
+            <End Role="User" EntitySet="Users" />
+            <End Role="UserGroup" EntitySet="UserGroups" />
+          </AssociationSet>
+          <AssociationSet Name="UserGroupGroup" Association="PhotoSharing.UserGroupGroup">
+            <End Role="UserGroup" EntitySet="UserGroups" />
+            <End Role="Group" EntitySet="Groups" />
+          </AssociationSet>
+          <AssociationSet Name="UserGroupOwner" Association="PhotoSharing.UserGroupOwner">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Group" EntitySet="Groups" />
+          </AssociationSet>
+          <AssociationSet Name="AlbumUser" Association="PhotoSharing.AlbumUser">
+            <End Role="Album" EntitySet="Albums" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="UserTagInformation" Association="PhotoSharing.UserTagInformation">
+            <End Role="User" EntitySet="Users" />
+            <End Role="TagInformation" EntitySet="TagInformations" />
+          </AssociationSet>
+          <AssociationSet Name="PhotoTagInformation" Association="PhotoSharing.PhotoTagInformation">
+            <End Role="Photo" EntitySet="Photos1" />
+            <End Role="TagInformation" EntitySet="TagInformations" />
+          </AssociationSet>
+          <EntitySet Name="Notifications" EntityType="PhotoSharing.Notification" />
+          <AssociationSet Name="UserNotification" Association="PhotoSharing.UserNotification">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Notification" EntitySet="Notifications" />
+          </AssociationSet>
+          <AssociationSet Name="LogNotification" Association="PhotoSharing.LogNotification">
+            <End Role="Log" EntitySet="Logs" />
+            <End Role="Notification" EntitySet="Notifications" />
+          </AssociationSet>
+          <AssociationSet Name="UserLog" Association="PhotoSharing.UserLog">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Log" EntitySet="Logs" />
+          </AssociationSet>
+          <AssociationSet Name="LogPhoto" Association="PhotoSharing.LogPhoto">
+            <End Role="Log" EntitySet="Logs" />
+            <End Role="Photo" EntitySet="Photos1" />
+          </AssociationSet>
+          <AssociationSet Name="AlbumPhoto" Association="PhotoSharing.AlbumPhoto">
+            <End Role="Album" EntitySet="Albums" />
+            <End Role="Photo" EntitySet="Photos1" />
+          </AssociationSet>
+          <EntitySet Name="PhotoAlbums" EntityType="PhotoSharing.PhotoAlbum" />
+          <AssociationSet Name="PhotoAlbumPhoto" Association="PhotoSharing.PhotoAlbumPhoto">
+            <End Role="PhotoAlbum" EntitySet="PhotoAlbums" />
+            <End Role="Photo" EntitySet="Photos1" />
+          </AssociationSet>
+          <AssociationSet Name="AlbumPhotoAlbum" Association="PhotoSharing.AlbumPhotoAlbum">
+            <End Role="Album" EntitySet="Albums" />
+            <End Role="PhotoAlbum" EntitySet="PhotoAlbums" />
+          </AssociationSet>
+          <AssociationSet Name="UserPhoto" Association="PhotoSharing.UserPhoto">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Photo" EntitySet="Photos1" />
+          </AssociationSet>
+          <AssociationSet Name="UserPhoto1" Association="PhotoSharing.UserPhoto1">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Photo" EntitySet="Photos1" />
+          </AssociationSet>
+          <EntitySet Name="SharePhotoes" EntityType="PhotoSharing.SharePhoto" />
+          <AssociationSet Name="UserShareUserPhoto" Association="PhotoSharing.UserShareUserPhoto">
+            <End Role="User" EntitySet="Users" />
+            <End Role="ShareUserPhoto" EntitySet="SharePhotoes" />
+          </AssociationSet>
+          <AssociationSet Name="ShareUserPhotoPhoto" Association="PhotoSharing.ShareUserPhotoPhoto">
+            <End Role="ShareUserPhoto" EntitySet="SharePhotoes" />
+            <End Role="Photo" EntitySet="Photos1" />
+          </AssociationSet>
+          <EntitySet Name="Comments" EntityType="PhotoSharing.Comment" />
+          <AssociationSet Name="UserComment" Association="PhotoSharing.UserComment">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Comment" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="CommentPhoto" Association="PhotoSharing.CommentPhoto">
+            <End Role="Comment" EntitySet="Comments" />
+            <End Role="Photo" EntitySet="Photos1" />
+          </AssociationSet>
+          <EntitySet Name="Likes" EntityType="PhotoSharing.Like" />
+          <AssociationSet Name="UserLike" Association="PhotoSharing.UserLike">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Like" EntitySet="Likes" />
+          </AssociationSet>
+          <AssociationSet Name="LikePhoto" Association="PhotoSharing.LikePhoto">
+            <End Role="Like" EntitySet="Likes" />
+            <End Role="Photo" EntitySet="Photos1" />
+          </AssociationSet>
+          <EntitySet Name="ShareWith" EntityType="PhotoSharing.ShareWith" />
+          <AssociationSet Name="GroupSharePhoto" Association="PhotoSharing.GroupSharePhoto">
+            <End Role="Group" EntitySet="Groups" />
+            <End Role="SharePhoto" EntitySet="SharePhotoes" />
+          </AssociationSet>
+          <AssociationSet Name="AlbumShareWith" Association="PhotoSharing.AlbumShareWith">
+            <End Role="Album" EntitySet="Albums" />
+            <End Role="ShareWith" EntitySet="ShareWith" />
+          </AssociationSet>
+          <AssociationSet Name="ShareWithPhoto" Association="PhotoSharing.ShareWithPhoto">
+            <End Role="ShareWith" EntitySet="ShareWith" />
+            <End Role="Photo" EntitySet="Photos1" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" />
+          <Property Name="LastName" Type="String" Nullable="false" cg:SetterAccess="Public" />
+          <Property Name="UserName" Type="String" Nullable="false" Unicode="true" />
+          <Property Name="Password" Type="String" Unicode="true" />
+          <Property Name="LastLoginTime" Type="DateTime" Nullable="true" />
+          <Property Name="DateOfBirth" Type="DateTime" Nullable="true" />
+          <Property Name="Sex" Type="String" Nullable="false" />
+          <Property Name="Phone" Type="Int32" Nullable="false" />
+          <Property Name="ProfilePicId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Photo">
+          <Key>
+            <PropertyRef Name="PhotoID" />
+          </Key>
+          <Property Name="PhotoID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" Nullable="true" />
+          <Property Name="GeoTag" Type="String" Nullable="true" />
+          <Property Name="Name" Type="String" Nullable="true" />
+          <Property Name="TotalLikes" Type="Int32" Nullable="true" />
+          <Property Name="UploadedUserId" Type="Int32" Nullable="false" />
+          <Property Name="SharedWithId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Album">
+          <Key>
+            <PropertyRef Name="AlbumID" />
+          </Key>
+          <Property Name="AlbumID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="true" />
+          <Property Name="OwnerId" Type="Int32" Nullable="false" />
+          <Property Name="CoverPicId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Group">
+          <Key>
+            <PropertyRef Name="GroupID" />
+          </Key>
+          <Property Name="GroupID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="true" />
+          <Property Name="OwnerId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Log">
+          <Key>
+            <PropertyRef Name="LogID" />
+          </Key>
+          <Property Name="LogID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Nullable="true" />
+          <Property Name="LoggerId" Type="Int32" Nullable="false" />
+          <Property Name="PhotoId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TagInformation">
+          <Key>
+            <PropertyRef Name="TagInformationID" />
+          </Key>
+          <Property Name="TagInformationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserUserID" Type="Int32" Nullable="false" />
+          <Property Name="PhotoId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Follower">
+          <Key>
+            <PropertyRef Name="FollowerID" />
+          </Key>
+          <Property Name="FollowerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="UserFollowerId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="UserFollower">
+          <End Type="PhotoSharing.User" Role="User" Multiplicity="1" />
+          <End Type="PhotoSharing.Follower" Role="Follower" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Follower">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UserFollower1">
+          <End Type="PhotoSharing.User" Role="User" Multiplicity="1" />
+          <End Type="PhotoSharing.Follower" Role="Follower" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Follower">
+              <PropertyRef Name="UserFollowerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="UserGroup">
+          <Key>
+            <PropertyRef Name="UserGroupID" />
+          </Key>
+          <Property Name="UserGroupID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="GroupId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="UserUserGroup">
+          <End Type="PhotoSharing.User" Role="User" Multiplicity="1" />
+          <End Type="PhotoSharing.UserGroup" Role="UserGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="UserGroup">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UserGroupGroup">
+          <End Type="PhotoSharing.UserGroup" Role="UserGroup" Multiplicity="*" />
+          <End Type="PhotoSharing.Group" Role="Group" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Group">
+              <PropertyRef Name="GroupID" />
+            </Principal>
+            <Dependent Role="UserGroup">
+              <PropertyRef Name="GroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UserGroupOwner">
+          <End Type="PhotoSharing.User" Role="User" Multiplicity="1" />
+          <End Type="PhotoSharing.Group" Role="Group" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Group">
+              <PropertyRef Name="OwnerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AlbumUser">
+          <End Type="PhotoSharing.Album" Role="Album" Multiplicity="*" />
+          <End Type="PhotoSharing.User" Role="User" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Album">
+              <PropertyRef Name="OwnerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UserTagInformation">
+          <End Type="PhotoSharing.User" Role="User" Multiplicity="1" />
+          <End Type="PhotoSharing.TagInformation" Role="TagInformation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="TagInformation">
+              <PropertyRef Name="UserUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PhotoTagInformation">
+          <End Type="PhotoSharing.Photo" Role="Photo" Multiplicity="1" />
+          <End Type="PhotoSharing.TagInformation" Role="TagInformation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Photo">
+              <PropertyRef Name="PhotoID" />
+            </Principal>
+            <Dependent Role="TagInformation">
+              <PropertyRef Name="PhotoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Notification">
+          <Key>
+            <PropertyRef Name="NotificationID" />
+          </Key>
+          <Property Name="NotificationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="LogLogID" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="UserNotification">
+          <End Type="PhotoSharing.User" Role="User" Multiplicity="1" />
+          <End Type="PhotoSharing.Notification" Role="Notification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Notification">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="LogNotification">
+          <End Type="PhotoSharing.Log" Role="Log" Multiplicity="1" />
+          <End Type="PhotoSharing.Notification" Role="Notification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Log">
+              <PropertyRef Name="LogID" />
+            </Principal>
+            <Dependent Role="Notification">
+              <PropertyRef Name="LogLogID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UserLog">
+          <End Type="PhotoSharing.User" Role="User" Multiplicity="1" />
+          <End Type="PhotoSharing.Log" Role="Log" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Log">
+              <PropertyRef Name="LoggerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="LogPhoto">
+          <End Type="PhotoSharing.Log" Role="Log" Multiplicity="*" />
+          <End Type="PhotoSharing.Photo" Role="Photo" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Photo">
+              <PropertyRef Name="PhotoID" />
+            </Principal>
+            <Dependent Role="Log">
+              <PropertyRef Name="PhotoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AlbumPhoto">
+          <End Type="PhotoSharing.Album" Role="Album" Multiplicity="*" />
+          <End Type="PhotoSharing.Photo" Role="Photo" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Photo">
+              <PropertyRef Name="PhotoID" />
+            </Principal>
+            <Dependent Role="Album">
+              <PropertyRef Name="CoverPicId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="PhotoAlbum">
+          <Key>
+            <PropertyRef Name="PhotoAlbumID" />
+          </Key>
+          <Property Name="PhotoAlbumID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PhotoId" Type="Int32" Nullable="false" />
+          <Property Name="AlbumId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="PhotoAlbumPhoto">
+          <End Type="PhotoSharing.PhotoAlbum" Role="PhotoAlbum" Multiplicity="*" />
+          <End Type="PhotoSharing.Photo" Role="Photo" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Photo">
+              <PropertyRef Name="PhotoID" />
+            </Principal>
+            <Dependent Role="PhotoAlbum">
+              <PropertyRef Name="PhotoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AlbumPhotoAlbum">
+          <End Type="PhotoSharing.Album" Role="Album" Multiplicity="1" />
+          <End Type="PhotoSharing.PhotoAlbum" Role="PhotoAlbum" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Album">
+              <PropertyRef Name="AlbumID" />
+            </Principal>
+            <Dependent Role="PhotoAlbum">
+              <PropertyRef Name="AlbumId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UserPhoto">
+          <End Type="PhotoSharing.User" Role="User" Multiplicity="*" />
+          <End Type="PhotoSharing.Photo" Role="Photo" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Photo">
+              <PropertyRef Name="PhotoID" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="ProfilePicId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UserPhoto1">
+          <End Type="PhotoSharing.User" Role="User" Multiplicity="1" />
+          <End Type="PhotoSharing.Photo" Role="Photo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Photo">
+              <PropertyRef Name="UploadedUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="SharePhoto">
+          <Key>
+            <PropertyRef Name="ShareUserPhotoID" />
+          </Key>
+          <Property Name="ShareUserPhotoID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="true" />
+          <Property Name="GroupId" Type="Int32" Nullable="true" />
+          <Property Name="PhotoId" Type="Int32" Nullable="true" />
+          <Property Name="AlbumId" Type="Int32" Nullable="true" />
+        </EntityType>
+        <Association Name="UserShareUserPhoto">
+          <End Type="PhotoSharing.User" Role="User" Multiplicity="0..1" />
+          <End Type="PhotoSharing.SharePhoto" Role="ShareUserPhoto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="ShareUserPhoto">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ShareUserPhotoPhoto">
+          <End Type="PhotoSharing.SharePhoto" Role="ShareUserPhoto" Multiplicity="*" />
+          <End Type="PhotoSharing.Photo" Role="Photo" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Photo">
+              <PropertyRef Name="PhotoID" />
+            </Principal>
+            <Dependent Role="ShareUserPhoto">
+              <PropertyRef Name="PhotoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Comment">
+          <Key>
+            <PropertyRef Name="CommentID" />
+          </Key>
+          <Property Name="CommentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="PhotoId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="UserComment">
+          <End Type="PhotoSharing.User" Role="User" Multiplicity="1" />
+          <End Type="PhotoSharing.Comment" Role="Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Comment">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CommentPhoto">
+          <End Type="PhotoSharing.Comment" Role="Comment" Multiplicity="*" />
+          <End Type="PhotoSharing.Photo" Role="Photo" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Photo">
+              <PropertyRef Name="PhotoID" />
+            </Principal>
+            <Dependent Role="Comment">
+              <PropertyRef Name="PhotoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Like">
+          <Key>
+            <PropertyRef Name="LikeID" />
+          </Key>
+          <Property Name="LikeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="PhotoId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="UserLike">
+          <End Type="PhotoSharing.User" Role="User" Multiplicity="1" />
+          <End Type="PhotoSharing.Like" Role="Like" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Like">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="LikePhoto">
+          <End Type="PhotoSharing.Like" Role="Like" Multiplicity="*" />
+          <End Type="PhotoSharing.Photo" Role="Photo" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Photo">
+              <PropertyRef Name="PhotoID" />
+            </Principal>
+            <Dependent Role="Like">
+              <PropertyRef Name="PhotoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ShareWith">
+          <Key>
+            <PropertyRef Name="SharerWithId" />
+          </Key>
+          <Property Name="SharerWithId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" Nullable="false" />
+        </EntityType>
+        <Association Name="GroupSharePhoto">
+          <End Type="PhotoSharing.Group" Role="Group" Multiplicity="0..1" />
+          <End Type="PhotoSharing.SharePhoto" Role="SharePhoto" Multiplicity="*" />
+        </Association>
+        <Association Name="AlbumShareWith">
+          <End Type="PhotoSharing.Album" Role="Album" Multiplicity="0..1" />
+          <End Type="PhotoSharing.ShareWith" Role="ShareWith" Multiplicity="*" />
+        </Association>
+        <Association Name="ShareWithPhoto">
+          <End Type="PhotoSharing.ShareWith" Role="ShareWith" Multiplicity="1" />
+          <End Type="PhotoSharing.Photo" Role="Photo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ShareWith">
+              <PropertyRef Name="SharerWithId" />
+            </Principal>
+            <Dependent Role="Photo">
+              <PropertyRef Name="SharedWithId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="PhotoSharingStoreContainer" CdmEntityContainer="PhotoSharingContainer">
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="IsTypeOf(PhotoSharing.User)">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="LastLoginTime" ColumnName="LastLoginTime" />
+          <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+          <ScalarProperty Name="Sex" ColumnName="Sex" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="ProfilePicId" ColumnName="ProfilePicId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Photos1">
+      <EntityTypeMapping TypeName="IsTypeOf(PhotoSharing.Photo)">
+        <MappingFragment StoreEntitySet="Photos1">
+          <ScalarProperty Name="PhotoID" ColumnName="PhotoID" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="GeoTag" ColumnName="GeoTag" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="TotalLikes" ColumnName="TotalLikes" />
+          <ScalarProperty Name="UploadedUserId" ColumnName="UploadedUserId" />
+          <ScalarProperty Name="SharedWithId" ColumnName="SharedWithId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Albums">
+      <EntityTypeMapping TypeName="IsTypeOf(PhotoSharing.Album)">
+        <MappingFragment StoreEntitySet="Albums">
+          <ScalarProperty Name="AlbumID" ColumnName="AlbumID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="OwnerId" ColumnName="OwnerId" />
+          <ScalarProperty Name="CoverPicId" ColumnName="CoverPicId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Groups">
+      <EntityTypeMapping TypeName="IsTypeOf(PhotoSharing.Group)">
+        <MappingFragment StoreEntitySet="Groups">
+          <ScalarProperty Name="GroupID" ColumnName="GroupID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="OwnerId" ColumnName="OwnerId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Logs">
+      <EntityTypeMapping TypeName="IsTypeOf(PhotoSharing.Log)">
+        <MappingFragment StoreEntitySet="Logs">
+          <ScalarProperty Name="LogID" ColumnName="LogID" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="LoggerId" ColumnName="LoggerId" />
+          <ScalarProperty Name="PhotoId" ColumnName="PhotoId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TagInformations">
+      <EntityTypeMapping TypeName="IsTypeOf(PhotoSharing.TagInformation)">
+        <MappingFragment StoreEntitySet="TagInformations">
+          <ScalarProperty Name="TagInformationID" ColumnName="TagInformationID" />
+          <ScalarProperty Name="UserUserID" ColumnName="UserUserID" />
+          <ScalarProperty Name="PhotoId" ColumnName="PhotoId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Followers">
+      <EntityTypeMapping TypeName="IsTypeOf(PhotoSharing.Follower)">
+        <MappingFragment StoreEntitySet="Followers">
+          <ScalarProperty Name="FollowerID" ColumnName="FollowerID" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="UserFollowerId" ColumnName="UserFollowerId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserGroups">
+      <EntityTypeMapping TypeName="IsTypeOf(PhotoSharing.UserGroup)">
+        <MappingFragment StoreEntitySet="UserGroups">
+          <ScalarProperty Name="UserGroupID" ColumnName="UserGroupID" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Notifications">
+      <EntityTypeMapping TypeName="IsTypeOf(PhotoSharing.Notification)">
+        <MappingFragment StoreEntitySet="Notifications">
+          <ScalarProperty Name="NotificationID" ColumnName="NotificationID" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="LogLogID" ColumnName="LogLogID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PhotoAlbums">
+      <EntityTypeMapping TypeName="IsTypeOf(PhotoSharing.PhotoAlbum)">
+        <MappingFragment StoreEntitySet="PhotoAlbums">
+          <ScalarProperty Name="PhotoAlbumID" ColumnName="PhotoAlbumID" />
+          <ScalarProperty Name="PhotoId" ColumnName="PhotoId" />
+          <ScalarProperty Name="AlbumId" ColumnName="AlbumId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SharePhotoes">
+      <EntityTypeMapping TypeName="IsTypeOf(PhotoSharing.SharePhoto)">
+        <MappingFragment StoreEntitySet="SharePhotoes">
+          <ScalarProperty Name="ShareUserPhotoID" ColumnName="ShareUserPhotoID" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+          <ScalarProperty Name="PhotoId" ColumnName="PhotoId" />
+          <ScalarProperty Name="AlbumId" ColumnName="AlbumId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Comments">
+      <EntityTypeMapping TypeName="IsTypeOf(PhotoSharing.Comment)">
+        <MappingFragment StoreEntitySet="Comments">
+          <ScalarProperty Name="CommentID" ColumnName="CommentID" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="PhotoId" ColumnName="PhotoId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Likes">
+      <EntityTypeMapping TypeName="IsTypeOf(PhotoSharing.Like)">
+        <MappingFragment StoreEntitySet="Likes">
+          <ScalarProperty Name="LikeID" ColumnName="LikeID" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="PhotoId" ColumnName="PhotoId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ShareWith">
+      <EntityTypeMapping TypeName="IsTypeOf(PhotoSharing.ShareWith)">
+        <MappingFragment StoreEntitySet="ShareWith">
+          <ScalarProperty Name="SharerWithId" ColumnName="SharerWithId" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="GroupSharePhoto" TypeName="PhotoSharing.GroupSharePhoto" StoreEntitySet="SharePhotoes">
+      <EndProperty Name="Group">
+        <ScalarProperty Name="GroupID" ColumnName="GroupSharePhoto_SharePhoto_GroupID" />
+      </EndProperty>
+      <EndProperty Name="SharePhoto">
+        <ScalarProperty Name="ShareUserPhotoID" ColumnName="ShareUserPhotoID" />
+      </EndProperty>
+      <Condition ColumnName="GroupSharePhoto_SharePhoto_GroupID" IsNull="false" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="AlbumShareWith" TypeName="PhotoSharing.AlbumShareWith" StoreEntitySet="ShareWith">
+      <EndProperty Name="Album">
+        <ScalarProperty Name="AlbumID" ColumnName="AlbumShareWith_ShareWith_AlbumID" />
+      </EndProperty>
+      <EndProperty Name="ShareWith">
+        <ScalarProperty Name="SharerWithId" ColumnName="SharerWithId" />
+      </EndProperty>
+      <Condition ColumnName="AlbumShareWith_ShareWith_AlbumID" IsNull="false" />
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+        <DesignerProperty Name="DefaultDatabaseSchema" Value="photoShare" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
