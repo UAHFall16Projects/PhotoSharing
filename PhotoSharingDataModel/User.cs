@@ -23,6 +23,6 @@ namespace PhotoSharingDataModel
         public Nullable<System.DateTime> DateOfBirth { get; set; }
         public string Sex { get; set; }
         public int Phone { get; set; }
-        public int ProfilePicId { get; set; }
+        public Nullable<int> ProfilePicId { get; set; }
     }
 }

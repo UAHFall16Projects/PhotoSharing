@@ -5,7 +5,9 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhotoSharing", "PhotoSharing\PhotoSharing.csproj", "{18360F78-5D03-4D3D-AECB-C418F8164058}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhotoSharingDataModel", "PhotoSharingDataModel\PhotoSharingDataModel.csproj", "{4B1C37F3-AFC1-4626-BEF5-CBF330FE5AE8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhotoSharingDLL", "PhotoSharingDataModel\PhotoSharingDLL.csproj", "{4B1C37F3-AFC1-4626-BEF5-CBF330FE5AE8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhotoSharingBLL", "PhotoSharingBLL\PhotoSharingBLL.csproj", "{4D6FABB9-7EF9-4BB6-B929-B5E05AA92FCE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{4B1C37F3-AFC1-4626-BEF5-CBF330FE5AE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4B1C37F3-AFC1-4626-BEF5-CBF330FE5AE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4B1C37F3-AFC1-4626-BEF5-CBF330FE5AE8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4D6FABB9-7EF9-4BB6-B929-B5E05AA92FCE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D6FABB9-7EF9-4BB6-B929-B5E05AA92FCE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D6FABB9-7EF9-4BB6-B929-B5E05AA92FCE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D6FABB9-7EF9-4BB6-B929-B5E05AA92FCE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

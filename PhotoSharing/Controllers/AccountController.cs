@@ -417,7 +417,8 @@ namespace PhotoSharing.Controllers
 
         protected override void Dispose(bool disposing)
         {
-            if (disposing)
+
+           if (disposing)
             {
                 if (_userManager != null)
                 {

@@ -12,6 +12,8 @@ namespace PhotoSharingDataModel
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class PhotoSharingContainer : DbContext
     {
@@ -26,7 +28,7 @@ namespace PhotoSharingDataModel
         }
     
         public virtual DbSet<User> Users { get; set; }
-        public virtual DbSet<Photo> Photos1 { get; set; }
+        public virtual DbSet<Photo> Photos { get; set; }
         public virtual DbSet<Album> Albums { get; set; }
         public virtual DbSet<Group> Groups { get; set; }
         public virtual DbSet<Log> Logs { get; set; }
@@ -39,5 +41,15 @@ namespace PhotoSharingDataModel
         public virtual DbSet<Comment> Comments { get; set; }
         public virtual DbSet<Like> Likes { get; set; }
         public virtual DbSet<ShareWith> ShareWith { get; set; }
+        public virtual DbSet<PhotoData> PhotoDatas { get; set; }
+    
+        public virtual ObjectResult<GetUsersByUserId_Result> GetUsersByUserId(Nullable<int> userId)
+        {
+            var userIdParameter = userId.HasValue ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetUsersByUserId_Result>("GetUsersByUserId", userIdParameter);
+        }
     }
 }

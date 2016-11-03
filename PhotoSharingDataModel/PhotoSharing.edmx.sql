@@ -2,16 +2,16 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 11/01/2016 17:22:59
+-- Date Created: 11/03/2016 02:50:07
 -- Generated from EDMX file: C:\Users\Rohit\Documents\GitHub\PhotoSharing\PhotoSharingDataModel\PhotoSharing.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
 GO
+USE [PhotoSharing];
+GO
 IF SCHEMA_ID(N'photoShare') IS NULL EXECUTE(N'CREATE SCHEMA [photoShare]');
 GO
-
-
 
 -- --------------------------------------------------
 -- Dropping existing FOREIGN KEY constraints
@@ -66,7 +66,7 @@ IF OBJECT_ID(N'[photoShare].[FK_UserPhoto]', 'F') IS NOT NULL
     ALTER TABLE [photoShare].[Users] DROP CONSTRAINT [FK_UserPhoto];
 GO
 IF OBJECT_ID(N'[photoShare].[FK_UserPhoto1]', 'F') IS NOT NULL
-    ALTER TABLE [photoShare].[Photos1] DROP CONSTRAINT [FK_UserPhoto1];
+    ALTER TABLE [photoShare].[Photos] DROP CONSTRAINT [FK_UserPhoto1];
 GO
 IF OBJECT_ID(N'[photoShare].[FK_UserShareUserPhoto]', 'F') IS NOT NULL
     ALTER TABLE [photoShare].[SharePhotoes] DROP CONSTRAINT [FK_UserShareUserPhoto];
@@ -93,7 +93,10 @@ IF OBJECT_ID(N'[photoShare].[FK_AlbumShareWith]', 'F') IS NOT NULL
     ALTER TABLE [photoShare].[ShareWith] DROP CONSTRAINT [FK_AlbumShareWith];
 GO
 IF OBJECT_ID(N'[photoShare].[FK_ShareWithPhoto]', 'F') IS NOT NULL
-    ALTER TABLE [photoShare].[Photos1] DROP CONSTRAINT [FK_ShareWithPhoto];
+    ALTER TABLE [photoShare].[Photos] DROP CONSTRAINT [FK_ShareWithPhoto];
+GO
+IF OBJECT_ID(N'[photoShare].[FK_PhotoDataPhoto]', 'F') IS NOT NULL
+    ALTER TABLE [photoShare].[Photos] DROP CONSTRAINT [FK_PhotoDataPhoto];
 GO
 
 -- --------------------------------------------------
@@ -103,8 +106,8 @@ GO
 IF OBJECT_ID(N'[photoShare].[Users]', 'U') IS NOT NULL
     DROP TABLE [photoShare].[Users];
 GO
-IF OBJECT_ID(N'[photoShare].[Photos1]', 'U') IS NOT NULL
-    DROP TABLE [photoShare].[Photos1];
+IF OBJECT_ID(N'[photoShare].[Photos]', 'U') IS NOT NULL
+    DROP TABLE [photoShare].[Photos];
 GO
 IF OBJECT_ID(N'[photoShare].[Albums]', 'U') IS NOT NULL
     DROP TABLE [photoShare].[Albums];
@@ -142,6 +145,9 @@ GO
 IF OBJECT_ID(N'[photoShare].[ShareWith]', 'U') IS NOT NULL
     DROP TABLE [photoShare].[ShareWith];
 GO
+IF OBJECT_ID(N'[photoShare].[PhotoDatas]', 'U') IS NOT NULL
+    DROP TABLE [photoShare].[PhotoDatas];
+GO
 
 -- --------------------------------------------------
 -- Creating all tables
@@ -158,19 +164,20 @@ CREATE TABLE [photoShare].[Users] (
     [DateOfBirth] datetime  NULL,
     [Sex] nvarchar(max)  NOT NULL,
     [Phone] int  NOT NULL,
-    [ProfilePicId] int  NOT NULL
+    [ProfilePicId] int  NULL
 );
 GO
 
--- Creating table 'Photos1'
-CREATE TABLE [photoShare].[Photos1] (
+-- Creating table 'Photos'
+CREATE TABLE [photoShare].[Photos] (
     [PhotoID] int IDENTITY(1,1) NOT NULL,
     [Description] nvarchar(max)  NULL,
     [GeoTag] nvarchar(max)  NULL,
     [Name] nvarchar(max)  NULL,
     [TotalLikes] int  NULL,
     [UploadedUserId] int  NOT NULL,
-    [SharedWithId] int  NOT NULL
+    [SharedWithId] int  NOT NULL,
+    [PhotoDataId] int  NOT NULL
 );
 GO
 
@@ -275,6 +282,13 @@ CREATE TABLE [photoShare].[ShareWith] (
 );
 GO
 
+-- Creating table 'PhotoDatas'
+CREATE TABLE [photoShare].[PhotoDatas] (
+    [PhotoDataID] int IDENTITY(1,1) NOT NULL,
+    [Data] nvarchar(max)  NOT NULL
+);
+GO
+
 -- --------------------------------------------------
 -- Creating all PRIMARY KEY constraints
 -- --------------------------------------------------
@@ -285,9 +299,9 @@ ADD CONSTRAINT [PK_Users]
     PRIMARY KEY CLUSTERED ([UserID] ASC);
 GO
 
--- Creating primary key on [PhotoID] in table 'Photos1'
-ALTER TABLE [photoShare].[Photos1]
-ADD CONSTRAINT [PK_Photos1]
+-- Creating primary key on [PhotoID] in table 'Photos'
+ALTER TABLE [photoShare].[Photos]
+ADD CONSTRAINT [PK_Photos]
     PRIMARY KEY CLUSTERED ([PhotoID] ASC);
 GO
 
@@ -361,6 +375,12 @@ GO
 ALTER TABLE [photoShare].[ShareWith]
 ADD CONSTRAINT [PK_ShareWith]
     PRIMARY KEY CLUSTERED ([SharerWithId] ASC);
+GO
+
+-- Creating primary key on [PhotoDataID] in table 'PhotoDatas'
+ALTER TABLE [photoShare].[PhotoDatas]
+ADD CONSTRAINT [PK_PhotoDatas]
+    PRIMARY KEY CLUSTERED ([PhotoDataID] ASC);
 GO
 
 -- --------------------------------------------------
@@ -476,7 +496,7 @@ GO
 ALTER TABLE [photoShare].[TagInformations]
 ADD CONSTRAINT [FK_PhotoTagInformation]
     FOREIGN KEY ([PhotoId])
-    REFERENCES [photoShare].[Photos1]
+    REFERENCES [photoShare].[Photos]
         ([PhotoID])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
@@ -536,7 +556,7 @@ GO
 ALTER TABLE [photoShare].[Logs]
 ADD CONSTRAINT [FK_LogPhoto]
     FOREIGN KEY ([PhotoId])
-    REFERENCES [photoShare].[Photos1]
+    REFERENCES [photoShare].[Photos]
         ([PhotoID])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
@@ -551,7 +571,7 @@ GO
 ALTER TABLE [photoShare].[Albums]
 ADD CONSTRAINT [FK_AlbumPhoto]
     FOREIGN KEY ([CoverPicId])
-    REFERENCES [photoShare].[Photos1]
+    REFERENCES [photoShare].[Photos]
         ([PhotoID])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
@@ -566,7 +586,7 @@ GO
 ALTER TABLE [photoShare].[PhotoAlbums]
 ADD CONSTRAINT [FK_PhotoAlbumPhoto]
     FOREIGN KEY ([PhotoId])
-    REFERENCES [photoShare].[Photos1]
+    REFERENCES [photoShare].[Photos]
         ([PhotoID])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
@@ -596,7 +616,7 @@ GO
 ALTER TABLE [photoShare].[Users]
 ADD CONSTRAINT [FK_UserPhoto]
     FOREIGN KEY ([ProfilePicId])
-    REFERENCES [photoShare].[Photos1]
+    REFERENCES [photoShare].[Photos]
         ([PhotoID])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
@@ -607,8 +627,8 @@ ON [photoShare].[Users]
     ([ProfilePicId]);
 GO
 
--- Creating foreign key on [UploadedUserId] in table 'Photos1'
-ALTER TABLE [photoShare].[Photos1]
+-- Creating foreign key on [UploadedUserId] in table 'Photos'
+ALTER TABLE [photoShare].[Photos]
 ADD CONSTRAINT [FK_UserPhoto1]
     FOREIGN KEY ([UploadedUserId])
     REFERENCES [photoShare].[Users]
@@ -618,7 +638,7 @@ GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_UserPhoto1'
 CREATE INDEX [IX_FK_UserPhoto1]
-ON [photoShare].[Photos1]
+ON [photoShare].[Photos]
     ([UploadedUserId]);
 GO
 
@@ -641,7 +661,7 @@ GO
 ALTER TABLE [photoShare].[SharePhotoes]
 ADD CONSTRAINT [FK_ShareUserPhotoPhoto]
     FOREIGN KEY ([PhotoId])
-    REFERENCES [photoShare].[Photos1]
+    REFERENCES [photoShare].[Photos]
         ([PhotoID])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
@@ -671,7 +691,7 @@ GO
 ALTER TABLE [photoShare].[Comments]
 ADD CONSTRAINT [FK_CommentPhoto]
     FOREIGN KEY ([PhotoId])
-    REFERENCES [photoShare].[Photos1]
+    REFERENCES [photoShare].[Photos]
         ([PhotoID])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
@@ -701,7 +721,7 @@ GO
 ALTER TABLE [photoShare].[Likes]
 ADD CONSTRAINT [FK_LikePhoto]
     FOREIGN KEY ([PhotoId])
-    REFERENCES [photoShare].[Photos1]
+    REFERENCES [photoShare].[Photos]
         ([PhotoID])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
@@ -742,8 +762,8 @@ ON [photoShare].[ShareWith]
     ([AlbumShareWith_ShareWith_AlbumID]);
 GO
 
--- Creating foreign key on [SharedWithId] in table 'Photos1'
-ALTER TABLE [photoShare].[Photos1]
+-- Creating foreign key on [SharedWithId] in table 'Photos'
+ALTER TABLE [photoShare].[Photos]
 ADD CONSTRAINT [FK_ShareWithPhoto]
     FOREIGN KEY ([SharedWithId])
     REFERENCES [photoShare].[ShareWith]
@@ -753,8 +773,23 @@ GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_ShareWithPhoto'
 CREATE INDEX [IX_FK_ShareWithPhoto]
-ON [photoShare].[Photos1]
+ON [photoShare].[Photos]
     ([SharedWithId]);
+GO
+
+-- Creating foreign key on [PhotoDataId] in table 'Photos'
+ALTER TABLE [photoShare].[Photos]
+ADD CONSTRAINT [FK_PhotoDataPhoto]
+    FOREIGN KEY ([PhotoDataId])
+    REFERENCES [photoShare].[PhotoDatas]
+        ([PhotoDataID])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_PhotoDataPhoto'
+CREATE INDEX [IX_FK_PhotoDataPhoto]
+ON [photoShare].[Photos]
+    ([PhotoDataId]);
 GO
 
 -- --------------------------------------------------

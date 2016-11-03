@@ -45,6 +45,8 @@
         <AssociationConnector Association="PhotoSharing.GroupSharePhoto" />
         <AssociationConnector Association="PhotoSharing.AlbumShareWith" />
         <AssociationConnector Association="PhotoSharing.ShareWithPhoto" />
+        <EntityTypeShape EntityType="PhotoSharing.PhotoData" Width="1.5" PointX="13.125" PointY="13" />
+        <AssociationConnector Association="PhotoSharing.PhotoDataPhoto" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
