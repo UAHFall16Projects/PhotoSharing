@@ -106,18 +106,9 @@
       <End Role="Like" EntitySet="Likes" />
       <End Role="Photo" EntitySet="Photos" />
     </AssociationSet>
-    <EntitySet Name="ShareWith" EntityType="PhotoSharing.ShareWith" />
     <AssociationSet Name="GroupSharePhoto" Association="PhotoSharing.GroupSharePhoto">
       <End Role="Group" EntitySet="Groups" />
       <End Role="SharePhoto" EntitySet="SharePhotoes" />
-    </AssociationSet>
-    <AssociationSet Name="AlbumShareWith" Association="PhotoSharing.AlbumShareWith">
-      <End Role="Album" EntitySet="Albums" />
-      <End Role="ShareWith" EntitySet="ShareWith" />
-    </AssociationSet>
-    <AssociationSet Name="ShareWithPhoto" Association="PhotoSharing.ShareWithPhoto">
-      <End Role="ShareWith" EntitySet="ShareWith" />
-      <End Role="Photo" EntitySet="Photos" />
     </AssociationSet>
     <EntitySet Name="PhotoDatas" EntityType="PhotoSharing.PhotoData" />
     <AssociationSet Name="PhotoDataPhoto" Association="PhotoSharing.PhotoDataPhoto">
@@ -125,22 +116,29 @@
       <End Role="Photo" EntitySet="Photos" />
     </AssociationSet>
     <FunctionImport Name="GetUsersByUserId" ReturnType="Collection(PhotoSharing.GetUsersByUserId_Result)">
-      <Parameter Name="UserId" Mode="In" Type="Int32" />
+      <Parameter Name="UserId" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="SavePhoto">
+      <Parameter Name="photo" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="ReadPhoto" ReturnType="Collection(PhotoSharing.ReadPhoto_Result)">
+      <Parameter Name="photoId" Mode="In" Type="Int32" />
     </FunctionImport>
   </EntityContainer>
   <EntityType Name="User">
     <Key>
       <PropertyRef Name="UserID" />
     </Key>
-    <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="FirstName" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
-    <Property Name="LastName" Type="String" Nullable="false" cg:SetterAccess="Public" MaxLength="Max" Unicode="true" FixedLength="false" />
-    <Property Name="UserName" Type="String" Nullable="false" Unicode="true" MaxLength="Max" FixedLength="false" />
+    <Property Name="UserID" Type="String" Nullable="false" annotation:StoreGeneratedPattern="Identity" Unicode="true" MaxLength="128" FixedLength="false" />
+    <Property Name="FirstName" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" Nullable="true" />
+    <Property Name="LastName" Type="String" cg:SetterAccess="Public" MaxLength="Max" Unicode="true" FixedLength="false" Nullable="true" />
+    <Property Name="Email" Type="String" Nullable="false" Unicode="true" MaxLength="256" FixedLength="false" />
+    <Property Name="UserName" Type="String" Unicode="true" MaxLength="256" FixedLength="false" Nullable="false" />
     <Property Name="Password" Type="String" Unicode="true" MaxLength="Max" FixedLength="false" />
     <Property Name="LastLoginTime" Type="DateTime" Nullable="true" Precision="3" />
     <Property Name="DateOfBirth" Type="DateTime" Nullable="true" Precision="3" />
-    <Property Name="Sex" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
-    <Property Name="Phone" Type="Int32" Nullable="false" />
+    <Property Name="Sex" Type="String" MaxLength="1" Unicode="false" FixedLength="false" Nullable="true" />
+    <Property Name="Phone" Type="String" Unicode="true" MaxLength="Max" FixedLength="false" Nullable="false" />
     <Property Name="ProfilePicId" Type="Int32" Nullable="true" />
   </EntityType>
   <EntityType Name="Photo">
@@ -152,7 +150,7 @@
     <Property Name="GeoTag" Type="String" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
     <Property Name="Name" Type="String" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
     <Property Name="TotalLikes" Type="Int32" Nullable="true" />
-    <Property Name="UploadedUserId" Type="Int32" Nullable="false" />
+    <Property Name="UploadedUserId" Type="String" Nullable="false" Unicode="true" MaxLength="128" FixedLength="false" />
     <Property Name="SharedWithId" Type="Int32" Nullable="false" />
     <Property Name="PhotoDataId" Type="Int32" Nullable="false" />
   </EntityType>
@@ -162,7 +160,7 @@
     </Key>
     <Property Name="AlbumID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Name" Type="String" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
-    <Property Name="OwnerId" Type="Int32" Nullable="false" />
+    <Property Name="OwnerId" Type="String" Nullable="false" Unicode="true" MaxLength="128" FixedLength="false" />
     <Property Name="CoverPicId" Type="Int32" Nullable="false" />
   </EntityType>
   <EntityType Name="Group">
@@ -171,7 +169,7 @@
     </Key>
     <Property Name="GroupID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Name" Type="String" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
-    <Property Name="OwnerId" Type="Int32" Nullable="false" />
+    <Property Name="OwnerId" Type="String" Nullable="false" Unicode="true" MaxLength="128" FixedLength="false" />
   </EntityType>
   <EntityType Name="Log">
     <Key>
@@ -179,7 +177,7 @@
     </Key>
     <Property Name="LogID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Date" Type="DateTime" Nullable="true" Precision="3" />
-    <Property Name="LoggerId" Type="Int32" Nullable="false" />
+    <Property Name="LoggerId" Type="String" Nullable="false" Unicode="true" MaxLength="128" FixedLength="false" />
     <Property Name="PhotoId" Type="Int32" Nullable="false" />
   </EntityType>
   <EntityType Name="TagInformation">
@@ -187,7 +185,7 @@
       <PropertyRef Name="TagInformationID" />
     </Key>
     <Property Name="TagInformationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="UserUserID" Type="Int32" Nullable="false" />
+    <Property Name="UserUserID" Type="String" Nullable="false" Unicode="true" MaxLength="128" FixedLength="false" />
     <Property Name="PhotoId" Type="Int32" Nullable="false" />
   </EntityType>
   <EntityType Name="Follower">
@@ -195,8 +193,8 @@
       <PropertyRef Name="FollowerID" />
     </Key>
     <Property Name="FollowerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="UserId" Type="Int32" Nullable="false" />
-    <Property Name="UserFollowerId" Type="Int32" Nullable="false" />
+    <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
+    <Property Name="UserFollowerId" Type="String" Nullable="false" Unicode="true" MaxLength="128" FixedLength="false" />
   </EntityType>
   <Association Name="UserFollower">
     <End Type="PhotoSharing.User" Role="User" Multiplicity="1" />
@@ -227,7 +225,7 @@
       <PropertyRef Name="UserGroupID" />
     </Key>
     <Property Name="UserGroupID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <Property Name="UserId" Type="String" Nullable="false" Unicode="true" MaxLength="128" FixedLength="false" />
     <Property Name="GroupId" Type="Int32" Nullable="false" />
   </EntityType>
   <Association Name="UserUserGroup">
@@ -307,7 +305,7 @@
       <PropertyRef Name="NotificationID" />
     </Key>
     <Property Name="NotificationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="UserID" Type="Int32" Nullable="false" />
+    <Property Name="UserID" Type="String" Nullable="false" Unicode="true" MaxLength="128" FixedLength="false" />
     <Property Name="LogLogID" Type="Int32" Nullable="false" />
   </EntityType>
   <Association Name="UserNotification">
@@ -428,10 +426,10 @@
   </Association>
   <EntityType Name="SharePhoto">
     <Key>
-      <PropertyRef Name="ShareUserPhotoID" />
+      <PropertyRef Name="SharePhotoID" />
     </Key>
-    <Property Name="ShareUserPhotoID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="UserId" Type="Int32" Nullable="true" />
+    <Property Name="SharePhotoID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="String" Nullable="true" Unicode="true" MaxLength="128" FixedLength="false" />
     <Property Name="GroupId" Type="Int32" Nullable="true" />
     <Property Name="PhotoId" Type="Int32" Nullable="true" />
     <Property Name="AlbumId" Type="Int32" Nullable="true" />
@@ -465,7 +463,7 @@
       <PropertyRef Name="CommentID" />
     </Key>
     <Property Name="CommentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <Property Name="UserId" Type="String" Nullable="false" Unicode="true" MaxLength="128" FixedLength="false" />
     <Property Name="PhotoId" Type="Int32" Nullable="false" />
   </EntityType>
   <Association Name="UserComment">
@@ -497,7 +495,7 @@
       <PropertyRef Name="LikeID" />
     </Key>
     <Property Name="LikeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <Property Name="UserId" Type="String" Nullable="false" Unicode="true" MaxLength="128" FixedLength="false" />
     <Property Name="PhotoId" Type="Int32" Nullable="false" />
   </EntityType>
   <Association Name="UserLike">
@@ -524,51 +522,16 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityType Name="ShareWith">
-    <Key>
-      <PropertyRef Name="SharerWithId" />
-    </Key>
-    <Property Name="SharerWithId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
-  </EntityType>
   <Association Name="GroupSharePhoto">
     <End Type="PhotoSharing.Group" Role="Group" Multiplicity="0..1" />
     <End Type="PhotoSharing.SharePhoto" Role="SharePhoto" Multiplicity="*" />
   </Association>
-  <Association Name="AlbumShareWith">
-    <End Type="PhotoSharing.Album" Role="Album" Multiplicity="0..1" />
-    <End Type="PhotoSharing.ShareWith" Role="ShareWith" Multiplicity="*" />
-  </Association>
-  <Association Name="ShareWithPhoto">
-    <End Type="PhotoSharing.ShareWith" Role="ShareWith" Multiplicity="1" />
-    <End Type="PhotoSharing.Photo" Role="Photo" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="ShareWith">
-        <PropertyRef Name="SharerWithId" />
-      </Principal>
-      <Dependent Role="Photo">
-        <PropertyRef Name="SharedWithId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <ComplexType Name="GetUsersByUserId_Result">
-    <Property Type="Int32" Name="UserID" Nullable="false" />
-    <Property Type="String" Name="FirstName" Nullable="true" />
-    <Property Type="String" Name="LastName" Nullable="false" />
-    <Property Type="String" Name="UserName" Nullable="false" />
-    <Property Type="String" Name="Password" Nullable="true" />
-    <Property Type="DateTime" Name="LastLoginTime" Nullable="true" Precision="23" />
-    <Property Type="DateTime" Name="DateOfBirth" Nullable="true" Precision="23" />
-    <Property Type="String" Name="Sex" Nullable="false" />
-    <Property Type="Int32" Name="Phone" Nullable="false" />
-    <Property Type="Int32" Name="ProfilePicId" Nullable="true" />
-  </ComplexType>
   <EntityType Name="PhotoData">
     <Key>
       <PropertyRef Name="PhotoDataID" />
     </Key>
     <Property Name="PhotoDataID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Data" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="Data" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
   </EntityType>
   <Association Name="PhotoDataPhoto">
     <End Type="PhotoSharing.PhotoData" Role="PhotoData" Multiplicity="1" />
@@ -582,4 +545,20 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <ComplexType Name="ReadPhoto_Result">
+    <Property Type="Binary" Name="Data" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="GetUsersByUserId_Result">
+    <Property Type="String" Name="UserID" Nullable="false" MaxLength="128" />
+    <Property Type="String" Name="FirstName" Nullable="true" />
+    <Property Type="String" Name="LastName" Nullable="true" />
+    <Property Type="String" Name="Email" Nullable="false" MaxLength="256" />
+    <Property Type="String" Name="UserName" Nullable="false" MaxLength="256" />
+    <Property Type="String" Name="Password" Nullable="true" />
+    <Property Type="DateTime" Name="LastLoginTime" Nullable="true" Precision="23" />
+    <Property Type="DateTime" Name="DateOfBirth" Nullable="true" Precision="23" />
+    <Property Type="String" Name="Sex" Nullable="true" MaxLength="1" />
+    <Property Type="String" Name="Phone" Nullable="false" />
+    <Property Type="Int32" Name="ProfilePicId" Nullable="true" />
+  </ComplexType>
 </Schema>

@@ -15,7 +15,7 @@ namespace PhotoSharingDataModel
     public partial class Comment
     {
         public int CommentID { get; set; }
-        public int UserId { get; set; }
+        public string UserId { get; set; }
         public int PhotoId { get; set; }
     }
 }

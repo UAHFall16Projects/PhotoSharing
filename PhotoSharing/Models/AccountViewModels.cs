@@ -85,8 +85,16 @@ namespace PhotoSharing.Models
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 
-        [Display(Name = "Hometown")]
-        public string Hometown { get; set; }
+        [Display(Name = "First Name")]
+        public string FirstName { get; set; }
+        [Display(Name = "Last Name")]
+        public string LastName { get; set; }
+        [Display(Name = "Date Of Birth")]
+        public System.DateTime? DateOfBirth { get; set; }
+
+        [Display(Name = "Sex")]
+        [MaxLength(1)]
+        public string Sex { get; set; }
     }
 
     public class ResetPasswordViewModel

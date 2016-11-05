@@ -41,10 +41,7 @@
         <EntityTypeShape EntityType="PhotoSharing.Like" Width="1.5" PointX="8.5" PointY="12.5" />
         <AssociationConnector Association="PhotoSharing.UserLike" />
         <AssociationConnector Association="PhotoSharing.LikePhoto" />
-        <EntityTypeShape EntityType="PhotoSharing.ShareWith" Width="1.5" PointX="0.875" PointY="14.375" />
         <AssociationConnector Association="PhotoSharing.GroupSharePhoto" />
-        <AssociationConnector Association="PhotoSharing.AlbumShareWith" />
-        <AssociationConnector Association="PhotoSharing.ShareWithPhoto" />
         <EntityTypeShape EntityType="PhotoSharing.PhotoData" Width="1.5" PointX="13.125" PointY="13" />
         <AssociationConnector Association="PhotoSharing.PhotoDataPhoto" />
       </Diagram>

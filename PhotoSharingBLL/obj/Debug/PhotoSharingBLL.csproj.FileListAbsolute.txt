@@ -1,4 +1,3 @@
-C:\Users\Rohit\Documents\GitHub\PhotoSharing\PhotoSharingBLL\obj\Debug\PhotoSharingBLL.csprojResolveAssemblyReference.cache
 C:\Users\Rohit\Documents\GitHub\PhotoSharing\PhotoSharingBLL\bin\Debug\PhotoSharingBLL.dll
 C:\Users\Rohit\Documents\GitHub\PhotoSharing\PhotoSharingBLL\bin\Debug\PhotoSharingBLL.pdb
 C:\Users\Rohit\Documents\GitHub\PhotoSharing\PhotoSharingBLL\bin\Debug\EntityFramework.dll
@@ -7,5 +6,6 @@ C:\Users\Rohit\Documents\GitHub\PhotoSharing\PhotoSharingBLL\bin\Debug\PhotoShar
 C:\Users\Rohit\Documents\GitHub\PhotoSharing\PhotoSharingBLL\bin\Debug\PhotoSharingDataModel.pdb
 C:\Users\Rohit\Documents\GitHub\PhotoSharing\PhotoSharingBLL\bin\Debug\EntityFramework.xml
 C:\Users\Rohit\Documents\GitHub\PhotoSharing\PhotoSharingBLL\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Rohit\Documents\GitHub\PhotoSharing\PhotoSharingBLL\obj\Debug\PhotoSharingBLL.csprojResolveAssemblyReference.cache
 C:\Users\Rohit\Documents\GitHub\PhotoSharing\PhotoSharingBLL\obj\Debug\PhotoSharingBLL.dll
 C:\Users\Rohit\Documents\GitHub\PhotoSharing\PhotoSharingBLL\obj\Debug\PhotoSharingBLL.pdb

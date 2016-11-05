@@ -30,6 +30,9 @@ namespace PhotoSharing.Models
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
 
+        [Display(Name = "Full Name")]
+        public string FullName { get { return FirstName + " " + LastName; } }
+
         [Display(Name = "User Name")]
         public string UserName { get; set; }
 
@@ -42,10 +45,11 @@ namespace PhotoSharing.Models
         public string Sex { get; set; }
 
         [Display(Name = "Phone")]
-        public int Phone { get; set; }
+        public string Phone { get; set; }
 
         [Display(Name = "ProfilePicId")]
         public int? ProfilePicId { get; set; }
+
 
     }
 }

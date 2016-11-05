@@ -19,7 +19,7 @@ namespace PhotoSharingDataModel
         public string GeoTag { get; set; }
         public string Name { get; set; }
         public Nullable<int> TotalLikes { get; set; }
-        public int UploadedUserId { get; set; }
+        public string UploadedUserId { get; set; }
         public int SharedWithId { get; set; }
         public int PhotoDataId { get; set; }
     }

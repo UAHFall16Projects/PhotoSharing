@@ -16,6 +16,6 @@ namespace PhotoSharingDataModel
     {
         public int GroupID { get; set; }
         public string Name { get; set; }
-        public int OwnerId { get; set; }
+        public string OwnerId { get; set; }
     }
 }

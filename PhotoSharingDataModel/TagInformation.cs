@@ -15,7 +15,7 @@ namespace PhotoSharingDataModel
     public partial class TagInformation
     {
         public int TagInformationID { get; set; }
-        public int UserUserID { get; set; }
+        public string UserUserID { get; set; }
         public int PhotoId { get; set; }
     }
 }

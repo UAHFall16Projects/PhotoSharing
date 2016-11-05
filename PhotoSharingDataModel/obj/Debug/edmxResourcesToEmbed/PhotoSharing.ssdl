@@ -6,7 +6,7 @@
     </Key>
     <Property Name="AlbumID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="nvarchar(max)" />
-    <Property Name="OwnerId" Type="int" Nullable="false" />
+    <Property Name="OwnerId" Type="nvarchar" MaxLength="128" Nullable="false" />
     <Property Name="CoverPicId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Comments">
@@ -14,7 +14,7 @@
       <PropertyRef Name="CommentID" />
     </Key>
     <Property Name="CommentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
     <Property Name="PhotoId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Followers">
@@ -22,8 +22,8 @@
       <PropertyRef Name="FollowerID" />
     </Key>
     <Property Name="FollowerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="UserId" Type="int" Nullable="false" />
-    <Property Name="UserFollowerId" Type="int" Nullable="false" />
+    <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="UserFollowerId" Type="nvarchar" MaxLength="128" Nullable="false" />
   </EntityType>
   <EntityType Name="Groups">
     <Key>
@@ -31,14 +31,14 @@
     </Key>
     <Property Name="GroupID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="nvarchar(max)" />
-    <Property Name="OwnerId" Type="int" Nullable="false" />
+    <Property Name="OwnerId" Type="nvarchar" MaxLength="128" Nullable="false" />
   </EntityType>
   <EntityType Name="Likes">
     <Key>
       <PropertyRef Name="LikeID" />
     </Key>
     <Property Name="LikeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
     <Property Name="PhotoId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Logs">
@@ -47,7 +47,7 @@
     </Key>
     <Property Name="LogID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Date" Type="datetime" />
-    <Property Name="LoggerId" Type="int" Nullable="false" />
+    <Property Name="LoggerId" Type="nvarchar" MaxLength="128" Nullable="false" />
     <Property Name="PhotoId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Notifications">
@@ -55,7 +55,7 @@
       <PropertyRef Name="NotificationID" />
     </Key>
     <Property Name="NotificationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="UserID" Type="int" Nullable="false" />
+    <Property Name="UserID" Type="nvarchar" MaxLength="128" Nullable="false" />
     <Property Name="LogLogID" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="PhotoAlbums">
@@ -71,7 +71,7 @@
       <PropertyRef Name="PhotoDataID" />
     </Key>
     <Property Name="PhotoDataID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Data" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Data" Type="varbinary(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="Photos">
     <Key>
@@ -82,35 +82,27 @@
     <Property Name="GeoTag" Type="nvarchar(max)" />
     <Property Name="Name" Type="nvarchar(max)" />
     <Property Name="TotalLikes" Type="int" />
-    <Property Name="UploadedUserId" Type="int" Nullable="false" />
+    <Property Name="UploadedUserId" Type="nvarchar" MaxLength="128" Nullable="false" />
     <Property Name="SharedWithId" Type="int" Nullable="false" />
     <Property Name="PhotoDataId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="SharePhotoes">
     <Key>
-      <PropertyRef Name="ShareUserPhotoID" />
+      <PropertyRef Name="SharePhotoID" />
     </Key>
-    <Property Name="ShareUserPhotoID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="UserId" Type="int" />
+    <Property Name="SharePhotoID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="nvarchar" MaxLength="128" />
     <Property Name="GroupId" Type="int" />
     <Property Name="PhotoId" Type="int" />
     <Property Name="AlbumId" Type="int" />
     <Property Name="GroupSharePhoto_SharePhoto_GroupID" Type="int" />
-  </EntityType>
-  <EntityType Name="ShareWith">
-    <Key>
-      <PropertyRef Name="SharerWithId" />
-    </Key>
-    <Property Name="SharerWithId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="AlbumShareWith_ShareWith_AlbumID" Type="int" />
   </EntityType>
   <EntityType Name="TagInformations">
     <Key>
       <PropertyRef Name="TagInformationID" />
     </Key>
     <Property Name="TagInformationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="UserUserID" Type="int" Nullable="false" />
+    <Property Name="UserUserID" Type="nvarchar" MaxLength="128" Nullable="false" />
     <Property Name="PhotoId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="UserGroups">
@@ -118,22 +110,23 @@
       <PropertyRef Name="UserGroupID" />
     </Key>
     <Property Name="UserGroupID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
     <Property Name="GroupId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Users">
     <Key>
       <PropertyRef Name="UserID" />
     </Key>
-    <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserID" Type="nvarchar" MaxLength="128" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="FirstName" Type="nvarchar(max)" />
-    <Property Name="LastName" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="UserName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="LastName" Type="nvarchar(max)" />
+    <Property Name="Email" Type="nvarchar" MaxLength="256" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
     <Property Name="Password" Type="nvarchar(max)" />
     <Property Name="LastLoginTime" Type="datetime" />
     <Property Name="DateOfBirth" Type="datetime" />
-    <Property Name="Sex" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Phone" Type="int" Nullable="false" />
+    <Property Name="Sex" Type="varchar" MaxLength="1" />
+    <Property Name="Phone" Type="nvarchar(max)" Nullable="false" />
     <Property Name="ProfilePicId" Type="int" />
   </EntityType>
   <Association Name="FK_AlbumPhoto">
@@ -157,18 +150,6 @@
       </Principal>
       <Dependent Role="PhotoAlbums">
         <PropertyRef Name="AlbumId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_AlbumShareWith">
-    <End Role="Albums" Type="Self.Albums" Multiplicity="0..1" />
-    <End Role="ShareWith" Type="Self.ShareWith" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Albums">
-        <PropertyRef Name="AlbumID" />
-      </Principal>
-      <Dependent Role="ShareWith">
-        <PropertyRef Name="AlbumShareWith_ShareWith_AlbumID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -289,18 +270,6 @@
       </Principal>
       <Dependent Role="SharePhotoes">
         <PropertyRef Name="PhotoId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_ShareWithPhoto">
-    <End Role="ShareWith" Type="Self.ShareWith" Multiplicity="1" />
-    <End Role="Photos" Type="Self.Photos" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="ShareWith">
-        <PropertyRef Name="SharerWithId" />
-      </Principal>
-      <Dependent Role="Photos">
-        <PropertyRef Name="SharedWithId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -461,7 +430,13 @@
     </ReferentialConstraint>
   </Association>
   <Function Name="GetUsersByUserId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="photoShare">
-    <Parameter Name="UserId" Type="int" Mode="In" />
+    <Parameter Name="UserId" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="ReadPhoto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="photoShare">
+    <Parameter Name="photoId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="SavePhoto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="photoShare">
+    <Parameter Name="photo" Type="varbinary(max)" Mode="In" />
   </Function>
   <EntityContainer Name="PhotoSharingStoreContainer">
     <EntitySet Name="Albums" EntityType="Self.Albums" Schema="photoShare" store:Type="Tables" />
@@ -475,7 +450,6 @@
     <EntitySet Name="PhotoDatas" EntityType="Self.PhotoDatas" Schema="photoShare" store:Type="Tables" />
     <EntitySet Name="Photos" EntityType="Self.Photos" Schema="photoShare" store:Type="Tables" />
     <EntitySet Name="SharePhotoes" EntityType="Self.SharePhotoes" Schema="photoShare" store:Type="Tables" />
-    <EntitySet Name="ShareWith" EntityType="Self.ShareWith" Schema="photoShare" store:Type="Tables" />
     <EntitySet Name="TagInformations" EntityType="Self.TagInformations" Schema="photoShare" store:Type="Tables" />
     <EntitySet Name="UserGroups" EntityType="Self.UserGroups" Schema="photoShare" store:Type="Tables" />
     <EntitySet Name="Users" EntityType="Self.Users" Schema="photoShare" store:Type="Tables" />
@@ -486,10 +460,6 @@
     <AssociationSet Name="FK_AlbumPhotoAlbum" Association="Self.FK_AlbumPhotoAlbum">
       <End Role="Albums" EntitySet="Albums" />
       <End Role="PhotoAlbums" EntitySet="PhotoAlbums" />
-    </AssociationSet>
-    <AssociationSet Name="FK_AlbumShareWith" Association="Self.FK_AlbumShareWith">
-      <End Role="Albums" EntitySet="Albums" />
-      <End Role="ShareWith" EntitySet="ShareWith" />
     </AssociationSet>
     <AssociationSet Name="FK_AlbumUser" Association="Self.FK_AlbumUser">
       <End Role="Users" EntitySet="Users" />
@@ -530,10 +500,6 @@
     <AssociationSet Name="FK_ShareUserPhotoPhoto" Association="Self.FK_ShareUserPhotoPhoto">
       <End Role="Photos" EntitySet="Photos" />
       <End Role="SharePhotoes" EntitySet="SharePhotoes" />
-    </AssociationSet>
-    <AssociationSet Name="FK_ShareWithPhoto" Association="Self.FK_ShareWithPhoto">
-      <End Role="ShareWith" EntitySet="ShareWith" />
-      <End Role="Photos" EntitySet="Photos" />
     </AssociationSet>
     <AssociationSet Name="FK_UserComment" Association="Self.FK_UserComment">
       <End Role="Users" EntitySet="Users" />

@@ -15,7 +15,7 @@ namespace PhotoSharingDataModel
     public partial class Notification
     {
         public int NotificationID { get; set; }
-        public int UserID { get; set; }
+        public string UserID { get; set; }
         public int LogLogID { get; set; }
     }
 }

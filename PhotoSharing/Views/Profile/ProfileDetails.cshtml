@@ -1,68 +1,152 @@
 ﻿@model PhotoSharing.Models.ProfileViewModel
 
-<div>
-    <h4>ProfileViewModel</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.FirstName)
-        </dt>
+@*<div>
+        <h4>ProfileViewModel</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.FirstName)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.FirstName)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.LastName)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.LastName)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.LastName)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.LastName)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.UserName)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.UserName)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.UserName)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.UserName)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Password)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Password)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Password)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Password)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Sex)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Sex)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Sex)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Sex)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Phone)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Phone)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Phone)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Phone)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ProfilePicId)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.ProfilePicId)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.ProfilePicId)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.ProfilePicId)
+            </dd>
+            <dd>
+                <div class="profileImage">
+                    @if (Model.ProfilePicId != null)
+                {
+                        <img src="@Url.Action("RetrievePhoto", "Profile", new { profilePicId = Model.ProfilePicId })" alt="" />
+                    }
+                    else
+                    {
+                        <img src="~/Content/Images/DefaultProfilePic.png" alt="" height=100 width=200 />
+                    }
+                </div>
+            </dd>
 
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+        </dl>
+    </div>*@
+<div class="mainContainer Module UserProfilePage fadeIn">
+    <div class="DenzelReactBridge Module ">
+        <div class="Module UserProfileHeader profileHeader">
+            <div class="centeredWithinWrapper gridWidth headerSizer">
+                <div class="header emptyProfile" itemscope="" itemtype="https://schema.org/Person">
+                    <div class="profileImage">
+                        @if (Model.ProfilePicId != null)
+                        {
+                            <img src="@Url.Action("RetrievePhoto", "Profile", new { profilePicId = Model.ProfilePicId })" alt="@Model.FullName" />
+                        }
+                        else
+                        {
+                            <img src="~/Content/Images/DefaultProfilePic.png" alt="" height=100 width=200 />
+                        }
+                    </div>
+                    <div class="fixedHeader">
+                        <div class="titleBar centeredWithinWrapper gridWidth">
+                            <div class="fixedHeaderNameAndImage _1lB54">
+                                <div class="fixedHeaderImage"><img alt="Rohit Pawar" src="https://s-passets-cache-ak0.pinimg.com/images/user/default_140.png"></div>
+                                <div class="fixedHeaderName" itemprop="name">Rohit Pawar</div>
+                            </div>
+                            <div class="buttons">
+                                <div style="float: left;">
+                                    <button aria-label="Edit profile" class="editProfile Button Module btn hasIcon rounded primary" type="button">
+                                        <em></em>
+                                        <span class="accessibilityText">Edit profile</span>
+                                    </button>
+                                    <a class="Button Module btn rounded settingsCog" href="/settings">
+                                        <em></em>
+                                        <span class="accessibilityText">Edit settings</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div><div class="profileInfo">
+                        <div class="aboutBar">
+                            <div class="about">
+                                <h1 class="name">
+                                    <div class="nameInner">@Model.FullName</div>
+                                </h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="DenzelReactBridge Module">
+            <div class="Module UserInfoBar centeredWithinWrapper infoBar gridWidth">
+                <div class="tabs">
+                    <ul data-reactid="5">
+                        <li data-reactid="12">
+                            <a class="" href="/rohitpawarsocia/likes/" data-reactid="13">
+                                <span data-reactid="14">
+                                    <span class="value">0</span>
+                                    <span class="label">Likes</span>
+                                </span>
+                            </a>
+                        </li>
+                        <li data-reactid="15">
+                            <a class="" href="/rohitpawarsocia/followers/" data-reactid="16">
+                                <span data-reactid="17"><span class="value ">0</span> <span class="label ">Followers</span></span>
+                            </a>
+                        </li>
+                        <li data-reactid="18">
+                            <a class="" href="/rohitpawarsocia/following/" data-reactid="19">
+                                <span data-reactid="20">
+                                    <span class="value ">7</span> <span class="label ">Following</span>
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>

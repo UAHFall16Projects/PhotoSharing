@@ -16,7 +16,7 @@ namespace PhotoSharingDataModel
     {
         public int LogID { get; set; }
         public Nullable<System.DateTime> Date { get; set; }
-        public int LoggerId { get; set; }
+        public string LoggerId { get; set; }
         public int PhotoId { get; set; }
     }
 }

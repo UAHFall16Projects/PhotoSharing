@@ -7,6 +7,7 @@
           <ScalarProperty Name="UserID" ColumnName="UserID" />
           <ScalarProperty Name="FirstName" ColumnName="FirstName" />
           <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
           <ScalarProperty Name="UserName" ColumnName="UserName" />
           <ScalarProperty Name="Password" ColumnName="Password" />
           <ScalarProperty Name="LastLoginTime" ColumnName="LastLoginTime" />
@@ -108,7 +109,7 @@
     <EntitySetMapping Name="SharePhotoes">
       <EntityTypeMapping TypeName="IsTypeOf(PhotoSharing.SharePhoto)">
         <MappingFragment StoreEntitySet="SharePhotoes">
-          <ScalarProperty Name="ShareUserPhotoID" ColumnName="ShareUserPhotoID" />
+          <ScalarProperty Name="SharePhotoID" ColumnName="SharePhotoID" />
           <ScalarProperty Name="UserId" ColumnName="UserId" />
           <ScalarProperty Name="GroupId" ColumnName="GroupId" />
           <ScalarProperty Name="PhotoId" ColumnName="PhotoId" />
@@ -134,14 +135,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="ShareWith">
-      <EntityTypeMapping TypeName="IsTypeOf(PhotoSharing.ShareWith)">
-        <MappingFragment StoreEntitySet="ShareWith">
-          <ScalarProperty Name="SharerWithId" ColumnName="SharerWithId" />
-          <ScalarProperty Name="Description" ColumnName="Description" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="PhotoDatas">
       <EntityTypeMapping TypeName="IsTypeOf(PhotoSharing.PhotoData)">
         <MappingFragment StoreEntitySet="PhotoDatas">
@@ -155,18 +148,9 @@
         <ScalarProperty Name="GroupID" ColumnName="GroupSharePhoto_SharePhoto_GroupID" />
       </EndProperty>
       <EndProperty Name="SharePhoto">
-        <ScalarProperty Name="ShareUserPhotoID" ColumnName="ShareUserPhotoID" />
+        <ScalarProperty Name="SharePhotoID" ColumnName="SharePhotoID" />
       </EndProperty>
       <Condition ColumnName="GroupSharePhoto_SharePhoto_GroupID" IsNull="false" />
-    </AssociationSetMapping>
-    <AssociationSetMapping Name="AlbumShareWith" TypeName="PhotoSharing.AlbumShareWith" StoreEntitySet="ShareWith">
-      <EndProperty Name="Album">
-        <ScalarProperty Name="AlbumID" ColumnName="AlbumShareWith_ShareWith_AlbumID" />
-      </EndProperty>
-      <EndProperty Name="ShareWith">
-        <ScalarProperty Name="SharerWithId" ColumnName="SharerWithId" />
-      </EndProperty>
-      <Condition ColumnName="AlbumShareWith_ShareWith_AlbumID" IsNull="false" />
     </AssociationSetMapping>
     <FunctionImportMapping FunctionImportName="GetUsersByUserId" FunctionName="PhotoSharing.Store.GetUsersByUserId">
       <ResultMapping>
@@ -174,6 +158,7 @@
           <ScalarProperty Name="UserID" ColumnName="UserID" />
           <ScalarProperty Name="FirstName" ColumnName="FirstName" />
           <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
           <ScalarProperty Name="UserName" ColumnName="UserName" />
           <ScalarProperty Name="Password" ColumnName="Password" />
           <ScalarProperty Name="LastLoginTime" ColumnName="LastLoginTime" />
@@ -184,5 +169,13 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ReadPhoto" FunctionName="PhotoSharing.Store.ReadPhoto">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PhotoSharing.ReadPhoto_Result">
+          <ScalarProperty Name="Data" ColumnName="Data" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="SavePhoto" FunctionName="PhotoSharing.Store.SavePhoto" />
   </EntityContainerMapping>
 </Mapping>

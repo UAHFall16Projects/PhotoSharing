@@ -15,6 +15,6 @@ namespace PhotoSharingDataModel
     public partial class PhotoData
     {
         public int PhotoDataID { get; set; }
-        public string Data { get; set; }
+        public byte[] Data { get; set; }
     }
 }

@@ -34,3 +34,18 @@ textarea {
         padding: 10px 15px;
     }
 }
+
+@media (min-width: 800px) {
+    .UserProfileHeader.profileHeader .profileImage, .UserProfileHeader.profileHeader .profileImage img {
+        height: calc(33 * 6px);
+        width: calc(33 * 7px);
+    }
+}
+
+.icon-arrow-right {
+  background-position: -264px -96px;
+}
+
+.datepicker.dropdown-menu {
+    width: 15%;
+}

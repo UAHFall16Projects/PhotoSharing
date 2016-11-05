@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 11/03/2016 02:50:07
+-- Date Created: 11/04/2016 23:58:30
 -- Generated from EDMX file: C:\Users\Rohit\Documents\GitHub\PhotoSharing\PhotoSharingDataModel\PhotoSharing.edmx
 -- --------------------------------------------------
 
@@ -17,14 +17,50 @@ GO
 -- Dropping existing FOREIGN KEY constraints
 -- --------------------------------------------------
 
+IF OBJECT_ID(N'[photoShare].[FK_AlbumPhoto]', 'F') IS NOT NULL
+    ALTER TABLE [photoShare].[Albums] DROP CONSTRAINT [FK_AlbumPhoto];
+GO
+IF OBJECT_ID(N'[photoShare].[FK_AlbumPhotoAlbum]', 'F') IS NOT NULL
+    ALTER TABLE [photoShare].[PhotoAlbums] DROP CONSTRAINT [FK_AlbumPhotoAlbum];
+GO
+IF OBJECT_ID(N'[photoShare].[FK_AlbumUser]', 'F') IS NOT NULL
+    ALTER TABLE [photoShare].[Albums] DROP CONSTRAINT [FK_AlbumUser];
+GO
+IF OBJECT_ID(N'[photoShare].[FK_CommentPhoto]', 'F') IS NOT NULL
+    ALTER TABLE [photoShare].[Comments] DROP CONSTRAINT [FK_CommentPhoto];
+GO
+IF OBJECT_ID(N'[photoShare].[FK_GroupSharePhoto]', 'F') IS NOT NULL
+    ALTER TABLE [photoShare].[SharePhotoes] DROP CONSTRAINT [FK_GroupSharePhoto];
+GO
+IF OBJECT_ID(N'[photoShare].[FK_LikePhoto]', 'F') IS NOT NULL
+    ALTER TABLE [photoShare].[Likes] DROP CONSTRAINT [FK_LikePhoto];
+GO
+IF OBJECT_ID(N'[photoShare].[FK_LogNotification]', 'F') IS NOT NULL
+    ALTER TABLE [photoShare].[Notifications] DROP CONSTRAINT [FK_LogNotification];
+GO
+IF OBJECT_ID(N'[photoShare].[FK_LogPhoto]', 'F') IS NOT NULL
+    ALTER TABLE [photoShare].[Logs] DROP CONSTRAINT [FK_LogPhoto];
+GO
+IF OBJECT_ID(N'[photoShare].[FK_PhotoAlbumPhoto]', 'F') IS NOT NULL
+    ALTER TABLE [photoShare].[PhotoAlbums] DROP CONSTRAINT [FK_PhotoAlbumPhoto];
+GO
+IF OBJECT_ID(N'[photoShare].[FK_PhotoDataPhoto]', 'F') IS NOT NULL
+    ALTER TABLE [photoShare].[Photos] DROP CONSTRAINT [FK_PhotoDataPhoto];
+GO
+IF OBJECT_ID(N'[photoShare].[FK_PhotoTagInformation]', 'F') IS NOT NULL
+    ALTER TABLE [photoShare].[TagInformations] DROP CONSTRAINT [FK_PhotoTagInformation];
+GO
+IF OBJECT_ID(N'[photoShare].[FK_ShareUserPhotoPhoto]', 'F') IS NOT NULL
+    ALTER TABLE [photoShare].[SharePhotoes] DROP CONSTRAINT [FK_ShareUserPhotoPhoto];
+GO
+IF OBJECT_ID(N'[photoShare].[FK_UserComment]', 'F') IS NOT NULL
+    ALTER TABLE [photoShare].[Comments] DROP CONSTRAINT [FK_UserComment];
+GO
 IF OBJECT_ID(N'[photoShare].[FK_UserFollower]', 'F') IS NOT NULL
     ALTER TABLE [photoShare].[Followers] DROP CONSTRAINT [FK_UserFollower];
 GO
 IF OBJECT_ID(N'[photoShare].[FK_UserFollower1]', 'F') IS NOT NULL
     ALTER TABLE [photoShare].[Followers] DROP CONSTRAINT [FK_UserFollower1];
-GO
-IF OBJECT_ID(N'[photoShare].[FK_UserUserGroup]', 'F') IS NOT NULL
-    ALTER TABLE [photoShare].[UserGroups] DROP CONSTRAINT [FK_UserUserGroup];
 GO
 IF OBJECT_ID(N'[photoShare].[FK_UserGroupGroup]', 'F') IS NOT NULL
     ALTER TABLE [photoShare].[UserGroups] DROP CONSTRAINT [FK_UserGroupGroup];
@@ -32,35 +68,14 @@ GO
 IF OBJECT_ID(N'[photoShare].[FK_UserGroupOwner]', 'F') IS NOT NULL
     ALTER TABLE [photoShare].[Groups] DROP CONSTRAINT [FK_UserGroupOwner];
 GO
-IF OBJECT_ID(N'[photoShare].[FK_AlbumUser]', 'F') IS NOT NULL
-    ALTER TABLE [photoShare].[Albums] DROP CONSTRAINT [FK_AlbumUser];
-GO
-IF OBJECT_ID(N'[photoShare].[FK_UserTagInformation]', 'F') IS NOT NULL
-    ALTER TABLE [photoShare].[TagInformations] DROP CONSTRAINT [FK_UserTagInformation];
-GO
-IF OBJECT_ID(N'[photoShare].[FK_PhotoTagInformation]', 'F') IS NOT NULL
-    ALTER TABLE [photoShare].[TagInformations] DROP CONSTRAINT [FK_PhotoTagInformation];
-GO
-IF OBJECT_ID(N'[photoShare].[FK_UserNotification]', 'F') IS NOT NULL
-    ALTER TABLE [photoShare].[Notifications] DROP CONSTRAINT [FK_UserNotification];
-GO
-IF OBJECT_ID(N'[photoShare].[FK_LogNotification]', 'F') IS NOT NULL
-    ALTER TABLE [photoShare].[Notifications] DROP CONSTRAINT [FK_LogNotification];
+IF OBJECT_ID(N'[photoShare].[FK_UserLike]', 'F') IS NOT NULL
+    ALTER TABLE [photoShare].[Likes] DROP CONSTRAINT [FK_UserLike];
 GO
 IF OBJECT_ID(N'[photoShare].[FK_UserLog]', 'F') IS NOT NULL
     ALTER TABLE [photoShare].[Logs] DROP CONSTRAINT [FK_UserLog];
 GO
-IF OBJECT_ID(N'[photoShare].[FK_LogPhoto]', 'F') IS NOT NULL
-    ALTER TABLE [photoShare].[Logs] DROP CONSTRAINT [FK_LogPhoto];
-GO
-IF OBJECT_ID(N'[photoShare].[FK_AlbumPhoto]', 'F') IS NOT NULL
-    ALTER TABLE [photoShare].[Albums] DROP CONSTRAINT [FK_AlbumPhoto];
-GO
-IF OBJECT_ID(N'[photoShare].[FK_PhotoAlbumPhoto]', 'F') IS NOT NULL
-    ALTER TABLE [photoShare].[PhotoAlbums] DROP CONSTRAINT [FK_PhotoAlbumPhoto];
-GO
-IF OBJECT_ID(N'[photoShare].[FK_AlbumPhotoAlbum]', 'F') IS NOT NULL
-    ALTER TABLE [photoShare].[PhotoAlbums] DROP CONSTRAINT [FK_AlbumPhotoAlbum];
+IF OBJECT_ID(N'[photoShare].[FK_UserNotification]', 'F') IS NOT NULL
+    ALTER TABLE [photoShare].[Notifications] DROP CONSTRAINT [FK_UserNotification];
 GO
 IF OBJECT_ID(N'[photoShare].[FK_UserPhoto]', 'F') IS NOT NULL
     ALTER TABLE [photoShare].[Users] DROP CONSTRAINT [FK_UserPhoto];
@@ -71,61 +86,34 @@ GO
 IF OBJECT_ID(N'[photoShare].[FK_UserShareUserPhoto]', 'F') IS NOT NULL
     ALTER TABLE [photoShare].[SharePhotoes] DROP CONSTRAINT [FK_UserShareUserPhoto];
 GO
-IF OBJECT_ID(N'[photoShare].[FK_ShareUserPhotoPhoto]', 'F') IS NOT NULL
-    ALTER TABLE [photoShare].[SharePhotoes] DROP CONSTRAINT [FK_ShareUserPhotoPhoto];
+IF OBJECT_ID(N'[photoShare].[FK_UserTagInformation]', 'F') IS NOT NULL
+    ALTER TABLE [photoShare].[TagInformations] DROP CONSTRAINT [FK_UserTagInformation];
 GO
-IF OBJECT_ID(N'[photoShare].[FK_UserComment]', 'F') IS NOT NULL
-    ALTER TABLE [photoShare].[Comments] DROP CONSTRAINT [FK_UserComment];
-GO
-IF OBJECT_ID(N'[photoShare].[FK_CommentPhoto]', 'F') IS NOT NULL
-    ALTER TABLE [photoShare].[Comments] DROP CONSTRAINT [FK_CommentPhoto];
-GO
-IF OBJECT_ID(N'[photoShare].[FK_UserLike]', 'F') IS NOT NULL
-    ALTER TABLE [photoShare].[Likes] DROP CONSTRAINT [FK_UserLike];
-GO
-IF OBJECT_ID(N'[photoShare].[FK_LikePhoto]', 'F') IS NOT NULL
-    ALTER TABLE [photoShare].[Likes] DROP CONSTRAINT [FK_LikePhoto];
-GO
-IF OBJECT_ID(N'[photoShare].[FK_GroupSharePhoto]', 'F') IS NOT NULL
-    ALTER TABLE [photoShare].[SharePhotoes] DROP CONSTRAINT [FK_GroupSharePhoto];
-GO
-IF OBJECT_ID(N'[photoShare].[FK_AlbumShareWith]', 'F') IS NOT NULL
-    ALTER TABLE [photoShare].[ShareWith] DROP CONSTRAINT [FK_AlbumShareWith];
-GO
-IF OBJECT_ID(N'[photoShare].[FK_ShareWithPhoto]', 'F') IS NOT NULL
-    ALTER TABLE [photoShare].[Photos] DROP CONSTRAINT [FK_ShareWithPhoto];
-GO
-IF OBJECT_ID(N'[photoShare].[FK_PhotoDataPhoto]', 'F') IS NOT NULL
-    ALTER TABLE [photoShare].[Photos] DROP CONSTRAINT [FK_PhotoDataPhoto];
+IF OBJECT_ID(N'[photoShare].[FK_UserUserGroup]', 'F') IS NOT NULL
+    ALTER TABLE [photoShare].[UserGroups] DROP CONSTRAINT [FK_UserUserGroup];
 GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
 -- --------------------------------------------------
 
-IF OBJECT_ID(N'[photoShare].[Users]', 'U') IS NOT NULL
-    DROP TABLE [photoShare].[Users];
-GO
-IF OBJECT_ID(N'[photoShare].[Photos]', 'U') IS NOT NULL
-    DROP TABLE [photoShare].[Photos];
-GO
 IF OBJECT_ID(N'[photoShare].[Albums]', 'U') IS NOT NULL
     DROP TABLE [photoShare].[Albums];
 GO
-IF OBJECT_ID(N'[photoShare].[Groups]', 'U') IS NOT NULL
-    DROP TABLE [photoShare].[Groups];
-GO
-IF OBJECT_ID(N'[photoShare].[Logs]', 'U') IS NOT NULL
-    DROP TABLE [photoShare].[Logs];
-GO
-IF OBJECT_ID(N'[photoShare].[TagInformations]', 'U') IS NOT NULL
-    DROP TABLE [photoShare].[TagInformations];
+IF OBJECT_ID(N'[photoShare].[Comments]', 'U') IS NOT NULL
+    DROP TABLE [photoShare].[Comments];
 GO
 IF OBJECT_ID(N'[photoShare].[Followers]', 'U') IS NOT NULL
     DROP TABLE [photoShare].[Followers];
 GO
-IF OBJECT_ID(N'[photoShare].[UserGroups]', 'U') IS NOT NULL
-    DROP TABLE [photoShare].[UserGroups];
+IF OBJECT_ID(N'[photoShare].[Groups]', 'U') IS NOT NULL
+    DROP TABLE [photoShare].[Groups];
+GO
+IF OBJECT_ID(N'[photoShare].[Likes]', 'U') IS NOT NULL
+    DROP TABLE [photoShare].[Likes];
+GO
+IF OBJECT_ID(N'[photoShare].[Logs]', 'U') IS NOT NULL
+    DROP TABLE [photoShare].[Logs];
 GO
 IF OBJECT_ID(N'[photoShare].[Notifications]', 'U') IS NOT NULL
     DROP TABLE [photoShare].[Notifications];
@@ -133,20 +121,23 @@ GO
 IF OBJECT_ID(N'[photoShare].[PhotoAlbums]', 'U') IS NOT NULL
     DROP TABLE [photoShare].[PhotoAlbums];
 GO
+IF OBJECT_ID(N'[photoShare].[PhotoDatas]', 'U') IS NOT NULL
+    DROP TABLE [photoShare].[PhotoDatas];
+GO
+IF OBJECT_ID(N'[photoShare].[Photos]', 'U') IS NOT NULL
+    DROP TABLE [photoShare].[Photos];
+GO
 IF OBJECT_ID(N'[photoShare].[SharePhotoes]', 'U') IS NOT NULL
     DROP TABLE [photoShare].[SharePhotoes];
 GO
-IF OBJECT_ID(N'[photoShare].[Comments]', 'U') IS NOT NULL
-    DROP TABLE [photoShare].[Comments];
+IF OBJECT_ID(N'[photoShare].[TagInformations]', 'U') IS NOT NULL
+    DROP TABLE [photoShare].[TagInformations];
 GO
-IF OBJECT_ID(N'[photoShare].[Likes]', 'U') IS NOT NULL
-    DROP TABLE [photoShare].[Likes];
+IF OBJECT_ID(N'[photoShare].[UserGroups]', 'U') IS NOT NULL
+    DROP TABLE [photoShare].[UserGroups];
 GO
-IF OBJECT_ID(N'[photoShare].[ShareWith]', 'U') IS NOT NULL
-    DROP TABLE [photoShare].[ShareWith];
-GO
-IF OBJECT_ID(N'[photoShare].[PhotoDatas]', 'U') IS NOT NULL
-    DROP TABLE [photoShare].[PhotoDatas];
+IF OBJECT_ID(N'[photoShare].[Users]', 'U') IS NOT NULL
+    DROP TABLE [photoShare].[Users];
 GO
 
 -- --------------------------------------------------
@@ -155,15 +146,16 @@ GO
 
 -- Creating table 'Users'
 CREATE TABLE [photoShare].[Users] (
-    [UserID] int IDENTITY(1,1) NOT NULL,
+    [UserID] nvarchar(128)  NOT NULL,
     [FirstName] nvarchar(max)  NULL,
-    [LastName] nvarchar(max)  NOT NULL,
-    [UserName] nvarchar(max)  NOT NULL,
+    [LastName] nvarchar(max)  NULL,
+    [Email] nvarchar(256)  NOT NULL,
+    [UserName] nvarchar(256)  NULL,
     [Password] nvarchar(max)  NULL,
     [LastLoginTime] datetime  NULL,
     [DateOfBirth] datetime  NULL,
-    [Sex] nvarchar(max)  NOT NULL,
-    [Phone] int  NOT NULL,
+    [Sex] varchar(1)  NULL,
+    [Phone] nvarchar(max)  NULL,
     [ProfilePicId] int  NULL
 );
 GO
@@ -175,7 +167,7 @@ CREATE TABLE [photoShare].[Photos] (
     [GeoTag] nvarchar(max)  NULL,
     [Name] nvarchar(max)  NULL,
     [TotalLikes] int  NULL,
-    [UploadedUserId] int  NOT NULL,
+    [UploadedUserId] nvarchar(128)  NOT NULL,
     [SharedWithId] int  NOT NULL,
     [PhotoDataId] int  NOT NULL
 );
@@ -185,7 +177,7 @@ GO
 CREATE TABLE [photoShare].[Albums] (
     [AlbumID] int IDENTITY(1,1) NOT NULL,
     [Name] nvarchar(max)  NULL,
-    [OwnerId] int  NOT NULL,
+    [OwnerId] nvarchar(128)  NOT NULL,
     [CoverPicId] int  NOT NULL
 );
 GO
@@ -194,7 +186,7 @@ GO
 CREATE TABLE [photoShare].[Groups] (
     [GroupID] int IDENTITY(1,1) NOT NULL,
     [Name] nvarchar(max)  NULL,
-    [OwnerId] int  NOT NULL
+    [OwnerId] nvarchar(128)  NOT NULL
 );
 GO
 
@@ -202,7 +194,7 @@ GO
 CREATE TABLE [photoShare].[Logs] (
     [LogID] int IDENTITY(1,1) NOT NULL,
     [Date] datetime  NULL,
-    [LoggerId] int  NOT NULL,
+    [LoggerId] nvarchar(128)  NOT NULL,
     [PhotoId] int  NOT NULL
 );
 GO
@@ -210,7 +202,7 @@ GO
 -- Creating table 'TagInformations'
 CREATE TABLE [photoShare].[TagInformations] (
     [TagInformationID] int IDENTITY(1,1) NOT NULL,
-    [UserUserID] int  NOT NULL,
+    [UserUserID] nvarchar(128)  NOT NULL,
     [PhotoId] int  NOT NULL
 );
 GO
@@ -218,15 +210,15 @@ GO
 -- Creating table 'Followers'
 CREATE TABLE [photoShare].[Followers] (
     [FollowerID] int IDENTITY(1,1) NOT NULL,
-    [UserId] int  NOT NULL,
-    [UserFollowerId] int  NOT NULL
+    [UserId] nvarchar(128)  NOT NULL,
+    [UserFollowerId] nvarchar(128)  NOT NULL
 );
 GO
 
 -- Creating table 'UserGroups'
 CREATE TABLE [photoShare].[UserGroups] (
     [UserGroupID] int IDENTITY(1,1) NOT NULL,
-    [UserId] int  NOT NULL,
+    [UserId] nvarchar(128)  NOT NULL,
     [GroupId] int  NOT NULL
 );
 GO
@@ -234,7 +226,7 @@ GO
 -- Creating table 'Notifications'
 CREATE TABLE [photoShare].[Notifications] (
     [NotificationID] int IDENTITY(1,1) NOT NULL,
-    [UserID] int  NOT NULL,
+    [UserID] nvarchar(128)  NOT NULL,
     [LogLogID] int  NOT NULL
 );
 GO
@@ -249,8 +241,8 @@ GO
 
 -- Creating table 'SharePhotoes'
 CREATE TABLE [photoShare].[SharePhotoes] (
-    [ShareUserPhotoID] int IDENTITY(1,1) NOT NULL,
-    [UserId] int  NULL,
+    [SharePhotoID] int IDENTITY(1,1) NOT NULL,
+    [UserId] nvarchar(128)  NULL,
     [GroupId] int  NULL,
     [PhotoId] int  NULL,
     [AlbumId] int  NULL,
@@ -261,7 +253,7 @@ GO
 -- Creating table 'Comments'
 CREATE TABLE [photoShare].[Comments] (
     [CommentID] int IDENTITY(1,1) NOT NULL,
-    [UserId] int  NOT NULL,
+    [UserId] nvarchar(128)  NOT NULL,
     [PhotoId] int  NOT NULL
 );
 GO
@@ -269,23 +261,15 @@ GO
 -- Creating table 'Likes'
 CREATE TABLE [photoShare].[Likes] (
     [LikeID] int IDENTITY(1,1) NOT NULL,
-    [UserId] int  NOT NULL,
+    [UserId] nvarchar(128)  NOT NULL,
     [PhotoId] int  NOT NULL
-);
-GO
-
--- Creating table 'ShareWith'
-CREATE TABLE [photoShare].[ShareWith] (
-    [SharerWithId] int IDENTITY(1,1) NOT NULL,
-    [Description] nvarchar(max)  NOT NULL,
-    [AlbumShareWith_ShareWith_AlbumID] int  NULL
 );
 GO
 
 -- Creating table 'PhotoDatas'
 CREATE TABLE [photoShare].[PhotoDatas] (
     [PhotoDataID] int IDENTITY(1,1) NOT NULL,
-    [Data] nvarchar(max)  NOT NULL
+    [Data] varbinary(max)  NOT NULL
 );
 GO
 
@@ -353,10 +337,10 @@ ADD CONSTRAINT [PK_PhotoAlbums]
     PRIMARY KEY CLUSTERED ([PhotoAlbumID] ASC);
 GO
 
--- Creating primary key on [ShareUserPhotoID] in table 'SharePhotoes'
+-- Creating primary key on [SharePhotoID] in table 'SharePhotoes'
 ALTER TABLE [photoShare].[SharePhotoes]
 ADD CONSTRAINT [PK_SharePhotoes]
-    PRIMARY KEY CLUSTERED ([ShareUserPhotoID] ASC);
+    PRIMARY KEY CLUSTERED ([SharePhotoID] ASC);
 GO
 
 -- Creating primary key on [CommentID] in table 'Comments'
@@ -369,12 +353,6 @@ GO
 ALTER TABLE [photoShare].[Likes]
 ADD CONSTRAINT [PK_Likes]
     PRIMARY KEY CLUSTERED ([LikeID] ASC);
-GO
-
--- Creating primary key on [SharerWithId] in table 'ShareWith'
-ALTER TABLE [photoShare].[ShareWith]
-ADD CONSTRAINT [PK_ShareWith]
-    PRIMARY KEY CLUSTERED ([SharerWithId] ASC);
 GO
 
 -- Creating primary key on [PhotoDataID] in table 'PhotoDatas'
@@ -745,36 +723,6 @@ GO
 CREATE INDEX [IX_FK_GroupSharePhoto]
 ON [photoShare].[SharePhotoes]
     ([GroupSharePhoto_SharePhoto_GroupID]);
-GO
-
--- Creating foreign key on [AlbumShareWith_ShareWith_AlbumID] in table 'ShareWith'
-ALTER TABLE [photoShare].[ShareWith]
-ADD CONSTRAINT [FK_AlbumShareWith]
-    FOREIGN KEY ([AlbumShareWith_ShareWith_AlbumID])
-    REFERENCES [photoShare].[Albums]
-        ([AlbumID])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_AlbumShareWith'
-CREATE INDEX [IX_FK_AlbumShareWith]
-ON [photoShare].[ShareWith]
-    ([AlbumShareWith_ShareWith_AlbumID]);
-GO
-
--- Creating foreign key on [SharedWithId] in table 'Photos'
-ALTER TABLE [photoShare].[Photos]
-ADD CONSTRAINT [FK_ShareWithPhoto]
-    FOREIGN KEY ([SharedWithId])
-    REFERENCES [photoShare].[ShareWith]
-        ([SharerWithId])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_ShareWithPhoto'
-CREATE INDEX [IX_FK_ShareWithPhoto]
-ON [photoShare].[Photos]
-    ([SharedWithId]);
 GO
 
 -- Creating foreign key on [PhotoDataId] in table 'Photos'

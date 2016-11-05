@@ -88,18 +88,18 @@ C:\Users\Rohit\documents\visual studio 2015\Projects\PhotoSharing\PhotoSharing\b
 C:\Users\Rohit\documents\visual studio 2015\Projects\PhotoSharing\PhotoSharing\obj\Debug\PhotoSharing.csprojResolveAssemblyReference.cache
 C:\Users\Rohit\documents\visual studio 2015\Projects\PhotoSharing\PhotoSharing\obj\Debug\PhotoSharing.dll
 C:\Users\Rohit\documents\visual studio 2015\Projects\PhotoSharing\PhotoSharing\obj\Debug\PhotoSharing.pdb
-C:\Users\Rohit\Documents\GitHub\PhotoSharing\PhotoSharing\bin\ApplicationInsights.config
 C:\Users\Rohit\Documents\GitHub\PhotoSharing\PhotoSharing\bin\roslyn\csc.exe
-C:\Users\Rohit\Documents\GitHub\PhotoSharing\PhotoSharing\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
 C:\Users\Rohit\Documents\GitHub\PhotoSharing\PhotoSharing\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
 C:\Users\Rohit\Documents\GitHub\PhotoSharing\PhotoSharing\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Users\Rohit\Documents\GitHub\PhotoSharing\PhotoSharing\bin\roslyn\System.Reflection.Metadata.dll
+C:\Users\Rohit\Documents\GitHub\PhotoSharing\PhotoSharing\bin\roslyn\VBCSCompiler.exe
+C:\Users\Rohit\Documents\GitHub\PhotoSharing\PhotoSharing\bin\ApplicationInsights.config
+C:\Users\Rohit\Documents\GitHub\PhotoSharing\PhotoSharing\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
 C:\Users\Rohit\Documents\GitHub\PhotoSharing\PhotoSharing\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
 C:\Users\Rohit\Documents\GitHub\PhotoSharing\PhotoSharing\bin\roslyn\Microsoft.CSharp.Core.targets
 C:\Users\Rohit\Documents\GitHub\PhotoSharing\PhotoSharing\bin\roslyn\Microsoft.VisualBasic.Core.targets
 C:\Users\Rohit\Documents\GitHub\PhotoSharing\PhotoSharing\bin\roslyn\System.Collections.Immutable.dll
-C:\Users\Rohit\Documents\GitHub\PhotoSharing\PhotoSharing\bin\roslyn\System.Reflection.Metadata.dll
 C:\Users\Rohit\Documents\GitHub\PhotoSharing\PhotoSharing\bin\roslyn\vbc.exe
-C:\Users\Rohit\Documents\GitHub\PhotoSharing\PhotoSharing\bin\roslyn\VBCSCompiler.exe
 C:\Users\Rohit\Documents\GitHub\PhotoSharing\PhotoSharing\bin\roslyn\VBCSCompiler.exe.config
 C:\Users\Rohit\Documents\GitHub\PhotoSharing\PhotoSharing\bin\PhotoSharing.dll.config
 C:\Users\Rohit\Documents\GitHub\PhotoSharing\PhotoSharing\bin\PhotoSharing.dll
@@ -130,6 +130,8 @@ C:\Users\Rohit\Documents\GitHub\PhotoSharing\PhotoSharing\bin\Microsoft.Owin.Sec
 C:\Users\Rohit\Documents\GitHub\PhotoSharing\PhotoSharing\bin\Microsoft.Web.Infrastructure.dll
 C:\Users\Rohit\Documents\GitHub\PhotoSharing\PhotoSharing\bin\Newtonsoft.Json.dll
 C:\Users\Rohit\Documents\GitHub\PhotoSharing\PhotoSharing\bin\Owin.dll
+C:\Users\Rohit\Documents\GitHub\PhotoSharing\PhotoSharing\bin\PhotoSharingBLL.dll
+C:\Users\Rohit\Documents\GitHub\PhotoSharing\PhotoSharing\bin\PhotoSharingDataModel.dll
 C:\Users\Rohit\Documents\GitHub\PhotoSharing\PhotoSharing\bin\System.Net.Http.Formatting.dll
 C:\Users\Rohit\Documents\GitHub\PhotoSharing\PhotoSharing\bin\System.Web.Helpers.dll
 C:\Users\Rohit\Documents\GitHub\PhotoSharing\PhotoSharing\bin\System.Web.Http.dll
@@ -142,6 +144,8 @@ C:\Users\Rohit\Documents\GitHub\PhotoSharing\PhotoSharing\bin\System.Web.WebPage
 C:\Users\Rohit\Documents\GitHub\PhotoSharing\PhotoSharing\bin\System.Web.WebPages.dll
 C:\Users\Rohit\Documents\GitHub\PhotoSharing\PhotoSharing\bin\System.Web.WebPages.Razor.dll
 C:\Users\Rohit\Documents\GitHub\PhotoSharing\PhotoSharing\bin\WebGrease.dll
+C:\Users\Rohit\Documents\GitHub\PhotoSharing\PhotoSharing\bin\PhotoSharingBLL.pdb
+C:\Users\Rohit\Documents\GitHub\PhotoSharing\PhotoSharing\bin\PhotoSharingDataModel.pdb
 C:\Users\Rohit\Documents\GitHub\PhotoSharing\PhotoSharing\bin\Antlr3.Runtime.pdb
 C:\Users\Rohit\Documents\GitHub\PhotoSharing\PhotoSharing\bin\EntityFramework.xml
 C:\Users\Rohit\Documents\GitHub\PhotoSharing\PhotoSharing\bin\EntityFramework.SqlServer.xml
@@ -178,7 +182,3 @@ C:\Users\Rohit\Documents\GitHub\PhotoSharing\PhotoSharing\bin\System.Web.WebPage
 C:\Users\Rohit\Documents\GitHub\PhotoSharing\PhotoSharing\obj\Debug\PhotoSharing.csprojResolveAssemblyReference.cache
 C:\Users\Rohit\Documents\GitHub\PhotoSharing\PhotoSharing\obj\Debug\PhotoSharing.dll
 C:\Users\Rohit\Documents\GitHub\PhotoSharing\PhotoSharing\obj\Debug\PhotoSharing.pdb
-C:\Users\Rohit\Documents\GitHub\PhotoSharing\PhotoSharing\bin\PhotoSharingBLL.dll
-C:\Users\Rohit\Documents\GitHub\PhotoSharing\PhotoSharing\bin\PhotoSharingDataModel.dll
-C:\Users\Rohit\Documents\GitHub\PhotoSharing\PhotoSharing\bin\PhotoSharingBLL.pdb
-C:\Users\Rohit\Documents\GitHub\PhotoSharing\PhotoSharing\bin\PhotoSharingDataModel.pdb

@@ -15,7 +15,7 @@ namespace PhotoSharingDataModel
     public partial class Follower
     {
         public int FollowerID { get; set; }
-        public int UserId { get; set; }
-        public int UserFollowerId { get; set; }
+        public string UserId { get; set; }
+        public string UserFollowerId { get; set; }
     }
 }

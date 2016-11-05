@@ -15,7 +15,7 @@ namespace PhotoSharingDataModel
     public partial class UserGroup
     {
         public int UserGroupID { get; set; }
-        public int UserId { get; set; }
+        public string UserId { get; set; }
         public int GroupId { get; set; }
     }
 }

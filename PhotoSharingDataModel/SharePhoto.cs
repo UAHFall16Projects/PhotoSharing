@@ -14,8 +14,8 @@ namespace PhotoSharingDataModel
     
     public partial class SharePhoto
     {
-        public int ShareUserPhotoID { get; set; }
-        public Nullable<int> UserId { get; set; }
+        public int SharePhotoID { get; set; }
+        public string UserId { get; set; }
         public Nullable<int> GroupId { get; set; }
         public Nullable<int> PhotoId { get; set; }
         public Nullable<int> AlbumId { get; set; }

@@ -40,16 +40,33 @@ namespace PhotoSharingDataModel
         public virtual DbSet<SharePhoto> SharePhotoes { get; set; }
         public virtual DbSet<Comment> Comments { get; set; }
         public virtual DbSet<Like> Likes { get; set; }
-        public virtual DbSet<ShareWith> ShareWith { get; set; }
         public virtual DbSet<PhotoData> PhotoDatas { get; set; }
     
-        public virtual ObjectResult<GetUsersByUserId_Result> GetUsersByUserId(Nullable<int> userId)
+        public virtual ObjectResult<GetUsersByUserId_Result> GetUsersByUserId(string userId)
         {
-            var userIdParameter = userId.HasValue ?
+            var userIdParameter = userId != null ?
                 new ObjectParameter("UserId", userId) :
-                new ObjectParameter("UserId", typeof(int));
+                new ObjectParameter("UserId", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetUsersByUserId_Result>("GetUsersByUserId", userIdParameter);
+        }
+    
+        public virtual int SavePhoto(byte[] photo)
+        {
+            var photoParameter = photo != null ?
+                new ObjectParameter("photo", photo) :
+                new ObjectParameter("photo", typeof(byte[]));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SavePhoto", photoParameter);
+        }
+    
+        public virtual ObjectResult<ReadPhoto_Result> ReadPhoto(Nullable<int> photoId)
+        {
+            var photoIdParameter = photoId.HasValue ?
+                new ObjectParameter("photoId", photoId) :
+                new ObjectParameter("photoId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ReadPhoto_Result>("ReadPhoto", photoIdParameter);
         }
     }
 }

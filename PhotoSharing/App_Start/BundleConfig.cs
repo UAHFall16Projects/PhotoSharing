@@ -40,6 +40,12 @@ namespace PhotoSharing
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                  "~/Content/bootstrap.css",
+                 //"~/Content/datepicker.css",
+                 "~/Content/Css/bundle-desktop-dp-main-f7d8952e.css",
+                 "~/Content/Css/bundle-desktop-dp-modules-0-dbfe529a.css",
+                 "~/Content/Css/bundle-desktop-dp-modules-1-3f8f9c24.css",
+                 "~/Content/Css/bundle-desktop-dp-modules-2-22de1ddc.css",
+                 "~/Content/Css/bundle-desktop-dp-modules-3-baf0a5d7.css",
                  "~/Content/Site.css"));
         }
     }

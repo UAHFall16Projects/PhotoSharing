@@ -15,7 +15,7 @@ namespace PhotoSharingDataModel
     public partial class Like
     {
         public int LikeID { get; set; }
-        public int UserId { get; set; }
+        public string UserId { get; set; }
         public int PhotoId { get; set; }
     }
 }
