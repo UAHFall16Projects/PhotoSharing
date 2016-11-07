@@ -66,12 +66,14 @@
     <Property Name="PhotoId" Type="int" Nullable="false" />
     <Property Name="AlbumId" Type="int" Nullable="false" />
   </EntityType>
-  <EntityType Name="PhotoDatas">
+  <EntityType Name="PhotoFiles">
     <Key>
-      <PropertyRef Name="PhotoDataID" />
+      <PropertyRef Name="PhotoFileID" />
     </Key>
-    <Property Name="PhotoDataID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Data" Type="varbinary(max)" Nullable="false" />
+    <Property Name="PhotoFileID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FileName" Type="nvarchar" MaxLength="255" />
+    <Property Name="ContentType" Type="nvarchar" MaxLength="100" />
+    <Property Name="Content" Type="varbinary(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="Photos">
     <Key>
@@ -83,8 +85,7 @@
     <Property Name="Name" Type="nvarchar(max)" />
     <Property Name="TotalLikes" Type="int" />
     <Property Name="UploadedUserId" Type="nvarchar" MaxLength="128" Nullable="false" />
-    <Property Name="SharedWithId" Type="int" Nullable="false" />
-    <Property Name="PhotoDataId" Type="int" Nullable="false" />
+    <Property Name="PhotoFileId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="SharePhotoes">
     <Key>
@@ -121,12 +122,12 @@
     <Property Name="FirstName" Type="nvarchar(max)" />
     <Property Name="LastName" Type="nvarchar(max)" />
     <Property Name="Email" Type="nvarchar" MaxLength="256" Nullable="false" />
-    <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="256" />
     <Property Name="Password" Type="nvarchar(max)" />
     <Property Name="LastLoginTime" Type="datetime" />
     <Property Name="DateOfBirth" Type="datetime" />
     <Property Name="Sex" Type="varchar" MaxLength="1" />
-    <Property Name="Phone" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Phone" Type="nvarchar(max)" />
     <Property Name="ProfilePicId" Type="int" />
   </EntityType>
   <Association Name="FK_AlbumPhoto">
@@ -238,14 +239,14 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_PhotoDataPhoto">
-    <End Role="PhotoDatas" Type="Self.PhotoDatas" Multiplicity="1" />
+    <End Role="PhotoFiles" Type="Self.PhotoFiles" Multiplicity="1" />
     <End Role="Photos" Type="Self.Photos" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="PhotoDatas">
-        <PropertyRef Name="PhotoDataID" />
+      <Principal Role="PhotoFiles">
+        <PropertyRef Name="PhotoFileID" />
       </Principal>
       <Dependent Role="Photos">
-        <PropertyRef Name="PhotoDataId" />
+        <PropertyRef Name="PhotoFileId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -429,14 +430,17 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Function Name="GetFollowersByUserId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="photoShare">
+    <Parameter Name="UserId" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="GetFollowingsByUserId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="photoShare">
+    <Parameter Name="UserId" Type="nvarchar" Mode="In" />
+  </Function>
   <Function Name="GetUsersByUserId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="photoShare">
     <Parameter Name="UserId" Type="nvarchar" Mode="In" />
   </Function>
   <Function Name="ReadPhoto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="photoShare">
-    <Parameter Name="photoId" Type="int" Mode="In" />
-  </Function>
-  <Function Name="SavePhoto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="photoShare">
-    <Parameter Name="photo" Type="varbinary(max)" Mode="In" />
+    <Parameter Name="photoFileId" Type="int" Mode="In" />
   </Function>
   <EntityContainer Name="PhotoSharingStoreContainer">
     <EntitySet Name="Albums" EntityType="Self.Albums" Schema="photoShare" store:Type="Tables" />
@@ -447,7 +451,7 @@
     <EntitySet Name="Logs" EntityType="Self.Logs" Schema="photoShare" store:Type="Tables" />
     <EntitySet Name="Notifications" EntityType="Self.Notifications" Schema="photoShare" store:Type="Tables" />
     <EntitySet Name="PhotoAlbums" EntityType="Self.PhotoAlbums" Schema="photoShare" store:Type="Tables" />
-    <EntitySet Name="PhotoDatas" EntityType="Self.PhotoDatas" Schema="photoShare" store:Type="Tables" />
+    <EntitySet Name="PhotoFiles" EntityType="Self.PhotoFiles" Schema="photoShare" store:Type="Tables" />
     <EntitySet Name="Photos" EntityType="Self.Photos" Schema="photoShare" store:Type="Tables" />
     <EntitySet Name="SharePhotoes" EntityType="Self.SharePhotoes" Schema="photoShare" store:Type="Tables" />
     <EntitySet Name="TagInformations" EntityType="Self.TagInformations" Schema="photoShare" store:Type="Tables" />
@@ -490,7 +494,7 @@
       <End Role="PhotoAlbums" EntitySet="PhotoAlbums" />
     </AssociationSet>
     <AssociationSet Name="FK_PhotoDataPhoto" Association="Self.FK_PhotoDataPhoto">
-      <End Role="PhotoDatas" EntitySet="PhotoDatas" />
+      <End Role="PhotoFiles" EntitySet="PhotoFiles" />
       <End Role="Photos" EntitySet="Photos" />
     </AssociationSet>
     <AssociationSet Name="FK_PhotoTagInformation" Association="Self.FK_PhotoTagInformation">

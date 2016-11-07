@@ -1,6 +1,6 @@
-﻿using Business = PhotoSharingBLL;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using PhotoSharingDataModel;
+using System.Collections.Generic;
 
 namespace PhotoSharing.Models
 {
@@ -10,7 +10,9 @@ namespace PhotoSharing.Models
 
     public class ProfileViewModel
     {
-        public ProfileViewModel(GetUsersByUserId_Result user)
+        public ProfileViewModel()
+        { }
+        public ProfileViewModel(GetUsersByUserId_Result user, List<GetFollowersByUserId_Result> followers = null, List<GetFollowingsByUserId_Result> following = null)
         {
             FirstName = user.FirstName;
             LastName = user.LastName;
@@ -19,6 +21,9 @@ namespace PhotoSharing.Models
             Sex = user.Sex;
             Phone = user.Phone;
             ProfilePicId = user.ProfilePicId;
+            ImageData = user.content;
+            _followers = followers;
+            _followings = following;
         }
         
 
@@ -30,13 +35,12 @@ namespace PhotoSharing.Models
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
 
-        [Display(Name = "Full Name")]
+        [Display(Name = "Name")]
         public string FullName { get { return FirstName + " " + LastName; } }
 
-        [Display(Name = "User Name")]
+        [Display(Name = "Username")]
         public string UserName { get; set; }
 
-        [Required]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
         public string Password { get; set; }
@@ -50,6 +54,61 @@ namespace PhotoSharing.Models
         [Display(Name = "ProfilePicId")]
         public int? ProfilePicId { get; set; }
 
+        [Display(Name = "Picture")]
+        public byte[] ImageData { get; set; }
 
+
+        private List<GetFollowersByUserId_Result> _followers;
+
+        private List<GetFollowingsByUserId_Result> _followings;
+
+
+        [Display(Name = "Follower")]
+        public List<GetFollowersByUserId_Result> Followers
+        {
+            get
+            {
+                if (_followers == null)
+                    return new List<GetFollowersByUserId_Result>();
+                else
+                    return _followers;
+            }
+        }
+
+        [Display(Name = "Follower")]
+        public List<GetFollowingsByUserId_Result> Followering
+        {
+            get
+            {
+                if (_followings == null)
+                    return new List<GetFollowingsByUserId_Result>();
+                else
+                    return _followings;
+            }
+        }
+
+        [Display(Name = "Following")]
+        public int FollowingCount
+        {
+            get
+            {
+                if (_followings == null)
+                    return 0;
+                else
+                    return _followings.Count;
+            }
+        }
+
+        [Display(Name = "Followers")]
+        public int FollowersCount
+        {
+            get
+            {
+                if (_followings == null)
+                    return 0;
+                else
+                    return _followers.Count;
+            }
+        }
     }
 }

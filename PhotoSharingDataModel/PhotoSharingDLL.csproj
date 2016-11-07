@@ -61,6 +61,12 @@
     <Compile Include="Follower.cs">
       <DependentUpon>PhotoSharing.tt</DependentUpon>
     </Compile>
+    <Compile Include="GetFollowersByUserId_Result.cs">
+      <DependentUpon>PhotoSharing.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetFollowingsByUserId_Result.cs">
+      <DependentUpon>PhotoSharing.tt</DependentUpon>
+    </Compile>
     <Compile Include="GetUsersByUserId_Result.cs">
       <DependentUpon>PhotoSharing.tt</DependentUpon>
     </Compile>
@@ -82,7 +88,7 @@
     <Compile Include="PhotoAlbum.cs">
       <DependentUpon>PhotoSharing.tt</DependentUpon>
     </Compile>
-    <Compile Include="PhotoData.cs">
+    <Compile Include="PhotoFile.cs">
       <DependentUpon>PhotoSharing.tt</DependentUpon>
     </Compile>
     <Compile Include="PhotoSharing.Context.cs">

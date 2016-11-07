@@ -24,5 +24,7 @@ namespace PhotoSharingDataModel
         public string Sex { get; set; }
         public string Phone { get; set; }
         public Nullable<int> ProfilePicId { get; set; }
+        public Nullable<int> photoFileId { get; set; }
+        public byte[] content { get; set; }
     }
 }

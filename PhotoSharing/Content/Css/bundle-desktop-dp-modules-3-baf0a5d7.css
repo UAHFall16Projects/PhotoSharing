@@ -8644,7 +8644,7 @@
     .UserEdit .profileImageWrapper img {
         height: 75px !important;
         max-width: none;
-        width: auto !important;
+        width: 75px !important;
     }
 
         .UserEdit .profileImageWrapper img.restrictWidth {

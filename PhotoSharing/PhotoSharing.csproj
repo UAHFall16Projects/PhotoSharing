@@ -267,13 +267,24 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Css\bundle-desktop-dp-main-f7d8952e.css" />
+    <Content Include="Content\Css\bundle-desktop-dp-modules-0-a011b3ce.css" />
     <Content Include="Content\Css\bundle-desktop-dp-modules-0-dbfe529a.css" />
     <Content Include="Content\Css\bundle-desktop-dp-modules-1-3f8f9c24.css" />
+    <Content Include="Content\Css\bundle-desktop-dp-modules-1-f180ebf7.css" />
     <Content Include="Content\Css\bundle-desktop-dp-modules-2-22de1ddc.css" />
+    <Content Include="Content\Css\bundle-desktop-dp-modules-2-35731d48.css" />
     <Content Include="Content\Css\bundle-desktop-dp-modules-3-baf0a5d7.css" />
+    <Content Include="Content\Css\bundle-desktop-dp-modules-3-e85ec347.css" />
+    <Content Include="Content\Css\component.css" />
+    <Content Include="Content\Css\demo.css" />
+    <Content Include="Content\Css\extracted-d1958a65.css" />
+    <Content Include="Content\Css\gestalt-77eddf7a.css" />
+    <Content Include="Content\Css\normalize.css" />
     <Content Include="Content\datepicker.css" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\Images\DefaultProfilePic.png" />
+    <Content Include="Content\Images\uploadImage_Default.png" />
+    <Content Include="Content\Images\webapp-common.png" />
     <Content Include="Content\jquery-ui.css" />
     <Content Include="Content\jquery-ui.theme.css" />
     <Content Include="Content\Site.css" />
@@ -322,6 +333,10 @@
     <Content Include="Scripts\jquery-3.1.1.min.js" />
     <Content Include="Scripts\jquery-3.1.1.slim.js" />
     <Content Include="Scripts\jquery-3.1.1.slim.min.js" />
+    <Content Include="Scripts\JS\BootstrapDialog.js" />
+    <Content Include="Scripts\JS\custom-file-input.js" />
+    <Content Include="Scripts\JS\jquery.custom-file-input.js" />
+    <Content Include="Scripts\JS\onLoadFunctions.js" />
     <Content Include="Scripts\knockout-2.3.0.debug.js" />
     <Content Include="Scripts\knockout-2.3.0.js" />
     <Content Include="Scripts\knockout.validation.debug.js" />
@@ -393,10 +408,6 @@
     <Content Include="Scripts\jquery-3.1.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\PhotoSharingBLL\PhotoSharingBLL.csproj">
-      <Project>{4d6fabb9-7ef9-4bb6-b929-b5e05aa92fce}</Project>
-      <Name>PhotoSharingBLL</Name>
-    </ProjectReference>
     <ProjectReference Include="..\PhotoSharingDataModel\PhotoSharingDLL.csproj">
       <Project>{4b1c37f3-afc1-4626-bef5-cbf330fe5ae8}</Project>
       <Name>PhotoSharingDLL</Name>

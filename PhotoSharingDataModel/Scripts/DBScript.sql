@@ -12,8 +12,8 @@ GO
 
 
 CREATE PROCEDURE [photoShare].[GetUsersByUserId]
-        -- Add the parameters for the stored procedure here
-        @UserId int = null
+	 -- Add the parameters for the stored procedure here
+        @UserId nvarchar(128) = null
         AS
         BEGIN
             -- SET NOCOUNT ON added to prevent extra result sets from
@@ -21,12 +21,15 @@ CREATE PROCEDURE [photoShare].[GetUsersByUserId]
             SET NOCOUNT ON;
 
             -- Insert statements for procedure here
-        select *
-        from photoShare.Users usr
-        where usr.UserID = @UserId
+        SELECT usr.*,photo.photoFileId,[file].content
+        FROM photoShare.Users usr
+		LEFT OUTER JOIN
+		[photoShare].Photos photo ON usr.ProfilePicId = photo.PhotoID
+		LEFT OUTER JOIN
+		[photoShare].[photoFiles] [file] ON photo.photoFileId = [file].photoFileID
+        WHERE usr.UserID = @UserId
         END
-
-
+		
 GO
 
 
@@ -41,10 +44,9 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 
-CREATE proc [photoShare].[ReadPhoto] @photoId int as 
-SELECT Data FROM PhotoDatas 
-WHERE PhotoDataID=@photoId 
-
+CREATE PROCEDURE [photoShare].[ReadPhoto] @photoFileId int as 
+SELECT Content FROM [photoShare].photoFiles 
+WHERE photoFileID=@photoFileId 
 
 GO
 
@@ -59,36 +61,10 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 
-CREATE proc [photoShare].[SavePhoto] @photo varbinary(Max) as
-INSERT INTO [photoShare].PhotoDatas([Data])
-VALUES (@photo)
-
-
-GO
-
 CREATE TRIGGER [dbo].[InsertUser] ON [dbo].[AspNetUsers] 
-  AFTER INSERT, UPDATE
+  AFTER INSERT
 AS 
 BEGIN
-	IF exists(SELECT * FROM inserted) and exists (SELECT * FROM deleted)
-		BEGIN
-		--Update Activity	
-		   UPDATE [photoShare].[Users]
-		   SET
-			   [Users].[UserID] = [insrt].[Id]
-			  ,[Users].[FirstName]=[insrt].[FirstName]
-			  ,[Users].[LastName]=[insrt].[LastName]
-			  ,[Users].[Email] = [insrt].[Email]
-			  ,[Users].[UserName]=[insrt].[UserName]
-			  ,[Users].[Password]=[insrt].[PasswordHash]
-			  ,[Users].[LastLoginTime]=GETDATE()
-			  ,[Users].[DateOfBirth]=[insrt].[DateOfBirth]
-			  ,[Users].[Sex]=[insrt].[Sex]
-			  ,[Users].[Phone]=[insrt].[PhoneNumber]
-		  FROM [photoShare].[Users] [usr]
-		  INNER JOIN Inserted [insrt]
-		  ON insrt.Id = usr.UserID
-		END
 
    IF exists (SELECT * FROM inserted) and not exists(SELECT * FROM deleted)
 		BEGIN
@@ -108,6 +84,134 @@ BEGIN
 				FROM Inserted
 		END
 END
+GO
+
+USE [PhotoSharing]
+GO
+
+/****** Object:  Trigger [dbo].[InsertUser]    Script Date: 11/5/2016 9:07:29 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TRIGGER [photoShare].[UpdateAspNetUser] ON [photoShare].[Users]
+  AFTER UPDATE
+AS 
+BEGIN
+	IF exists(SELECT * FROM inserted) and exists (SELECT * FROM deleted)
+		BEGIN
+		--Update Activity	
+		   UPDATE [dbo].[AspNetUsers]
+		   SET
+			   [AspNetUsers].[FirstName]=[insrt].[FirstName]
+			  ,[AspNetUsers].[LastName]=[insrt].[LastName]
+			  ,[AspNetUsers].[Email] = [insrt].[Email]
+			  ,[AspNetUsers].[UserName]=[insrt].[UserName]
+			  ,[AspNetUsers].[PasswordHash]=[insrt].[Password]
+			  ,[AspNetUsers].[DateOfBirth]=[insrt].[DateOfBirth]
+			  ,[AspNetUsers].[Sex]=[insrt].[Sex]
+			  ,[AspNetUsers].[PhoneNumber]=[insrt].[Phone]
+		  FROM  [dbo].[AspNetUsers] [usr]
+		  INNER JOIN Inserted [insrt]
+		  ON insrt.UserID = usr.Id
+		END
+
+END
+GO
+
+
+
+USE [PhotoSharing]
+GO
+
+USE [PhotoSharing]
+GO
+
+/****** Object:  StoredProcedure [photoShare].[GetUsersByUserId]    Script Date: 11/6/2016 11:05:18 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [photoShare].[GetFollowersByUserId]
+        @UserId nvarchar(128) = null
+        AS
+        BEGIN
+            -- SET NOCOUNT ON added to prevent extra result sets from
+            -- interfering with SELECT statements.
+            SET NOCOUNT ON;
+
+        SELECT folwrs.*, usr.FirstName+ ' '+usr.LastName FullName, usr.ProfilePifId
+		FROM photoShare.Followers folwrs
+		LEFT OUTER JOIN photoShare.Users usr
+		ON folwrs.UserFollowerId = usr.UserID
+        WHERE folwrs.UserId = @UserId
+        END
+		
+
+GO
+
+
+
+
+USE [PhotoSharing]
+GO
+
+USE [PhotoSharing]
+GO
+
+/****** Object:  StoredProcedure [photoShare].[GetUsersByUserId]    Script Date: 11/6/2016 11:05:18 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [photoShare].[GetFollowingsByUserId]
+        @UserId nvarchar(128) = null
+        AS
+        BEGIN
+            -- SET NOCOUNT ON added to prevent extra result sets from
+            -- interfering with SELECT statements.
+            SET NOCOUNT ON;
+
+        SELECT folwrs.*, usr.FirstName+ ' '+usr.LastName FullName, usr.ProfilePicId
+		FROM photoShare.Followers folwrs
+		LEFT OUTER JOIN photoShare.Users usr
+		ON folwrs.UserId = usr.UserID
+		WHERE folwrs.UserFollowerId = @UserId
+        END
+		
+
+GO
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 SET IDENTITY_INSERT [photoShare].[PhotoDatas] ON 

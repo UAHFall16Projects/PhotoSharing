@@ -42,7 +42,7 @@
         <AssociationConnector Association="PhotoSharing.UserLike" />
         <AssociationConnector Association="PhotoSharing.LikePhoto" />
         <AssociationConnector Association="PhotoSharing.GroupSharePhoto" />
-        <EntityTypeShape EntityType="PhotoSharing.PhotoData" Width="1.5" PointX="13.125" PointY="13" />
+        <EntityTypeShape EntityType="PhotoSharing.PhotoFile" Width="1.5" PointX="13.125" PointY="13" />
         <AssociationConnector Association="PhotoSharing.PhotoDataPhoto" />
       </Diagram>
     </edmx:Diagrams>

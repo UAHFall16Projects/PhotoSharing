@@ -130,7 +130,6 @@ C:\Users\Rohit\Documents\GitHub\PhotoSharing\PhotoSharing\bin\Microsoft.Owin.Sec
 C:\Users\Rohit\Documents\GitHub\PhotoSharing\PhotoSharing\bin\Microsoft.Web.Infrastructure.dll
 C:\Users\Rohit\Documents\GitHub\PhotoSharing\PhotoSharing\bin\Newtonsoft.Json.dll
 C:\Users\Rohit\Documents\GitHub\PhotoSharing\PhotoSharing\bin\Owin.dll
-C:\Users\Rohit\Documents\GitHub\PhotoSharing\PhotoSharing\bin\PhotoSharingBLL.dll
 C:\Users\Rohit\Documents\GitHub\PhotoSharing\PhotoSharing\bin\PhotoSharingDataModel.dll
 C:\Users\Rohit\Documents\GitHub\PhotoSharing\PhotoSharing\bin\System.Net.Http.Formatting.dll
 C:\Users\Rohit\Documents\GitHub\PhotoSharing\PhotoSharing\bin\System.Web.Helpers.dll
@@ -144,7 +143,6 @@ C:\Users\Rohit\Documents\GitHub\PhotoSharing\PhotoSharing\bin\System.Web.WebPage
 C:\Users\Rohit\Documents\GitHub\PhotoSharing\PhotoSharing\bin\System.Web.WebPages.dll
 C:\Users\Rohit\Documents\GitHub\PhotoSharing\PhotoSharing\bin\System.Web.WebPages.Razor.dll
 C:\Users\Rohit\Documents\GitHub\PhotoSharing\PhotoSharing\bin\WebGrease.dll
-C:\Users\Rohit\Documents\GitHub\PhotoSharing\PhotoSharing\bin\PhotoSharingBLL.pdb
 C:\Users\Rohit\Documents\GitHub\PhotoSharing\PhotoSharing\bin\PhotoSharingDataModel.pdb
 C:\Users\Rohit\Documents\GitHub\PhotoSharing\PhotoSharing\bin\Antlr3.Runtime.pdb
 C:\Users\Rohit\Documents\GitHub\PhotoSharing\PhotoSharing\bin\EntityFramework.xml

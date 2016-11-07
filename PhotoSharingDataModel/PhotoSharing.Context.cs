@@ -40,7 +40,7 @@ namespace PhotoSharingDataModel
         public virtual DbSet<SharePhoto> SharePhotoes { get; set; }
         public virtual DbSet<Comment> Comments { get; set; }
         public virtual DbSet<Like> Likes { get; set; }
-        public virtual DbSet<PhotoData> PhotoDatas { get; set; }
+        public virtual DbSet<PhotoFile> PhotoFiles { get; set; }
     
         public virtual ObjectResult<GetUsersByUserId_Result> GetUsersByUserId(string userId)
         {
@@ -51,22 +51,31 @@ namespace PhotoSharingDataModel
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetUsersByUserId_Result>("GetUsersByUserId", userIdParameter);
         }
     
-        public virtual int SavePhoto(byte[] photo)
+        public virtual ObjectResult<ReadPhoto_Result> ReadPhoto(Nullable<int> photoFileId)
         {
-            var photoParameter = photo != null ?
-                new ObjectParameter("photo", photo) :
-                new ObjectParameter("photo", typeof(byte[]));
+            var photoFileIdParameter = photoFileId.HasValue ?
+                new ObjectParameter("photoFileId", photoFileId) :
+                new ObjectParameter("photoFileId", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SavePhoto", photoParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ReadPhoto_Result>("ReadPhoto", photoFileIdParameter);
         }
     
-        public virtual ObjectResult<ReadPhoto_Result> ReadPhoto(Nullable<int> photoId)
+        public virtual ObjectResult<GetFollowersByUserId_Result> GetFollowersByUserId(string userId)
         {
-            var photoIdParameter = photoId.HasValue ?
-                new ObjectParameter("photoId", photoId) :
-                new ObjectParameter("photoId", typeof(int));
+            var userIdParameter = userId != null ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ReadPhoto_Result>("ReadPhoto", photoIdParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetFollowersByUserId_Result>("GetFollowersByUserId", userIdParameter);
+        }
+    
+        public virtual ObjectResult<GetFollowingsByUserId_Result> GetFollowingsByUserId(string userId)
+        {
+            var userIdParameter = userId != null ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetFollowingsByUserId_Result>("GetFollowingsByUserId", userIdParameter);
         }
     }
 }

@@ -1,84 +1,15 @@
-﻿@model PhotoSharing.Models.ProfileViewModel
+﻿@using PhotoSharingDataModel;
+@model PhotoSharing.Models.ProfileViewModel
 
-@*<div>
-        <h4>ProfileViewModel</h4>
-        <hr />
-        <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.FirstName)
-            </dt>
+@section AddToHead{
+  
+}
 
-            <dd>
-                @Html.DisplayFor(model => model.FirstName)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.LastName)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.LastName)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.UserName)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.UserName)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.Password)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Password)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.Sex)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Sex)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.Phone)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Phone)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.ProfilePicId)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.ProfilePicId)
-            </dd>
-            <dd>
-                <div class="profileImage">
-                    @if (Model.ProfilePicId != null)
-                {
-                        <img src="@Url.Action("RetrievePhoto", "Profile", new { profilePicId = Model.ProfilePicId })" alt="" />
-                    }
-                    else
-                    {
-                        <img src="~/Content/Images/DefaultProfilePic.png" alt="" height=100 width=200 />
-                    }
-                </div>
-            </dd>
-
-        </dl>
-    </div>*@
 <div class="mainContainer Module UserProfilePage fadeIn">
     <div class="DenzelReactBridge Module ">
         <div class="Module UserProfileHeader profileHeader">
             <div class="centeredWithinWrapper gridWidth headerSizer">
-                <div class="header emptyProfile" itemscope="" itemtype="https://schema.org/Person">
+                <div class="header emptyProfile">
                     <div class="profileImage">
                         @if (Model.ProfilePicId != null)
                         {
@@ -92,15 +23,16 @@
                     <div class="fixedHeader">
                         <div class="titleBar centeredWithinWrapper gridWidth">
                             <div class="fixedHeaderNameAndImage _1lB54">
-                                <div class="fixedHeaderImage"><img alt="Rohit Pawar" src="https://s-passets-cache-ak0.pinimg.com/images/user/default_140.png"></div>
+                                <div class="fixedHeaderImage"><img alt="Rohit Pawar" src="@Url.Content("~/content/images/defaultprofilepic.png")"></div>
                                 <div class="fixedHeaderName" itemprop="name">Rohit Pawar</div>
                             </div>
                             <div class="buttons">
                                 <div style="float: left;">
-                                    <button aria-label="Edit profile" class="editProfile Button Module btn hasIcon rounded primary" type="button">
+                                    `
+                                    <a class="modal-link btn btn-success editProfile Button Module btn hasIcon rounded primary" href="/Profile/ProfileEditDetails">
                                         <em></em>
                                         <span class="accessibilityText">Edit profile</span>
-                                    </button>
+                                    </a>
                                     <a class="Button Module btn rounded settingsCog" href="/settings">
                                         <em></em>
                                         <span class="accessibilityText">Edit settings</span>
@@ -122,25 +54,25 @@
         </div>
         <div class="DenzelReactBridge Module">
             <div class="Module UserInfoBar centeredWithinWrapper infoBar gridWidth">
-                <div class="tabs">
+                <div class="tabs" id="navbar">
                     <ul data-reactid="5">
-                        <li data-reactid="12">
-                            <a class="" href="/rohitpawarsocia/likes/" data-reactid="13">
+                        @*<li data-reactid="12">
+                            <a class="" href="#following" data-reactid="13">
                                 <span data-reactid="14">
                                     <span class="value">0</span>
                                     <span class="label">Likes</span>
                                 </span>
                             </a>
-                        </li>
+                        </li>*@
                         <li data-reactid="15">
-                            <a class="" href="/rohitpawarsocia/followers/" data-reactid="16">
-                                <span data-reactid="17"><span class="value ">0</span> <span class="label ">Followers</span></span>
+                            <a class="" href="#followers" data-reactid="16">
+                                <span data-reactid="17"><span class="value ">@Model.FollowersCount</span> <span class="label ">Followers</span></span>
                             </a>
                         </li>
                         <li data-reactid="18">
-                            <a class="" href="/rohitpawarsocia/following/" data-reactid="19">
+                            <a class="" href="#following" data-reactid="19">
                                 <span data-reactid="20">
-                                    <span class="value ">7</span> <span class="label ">Following</span>
+                                    <span class="value ">@Model.FollowingCount</span> <span class="label ">Following</span>
                                 </span>
                             </a>
                         </li>
@@ -148,5 +80,106 @@
                 </div>
             </div>
         </div>
+        <div id="userProfileContent">
+            <div id="followers"  style="display:none">
+                <div class="Module UserProfileContent">
+                    <div class="Module UserProfileFollowingGrid">
+                        <div class="Grid Module">
+                            <div class="GridItems Module centeredWithinWrapper denzelPrimeEnabled fixedHeightLayout padItems">
+                                @foreach (GetFollowersByUserId_Result follower in Model.Followers)
+                        {
+                                    <div class="item ui-draggable ui-draggable-disabled ui-state-disabled" aria-disabled="true">
+                                        <div class="Interest Module followingOneClickView size11" style="padding-right: 12px; padding-bottom: 24px; padding-left: 12px; padding-top: 24px;">
+                                            <div class="overflowMask hidden ">
+                                                <div class="mask">
+                                                    <span class="text ">...</span>
+                                                </div>
+                                            </div>
+                                            <div class="interestMaskAndWrapper">
+                                                <a href="/topics/humor/" class="interestWrapper">
 
+                                                    @if (follower.ProfilePicId != null)
+                                        {
+                                                        <img src="@Url.Action("RetrievePhoto", "Profile", new { profilePicId = follower.ProfilePicId })" alt="@follower.FullName" />
+                                                        <div class="interestLabel">
+                                                            <h2>
+                                                                @follower.FullName
+                                                            </h2>
+                                                        </div>
+                                        }
+                                        else
+                                        {
+                                                        <img src="~/Content/Images/DefaultProfilePic.png" alt="" height=100 width=200 />
+                                                        <div class="interestLabel">
+                                                            <h2>
+                                                                @follower.FullName
+                                                            </h2>
+                                                        </div>
+                                        }
+                                                </a>
+                                            </div>
+                                            <button class="Button FollowButton InterestFollowButton Module btn followed hasText notNavigatable  rounded wideInterestFollowButton" type="button">
+                                                <span class="buttonText">
+                                                    Unfollow
+                                                </span>
+                                            </button>
+                                        </div>
+                                    </div>
+                        }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="following" style="display:none">
+                <div class="Module UserProfileContent">
+                    <div class="Module UserProfileFollowingGrid">
+                        <div class="Grid Module">
+                            <div class="GridItems Module centeredWithinWrapper denzelPrimeEnabled fixedHeightLayout padItems">
+                                @foreach (GetFollowingsByUserId_Result following in Model.Followering)
+                                {
+                                    <div class="item ui-draggable ui-draggable-disabled ui-state-disabled" aria-disabled="true">
+                                        <div class="Interest Module followingOneClickView size11" style="padding-right: 12px; padding-bottom: 24px; padding-left: 12px; padding-top: 24px;">
+                                            <div class="overflowMask hidden ">
+                                                <div class="mask">
+                                                    <span class="text ">...</span>
+                                                </div>
+                                            </div>
+                                            <div class="interestMaskAndWrapper">
+                                                <a href="/topics/humor/" class="interestWrapper">
+
+                                                    @if (following.ProfilePicId != null)
+                                                    {
+                                                        <img src="@Url.Action("RetrievePhoto", "Profile", new { profilePicId = following.ProfilePicId })" alt="@following.FullName" />
+                                                        <div class="interestLabel">
+                                                            <h2>
+                                                                @following.FullName
+                                                            </h2>
+                                                        </div>
+                                                    }
+                                                    else
+                                                    {
+                                                        <img src="~/Content/Images/DefaultProfilePic.png" alt="" height=100 width=200 />
+                                                        <div class="interestLabel">
+                                                            <h2>
+                                                                @following.FullName
+                                                            </h2>
+                                                        </div>
+                                                    }
+                                                </a>
+                                            </div>
+                                            <button class="Button FollowButton InterestFollowButton Module btn followed hasText notNavigatable  rounded wideInterestFollowButton" type="button">
+                                                <span class="buttonText">
+                                                    Unfollow
+                                                </span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>

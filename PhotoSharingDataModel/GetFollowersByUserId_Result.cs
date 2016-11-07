@@ -11,8 +11,12 @@ namespace PhotoSharingDataModel
 {
     using System;
     
-    public partial class ReadPhoto_Result
+    public partial class GetFollowersByUserId_Result
     {
-        public byte[] Content { get; set; }
+        public int FollowerID { get; set; }
+        public string UserId { get; set; }
+        public string UserFollowerId { get; set; }
+        public string FullName { get; set; }
+        public Nullable<int> ProfilePicId { get; set; }
     }
 }
