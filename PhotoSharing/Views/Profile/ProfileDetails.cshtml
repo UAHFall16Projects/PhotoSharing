@@ -2,7 +2,7 @@
 @model PhotoSharing.Models.ProfileViewModel
 
 @section AddToHead{
-  
+
 }
 
 <div class="mainContainer Module UserProfilePage fadeIn">
@@ -28,15 +28,39 @@
                             </div>
                             <div class="buttons">
                                 <div style="float: left;">
-                                    `
                                     <a class="modal-link btn btn-success editProfile Button Module btn hasIcon rounded primary" href="/Profile/ProfileEditDetails">
                                         <em></em>
                                         <span class="accessibilityText">Edit profile</span>
                                     </a>
-                                    <a class="Button Module btn rounded settingsCog" href="/settings">
-                                        <em></em>
-                                        <span class="accessibilityText">Edit settings</span>
-                                    </a>
+                                </div>
+                                <div style="position:relative;float:left;" data-reactid="21">
+                                    <button class="Button DropdownButton Module btn rounded userProfileMenu react" id="profileMoreOptions" type="button" data-reactid="22">
+                                        <em data-reactid="23"></em>
+                                        <span class="accessibilityText" data-reactid="24">User Menu</span>
+                                    </button>
+                                    <div id="profileMoreDDL" class="Module Dropdown PositionModule hide positionModuleElement userDropdown underneathHeader defaultCaret positionModuleFixed positionBottom positionFixed slideIn active" style="position: absolute; left: -73.5px; top: 38px;">
+                                        <span class="positionModuleCaret" style="left: -1px; right: 1px; margin: 0px auto;"></span>
+                                        <div class="Module UserDropdown self">
+                                            <ul class="List Module">
+                                                <li data-index="2">
+                                                    <a class="modal-link userMenuFindFriends" href="/Profile/ChangePassword">
+                                                        <span class="userMenuFindFriends">Change Password</span>
+                                                    </a>
+                                                </li>
+                                                <li data-index="2">
+                                                    <a class="userMenuFindFriends" href="/find_friends/">
+                                                        <span class="userMenuFindFriends"><!-- react-text: 94 --> <!-- /react-text --><!-- react-text: 95 -->Find friends<!-- /react-text --><!-- react-text: 96 --> <!-- /react-text --></span>
+                                                    </a>
+                                                </li>
+                                                <li data-index="4"><a class="getHelp" href="#"><span class="getHelp"><!-- react-text: 106 --> <!-- /react-text --><!-- react-text: 107 -->Get help<!-- /react-text --><!-- react-text: 108 --> <!-- /react-text --></span></a></li>
+                                                <li data-index="5">
+                                                    <a href="javascript:sessionStorage.removeItem('accessToken');$('#logoutForm').submit();"><span>Logout
+                                                    </span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -57,13 +81,13 @@
                 <div class="tabs" id="navbar">
                     <ul data-reactid="5">
                         @*<li data-reactid="12">
-                            <a class="" href="#following" data-reactid="13">
-                                <span data-reactid="14">
-                                    <span class="value">0</span>
-                                    <span class="label">Likes</span>
-                                </span>
-                            </a>
-                        </li>*@
+                                <a class="" href="#following" data-reactid="13">
+                                    <span data-reactid="14">
+                                        <span class="value">0</span>
+                                        <span class="label">Likes</span>
+                                    </span>
+                                </a>
+                            </li>*@
                         <li data-reactid="15">
                             <a class="" href="#followers" data-reactid="16">
                                 <span data-reactid="17"><span class="value ">@Model.FollowersCount</span> <span class="label ">Followers</span></span>
@@ -81,13 +105,13 @@
             </div>
         </div>
         <div id="userProfileContent">
-            <div id="followers"  style="display:none">
+            <div id="followers" style="display:none">
                 <div class="Module UserProfileContent">
                     <div class="Module UserProfileFollowingGrid">
                         <div class="Grid Module">
                             <div class="GridItems Module centeredWithinWrapper denzelPrimeEnabled fixedHeightLayout padItems">
                                 @foreach (GetFollowersByUserId_Result follower in Model.Followers)
-                        {
+                                {
                                     <div class="item ui-draggable ui-draggable-disabled ui-state-disabled" aria-disabled="true">
                                         <div class="Interest Module followingOneClickView size11" style="padding-right: 12px; padding-bottom: 24px; padding-left: 12px; padding-top: 24px;">
                                             <div class="overflowMask hidden ">
@@ -99,23 +123,23 @@
                                                 <a href="/topics/humor/" class="interestWrapper">
 
                                                     @if (follower.ProfilePicId != null)
-                                        {
+                                                    {
                                                         <img src="@Url.Action("RetrievePhoto", "Profile", new { profilePicId = follower.ProfilePicId })" alt="@follower.FullName" />
                                                         <div class="interestLabel">
                                                             <h2>
                                                                 @follower.FullName
                                                             </h2>
                                                         </div>
-                                        }
-                                        else
-                                        {
+                                                    }
+                                                    else
+                                                    {
                                                         <img src="~/Content/Images/DefaultProfilePic.png" alt="" height=100 width=200 />
                                                         <div class="interestLabel">
                                                             <h2>
                                                                 @follower.FullName
                                                             </h2>
                                                         </div>
-                                        }
+                                                    }
                                                 </a>
                                             </div>
                                             <button class="Button FollowButton InterestFollowButton Module btn followed hasText notNavigatable  rounded wideInterestFollowButton" type="button">
@@ -125,7 +149,7 @@
                                             </button>
                                         </div>
                                     </div>
-                        }
+                                }
                             </div>
                         </div>
                     </div>

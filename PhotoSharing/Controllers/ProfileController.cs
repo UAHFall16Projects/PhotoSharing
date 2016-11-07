@@ -18,6 +18,7 @@ namespace PhotoSharing.Controllers
     public class ProfileController : Controller
     {
         private ApplicationUserManager _userManager;
+        private ApplicationSignInManager _signInManager;
 
         public ApplicationUserManager UserManager
         {
@@ -31,7 +32,17 @@ namespace PhotoSharing.Controllers
             }
         }
 
-
+        public ApplicationSignInManager SignInManager
+        {
+            get
+            {
+                return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
+            }
+            private set
+            {
+                _signInManager = value;
+            }
+        }
         // GET: Profile
         [AllowAnonymous]
         public ActionResult ProfileDetails()
@@ -128,6 +139,33 @@ namespace PhotoSharing.Controllers
             return PartialView("ProfileEditDetails",profileVM);
         }
 
+        public ActionResult ChangePassword()
+        {
+            return PartialView();
+        }
+
+        //
+        // POST: /Manage/ChangePassword
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> ChangePassword(ChangePasswordViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+            var result = await UserManager.ChangePasswordAsync(User.Identity.GetUserId(), model.OldPassword, model.NewPassword);
+            if (result.Succeeded)
+            {
+                var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+                if (user != null)
+                {
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                }
+                return RedirectToAction("ProfileDetails");
+            }
+            return View(model);
+        }
 
     }
 }
