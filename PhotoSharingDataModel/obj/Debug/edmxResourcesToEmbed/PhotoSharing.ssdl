@@ -436,6 +436,9 @@
   <Function Name="GetFollowingsByUserId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="photoShare">
     <Parameter Name="UserId" Type="nvarchar" Mode="In" />
   </Function>
+  <Function Name="GetPhotosByUserId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="photoShare">
+    <Parameter Name="UserId" Type="nvarchar" Mode="In" />
+  </Function>
   <Function Name="GetUsersByUserId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="photoShare">
     <Parameter Name="UserId" Type="nvarchar" Mode="In" />
   </Function>

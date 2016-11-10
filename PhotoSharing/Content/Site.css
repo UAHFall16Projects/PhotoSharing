@@ -43,7 +43,7 @@ textarea {
 }
 
 .icon-arrow-right {
-  background-position: -264px -96px;
+    background-position: -264px -96px;
 }
 
 .datepicker.dropdown-menu {
@@ -51,9 +51,9 @@ textarea {
 }
 
 .modal-content {
-         width: 600px !important;
-         margin: 30px auto !important;
-     }
+    width: 600px !important;
+    margin: 30px auto !important;
+}
 
 .UserEdit .form-group .control-label {
     font-size: 14px;
@@ -73,24 +73,65 @@ textarea {
     width: 100%;
 }
 
-.Interest .interestMaskAndWrapper .interestWrapper img:hover {
-    opacity: 1;
-}
+    .Interest .interestMaskAndWrapper .interestWrapper img:hover {
+        opacity: 1;
+    }
 
 .UserInfoBar .tabs .label {
     text-align: left;
     padding-left: 0px;
 }
 
-.UserInfoBar li a.active .value{
-color:#555 !important;
-    text-decoration: none;
-}
-.UserInfoBar li a.active  {
+.UserInfoBar li a.active .value {
+    color: #555 !important;
     text-decoration: none;
 }
 
-.UserInfoBar li a:hover  {
-color:#555 !important;
+.UserInfoBar li a.active {
     text-decoration: none;
 }
+
+.UserInfoBar li a:hover {
+    color: #555 !important;
+    text-decoration: none;
+}
+
+
+
+
+.HomeNavigation ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    /*background-color: #f1f1f1;*/
+    position: fixed;
+    height: 100%;
+    overflow: auto;
+}
+
+.HomeNavigation li a {
+    display: block;
+    color: rgba(0, 0, 0, 0.52);
+    fill:rgba(0, 0, 0, 0.52);
+    padding: 8px 16px;
+    text-decoration: none;
+}
+
+    .HomeNavigation li a.active {
+        display: block;
+        color: #d2322d;
+        fill: #d2322d;
+        padding: 8px 16px;
+        text-decoration: none;
+    }
+
+    .HomeNavigation li a.active {
+        /*background-color: #d9534f;*/
+        /*color: white;*/
+    }
+
+    .HomeNavigation li a:hover:not(.active) {
+        background-color: #e86460;
+        color: white;
+        fill: white;
+    }

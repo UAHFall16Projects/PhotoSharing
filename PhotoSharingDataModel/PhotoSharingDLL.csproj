@@ -67,6 +67,9 @@
     <Compile Include="GetFollowingsByUserId_Result.cs">
       <DependentUpon>PhotoSharing.tt</DependentUpon>
     </Compile>
+    <Compile Include="GetPhotosByUserId_Result.cs">
+      <DependentUpon>PhotoSharing.tt</DependentUpon>
+    </Compile>
     <Compile Include="GetUsersByUserId_Result.cs">
       <DependentUpon>PhotoSharing.tt</DependentUpon>
     </Compile>

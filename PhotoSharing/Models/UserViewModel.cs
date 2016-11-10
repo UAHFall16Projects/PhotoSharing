@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using PhotoSharingDataModel;
 using System.Collections.Generic;
+using System.Web.Mvc;
 
 namespace PhotoSharing.Models
 {
@@ -25,7 +26,7 @@ namespace PhotoSharing.Models
             _followers = followers;
             _followings = following;
         }
-        
+
 
         [Required]
         [Display(Name = "First Name")]
@@ -111,4 +112,31 @@ namespace PhotoSharing.Models
             }
         }
     }
+
+    public class UserPhotoViewModel
+    {
+        public UserPhotoViewModel()
+        {
+
+        }
+        public UserPhotoViewModel(List<GetPhotosByUserId_Result> savedPhotos)
+        {
+            FillUserPhotos(savedPhotos);
+
+        }
+
+        public void FillUserPhotos(List<GetPhotosByUserId_Result> savedPhotos)
+        {
+            PhotosIds = new List<int>();
+            foreach (var savedPhoto in savedPhotos)
+            {
+                PhotosIds.Add(savedPhoto.PhotoFileID);
+            }
+        }
+
+        [Display(Name = "Photos")]
+        public List<int> PhotosIds
+        { get; set; }
+
+    } 
 }

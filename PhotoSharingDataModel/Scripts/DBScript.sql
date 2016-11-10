@@ -192,7 +192,33 @@ GO
 
 
 
+USE [PhotoSharing]
+GO
 
+/****** Object:  StoredProcedure [photoShare].[ReadPhoto]    Script Date: 11/9/2016 7:30:44 PM ******/
+DROP PROCEDURE [photoShare].[GetPhotosByUserId]
+GO
+
+/****** Object:  StoredProcedure [photoShare].[ReadPhoto]    Script Date: 11/9/2016 7:30:44 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+
+
+CREATE PROCEDURE [photoShare].[GetPhotosByUserId] @UserId int as 
+SELECT * FROM 
+[photoShare].photoFiles files
+INNER JOIN photoShare.Photos Photos
+ON files.PhotoFileID = Photos.PhotoFileId
+WHERE Photos.UploadedUserId = @UserId 
+
+
+
+GO
 
 
 

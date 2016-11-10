@@ -77,5 +77,14 @@ namespace PhotoSharingDataModel
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetFollowingsByUserId_Result>("GetFollowingsByUserId", userIdParameter);
         }
+    
+        public virtual ObjectResult<GetPhotosByUserId_Result> GetPhotosByUserId(string userId)
+        {
+            var userIdParameter = userId != null ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetPhotosByUserId_Result>("GetPhotosByUserId", userIdParameter);
+        }
     }
 }

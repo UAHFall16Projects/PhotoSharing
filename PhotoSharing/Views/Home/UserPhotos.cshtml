@@ -1,0 +1,52 @@
+﻿@model PhotoSharing.Models.UserPhotoViewModel
+
+<div id="userPhotosContent">
+    <div id="Photos">
+        <div class="Module UserProfileContent">
+            <div class="Module UserProfileFollowingGrid">
+                <div class="Grid Module">
+                    <div class="GridItems Module centeredWithinWrapper denzelPrimeEnabled fixedHeightLayout padItems">
+                        @foreach (int photoId in Model.PhotosIds)
+                        {
+                            <div class="item ui-draggable ui-draggable-disabled ui-state-disabled" aria-disabled="true">
+                                <div class="Interest Module followingOneClickView size11" style="padding-right: 12px; padding-bottom: 24px; padding-left: 12px; padding-top: 24px;">
+                                    <div class="overflowMask hidden ">
+                                        <div class="mask">
+                                            <span class="text ">...</span>
+                                        </div>
+                                    </div>
+                                    <div class="interestMaskAndWrapper">
+                                        <a href="/topics/humor/" class="interestWrapper" style="width:auto !important">
+
+                                            @*@if (follower.ProfilePicId != null)
+                                            {*@
+
+                                            <img src="@Url.Action("RetrievePhoto", "Profile", new { profilePicId = photoId })" />
+
+                                                @*<img src="@photoContent.FileContents"  alt=""/>
+                                                        <div class="interestLabel">
+                                                            <h2>
+                                                            </h2>
+                                                        </div>*@
+                                            @*  *@}
+                                            @*else
+                                            {
+                                                <img src="~/Content/Images/DefaultProfilePic.png" alt="" height=100 width=200 />
+                                                        <div class="interestLabel">
+                                                            <h2>
+                                                                @follower.FullName
+                                                            </h2>
+                                                        </div>
+                                            }*@
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</div>

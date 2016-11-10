@@ -4,4 +4,14 @@
 @section Scripts{
     @Scripts.Render("~/bundles/knockout")
     @Scripts.Render("~/bundles/app")
+<script type="text/javascript">
+    $(document).ready(function () { // JQuery not loaded here, $ is undefined
+            var urlUserPhotos = '@Url.Action("UserPhotos", "Home")';
+        $('#homeNavigation a').click(function () {
+            $("a.active").removeClass("active");
+                $(this).addClass("active");
+                $('#homeUserPhtotos').load(urlUserPhotos);
+            })
+        });
+</script>
 }

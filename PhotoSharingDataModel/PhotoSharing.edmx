@@ -441,6 +441,9 @@
         <Function Name="GetFollowingsByUserId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="photoShare">
           <Parameter Name="UserId" Type="nvarchar" Mode="In" />
         </Function>
+        <Function Name="GetPhotosByUserId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="photoShare">
+          <Parameter Name="UserId" Type="nvarchar" Mode="In" />
+        </Function>
         <Function Name="GetUsersByUserId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="photoShare">
           <Parameter Name="UserId" Type="nvarchar" Mode="In" />
         </Function>
@@ -689,9 +692,12 @@
           <Parameter Name="photoFileId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetFollowersByUserId" ReturnType="Collection(PhotoSharing.GetFollowersByUserId_Result)">
-            <Parameter Name="UserId" Mode="In" Type="String" />
+          <Parameter Name="UserId" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="GetFollowingsByUserId" ReturnType="Collection(PhotoSharing.GetFollowingsByUserId_Result)">
+          <Parameter Name="UserId" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetPhotosByUserId" ReturnType="Collection(PhotoSharing.GetPhotosByUserId_Result)">
             <Parameter Name="UserId" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
@@ -1116,21 +1122,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <ComplexType Name="GetUsersByUserId_Result">
-          <Property Type="String" Name="UserID" Nullable="false" MaxLength="128" />
-          <Property Type="String" Name="FirstName" Nullable="true" />
-          <Property Type="String" Name="LastName" Nullable="true" />
-          <Property Type="String" Name="Email" Nullable="false" MaxLength="256" />
-          <Property Type="String" Name="UserName" Nullable="true" MaxLength="256" />
-          <Property Type="String" Name="Password" Nullable="true" />
-          <Property Type="DateTime" Name="LastLoginTime" Nullable="true" Precision="23" />
-          <Property Type="DateTime" Name="DateOfBirth" Nullable="true" Precision="23" />
-          <Property Type="String" Name="Sex" Nullable="true" MaxLength="1" />
-          <Property Type="String" Name="Phone" Nullable="true" />
-          <Property Type="Int32" Name="ProfilePicId" Nullable="true" />
-          <Property Type="Int32" Name="photoFileId" Nullable="true" />
-          <Property Type="Binary" Name="content" Nullable="true" />
-        </ComplexType>
         <ComplexType Name="ReadPhoto_Result">
           <Property Type="Binary" Name="Content" Nullable="false" />
         </ComplexType>
@@ -1147,6 +1138,29 @@
           <Property Type="String" Name="UserFollowerId" Nullable="false" MaxLength="128" />
           <Property Type="String" Name="FullName" Nullable="true" />
           <Property Type="Int32" Name="ProfilePicId" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetUsersByUserId_Result">
+          <Property Type="String" Name="UserID" Nullable="false" MaxLength="128" />
+          <Property Type="String" Name="FirstName" Nullable="true" />
+          <Property Type="String" Name="LastName" Nullable="true" />
+          <Property Type="String" Name="Email" Nullable="false" MaxLength="256" />
+          <Property Type="String" Name="UserName" Nullable="true" MaxLength="256" />
+          <Property Type="String" Name="Password" Nullable="true" />
+          <Property Type="DateTime" Name="LastLoginTime" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="DateOfBirth" Nullable="true" Precision="23" />
+          <Property Type="String" Name="Sex" Nullable="true" MaxLength="1" />
+          <Property Type="String" Name="Phone" Nullable="true" />
+          <Property Type="Int32" Name="ProfilePicId" Nullable="true" />
+          <Property Type="Int32" Name="photoFileId" Nullable="true" />
+          <Property Type="Binary" Name="content" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetPhotosByUserId_Result">
+          <Property Type="Int32" Name="PhotoFileID" Nullable="false" />
+          <Property Type="String" Name="FileName" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="ContentType" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Description" Nullable="true" />
+          <Property Type="String" Name="UploadedUserId" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="TotalLikes" Nullable="true" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1351,6 +1365,18 @@
                 <ScalarProperty Name="UserFollowerId" ColumnName="UserFollowerId" />
                 <ScalarProperty Name="FullName" ColumnName="FullName" />
                 <ScalarProperty Name="ProfilePicId" ColumnName="ProfilePicId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetPhotosByUserId" FunctionName="PhotoSharing.Store.GetPhotosByUserId">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PhotoSharing.GetPhotosByUserId_Result">
+                <ScalarProperty Name="PhotoFileID" ColumnName="PhotoFileID" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="ContentType" ColumnName="ContentType" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="UploadedUserId" ColumnName="UploadedUserId" />
+                <ScalarProperty Name="TotalLikes" ColumnName="TotalLikes" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
