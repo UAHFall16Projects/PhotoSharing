@@ -21,5 +21,6 @@ namespace PhotoSharingDataModel
         public Nullable<int> TotalLikes { get; set; }
         public string UploadedUserId { get; set; }
         public int PhotoFileId { get; set; }
+        public Nullable<bool> Deleted { get; set; }
     }
 }

@@ -112,7 +112,7 @@ textarea {
 .HomeNavigation li a {
     display: block;
     color: rgba(0, 0, 0, 0.52);
-    fill:rgba(0, 0, 0, 0.52);
+    fill: rgba(0, 0, 0, 0.52);
     padding: 8px 16px;
     text-decoration: none;
 }
@@ -135,3 +135,162 @@ textarea {
         color: white;
         fill: white;
     }
+
+.UserShareButton {
+    display: block !important;
+    width: 100% !important;
+}
+
+.PhotosTopMargin {
+    margin-top: 20px !important;
+}
+
+.PhotosShareBtn {
+    top: 10%;
+    left: 5%;
+    display: none;
+    border-radius: 6px !important;
+    background: #d2322d !important;
+    margin: 5px 5px !important;
+    position: absolute !important;
+    width: 50px !important;
+    height: 50px !important;
+    z-index: 200;
+    padding: 7px 7px !important;
+}
+
+    .PhotosShareBtn:hover {
+        -webkit-box-shadow: none !important;
+        box-shadow: none !important;
+        height: 100%;
+        left: 5%;
+        position: absolute;
+        top: 10%;
+        width: 100%;
+        z-index: 100;
+        display: block !important;
+    }
+
+    .PhotosShareBtn img {
+        border-radius: 4px !important;
+        background: #d2322d center !important;
+        opacity: 1 !important;
+    }
+
+.ui-autocomplete {
+    position: absolute;
+    cursor: default;
+    z-index: 4000 !important;
+    border: 1px solid #c5c5c5;
+    background: #ffffff;
+    color: #333333;
+    /*width: 12em;*/
+    max-height: 100%;
+    line-height: 2em;
+    overflow: scroll;
+    overflow-x: hidden;
+    font-size: 14px;
+    font-family: "Helvetica Neue", Helvetica, "ãƒ’ãƒ©ã‚®ãƒŽè§’ã‚´ Pro W3", "Hiragino Kaku Gothic Pro", ãƒ¡ã‚¤ãƒªã‚ª, Meiryo, "ï¼­ï¼³ ï¼°ã‚´ã‚·ãƒƒã‚¯", arial, sans-serif;
+}
+
+.ui-helper-hidden-accessible {
+    display: none;
+}
+
+.ui-autocomplete-loading {
+    background: white url('Images/ui-anim_basic_16x16.gif') right center no-repeat;
+}
+
+.userAutoComplete {
+    color: black;
+    height: 70px;
+    padding-top: 10px;
+    padding-left: 10px;
+    border-bottom: 1px solid #c5c5c5;
+}
+
+    .userAutoComplete:hover {
+        background: #efefef;
+        /*border-style: ridge;*/
+    }
+
+.autocompleteProfileImageWrapper {
+    overflow: hidden;
+    border-radius: 50%;
+    display: inline-block;
+    height: 50px;
+    margin-right: 10px;
+    vertical-align: middle;
+    width: 50px;
+}
+
+    .autocompleteProfileImageWrapper img {
+        height: 100% !important;
+        width: 100% !important;
+    }
+
+.autocompleteUserName {
+    vertical-align: initial;
+}
+
+.followAutoComplete {
+    color: black;
+    height: 120px;
+    padding-top: 10px;
+    padding-left: 10px;
+    border-bottom: 1px solid #c5c5c5;
+}
+
+    .followAutoComplete:hover {
+        background: #efefef;
+    }
+
+.autocompleteFollowImageWrapper {
+    overflow: hidden;
+    border-radius: 10%;
+    display: inline-block;
+    height: 100px;
+    margin-right: 10px;
+    vertical-align: middle;
+    width: 100px;
+}
+
+
+    .autocompleteFollowImageWrapper img {
+        height: 100% !important;
+        width: 100% !important;
+    }
+
+.autocompleteFollowName {
+    /* vertical-align: initial; */
+    /* float: right; */
+    /* top: 50px; */
+    position: relative;
+    left: 150px;
+    top: -85px;
+}
+
+.autocompleteFollowFullName {
+    font-weight: bold;
+    /* float: right; */
+    top: -85px;
+    position: relative;
+    left: 150px;
+}
+
+.ui-autocompleteFollowup {
+    color: #333333;
+    /*width: 12em;*/
+    max-height: 320px;
+    line-height: 2em;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+
+.ui-autocompleteUser {
+    color: #333333;
+    max-height: 180px;
+    line-height: 2em;
+    overflow: scroll;
+    overflow-x: hidden;
+}

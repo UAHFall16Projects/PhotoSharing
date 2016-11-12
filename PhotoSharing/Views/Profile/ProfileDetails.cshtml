@@ -48,11 +48,11 @@
                                                     </a>
                                                 </li>
                                                 <li data-index="2">
-                                                    <a class="userMenuFindFriends" href="/find_friends/">
-                                                        <span class="userMenuFindFriends"><!-- react-text: 94 --> <!-- /react-text --><!-- react-text: 95 -->Find friends<!-- /react-text --><!-- react-text: 96 --> <!-- /react-text --></span>
+                                                    <a class="modal-link userMenuFindFriends" href="/Profile/FollowUsers">
+                                                        <span class="userMenuFindFriends">Follow Users</span>
                                                     </a>
                                                 </li>
-                                                <li data-index="4"><a class="getHelp" href="#"><span class="getHelp"><!-- react-text: 106 --> <!-- /react-text --><!-- react-text: 107 -->Get help<!-- /react-text --><!-- react-text: 108 --> <!-- /react-text --></span></a></li>
+                                                <li data-index="4"><a class="getHelp" href="#"><span class="getHelp">Get help</span></a></li>
                                                 <li data-index="5">
                                                     <a href="javascript:sessionStorage.removeItem('accessToken');$('#logoutForm').submit();"><span>Logout
                                                     </span>
@@ -120,7 +120,7 @@
                                                 </div>
                                             </div>
                                             <div class="interestMaskAndWrapper">
-                                                <a href="/topics/humor/" class="interestWrapper">
+                                                <a href="#" class="interestWrapper">
 
                                                     @if (follower.ProfilePicId != null)
                                                     {
@@ -142,9 +142,9 @@
                                                     }
                                                 </a>
                                             </div>
-                                            <button class="Button FollowButton InterestFollowButton Module btn followed hasText notNavigatable  rounded wideInterestFollowButton" type="button">
+                                            <button onclick="location.href='@Url.Action("FollowNewUsers", "Profile", new { userId = follower.UserFollowerId})'" class="Button FollowButton InterestFollowButton Module btn followed hasText notNavigatable btn-danger rounded wideInterestFollowButton" type="button">
                                                 <span class="buttonText">
-                                                    Unfollow
+                                                    Follow
                                                 </span>
                                             </button>
                                         </div>
@@ -170,7 +170,7 @@
                                                 </div>
                                             </div>
                                             <div class="interestMaskAndWrapper">
-                                                <a href="/topics/humor/" class="interestWrapper">
+                                                <a href="#" class="interestWrapper">
 
                                                     @if (following.ProfilePicId != null)
                                                     {
@@ -192,7 +192,7 @@
                                                     }
                                                 </a>
                                             </div>
-                                            <button class="Button FollowButton InterestFollowButton Module btn followed hasText notNavigatable  rounded wideInterestFollowButton" type="button">
+                                            <button onclick="location.href='@Url.Action("UnFollowUsers", "Profile", new { userId = following.UserId})'" class="Button FollowButton InterestFollowButton Module btn followed hasText notNavigatable  rounded wideInterestFollowButton" type="button">
                                                 <span class="buttonText">
                                                     Unfollow
                                                 </span>

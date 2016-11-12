@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -8,13 +7,10 @@ using Microsoft.AspNet.Identity;
 using PhotoSharing.Models;
 using PhotoSharingDataModel;
 using System.Threading.Tasks;
-using Microsoft.AspNet.Identity.EntityFramework;
-using System.Data.Entity;
-using System.IO;
-using System.Drawing;
 
 namespace PhotoSharing.Controllers
 {
+    [Authorize]
     public class ProfileController : Controller
     {
         private ApplicationUserManager _userManager;
@@ -44,7 +40,9 @@ namespace PhotoSharing.Controllers
             }
         }
         // GET: Profile
+        [Authorize]
         [AllowAnonymous]
+        [Authorize]
         public ActionResult ProfileDetails()
         {
             var userId = User.Identity.GetUserId();
@@ -66,6 +64,7 @@ namespace PhotoSharing.Controllers
         // POST: /Account/Register
         [HttpPost]
         [AllowAnonymous]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public ActionResult UpdateProfileDetails(ProfileViewModel model, HttpPostedFileBase uploadprofilePic)
         {
@@ -80,6 +79,7 @@ namespace PhotoSharing.Controllers
                         //Photo Data object stored to DB
                         PhotoFile photoData = new PhotoFile();
                         photoData.Content = new byte[uploadprofilePic.ContentLength];
+                        photoData.ContentType = uploadprofilePic.ContentType;
                         uploadprofilePic.InputStream.Read(photoData.Content, 0, uploadprofilePic.ContentLength);
                         var savedPhotoFile = photoSharing.PhotoFiles.Add(photoData);
                         photoSharing.SaveChanges();
@@ -105,9 +105,10 @@ namespace PhotoSharing.Controllers
             }
             // If we got this far, something failed, redisplay form
             return RedirectToAction("ProfileDetails");
-            
+
         }
 
+        [Authorize]
         public ActionResult RetrievePhoto(int profilePicId)
         {
             var photoResult = new ReadPhoto_Result();
@@ -126,6 +127,7 @@ namespace PhotoSharing.Controllers
             }
         }
 
+        [Authorize]
         public ActionResult ProfileEditDetails()
         {
             var users = new GetUsersByUserId_Result();
@@ -136,9 +138,10 @@ namespace PhotoSharing.Controllers
             };
 
             ProfileViewModel profileVM = new ProfileViewModel(users);
-            return PartialView("ProfileEditDetails",profileVM);
+            return PartialView("ProfileEditDetails", profileVM);
         }
 
+        [Authorize]
         public ActionResult ChangePassword()
         {
             return PartialView();
@@ -147,6 +150,7 @@ namespace PhotoSharing.Controllers
         //
         // POST: /Manage/ChangePassword
         [HttpPost]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> ChangePassword(ChangePasswordViewModel model)
         {
@@ -167,5 +171,72 @@ namespace PhotoSharing.Controllers
             return View(model);
         }
 
+        [Authorize]
+        public ActionResult FollowUsers(FollowUserPhotoViewModel model)
+        {
+
+            return PartialView();
+        }
+
+        [Authorize]
+        [HttpPost]
+        public ActionResult UpdateFollowUsers(FollowUserPhotoViewModel followUserPhotoVM)
+        {
+            var userId = User.Identity.GetUserId();
+            var sharedUsernames = followUserPhotoVM.SearchUser.Trim().ToString().Split(',');
+            using (var photoSharing = new PhotoSharingContainer())
+            {
+                foreach (var userName in sharedUsernames.Where(qry => !string.IsNullOrEmpty(qry.Trim())).Select(qry => qry.Trim()))
+                {
+                    var userToShare = photoSharing.Users.Where(qry => qry.UserName == userName).FirstOrDefault();
+                    var existingFollower = photoSharing.Followers.Where(qry => qry.UserFollowerId == userId && qry.UserId == userToShare.UserID).FirstOrDefault();
+                    if (userToShare != null && existingFollower == null)
+                    {
+                        Follower follower = new Follower();
+                        follower.UserFollowerId = User.Identity.GetUserId();
+                        follower.UserId = userToShare.UserID;
+                        photoSharing.Followers.Add(follower);
+                    }
+                }
+                photoSharing.SaveChanges();
+            }
+
+            return RedirectToAction("ProfileDetails");
+        }
+
+        [Authorize]
+        public ActionResult UnFollowUsers(string userId)
+        {
+            var userFollowerId = User.Identity.GetUserId();
+            using (var photoSharing = new PhotoSharingContainer())
+            {
+                var follower = photoSharing.Followers.Where(qry => qry.UserFollowerId == userFollowerId && qry.UserId == userId).FirstOrDefault();
+                if (follower != null)
+                {
+                    photoSharing.Followers.Remove(follower);
+                    photoSharing.SaveChanges();
+                }
+            }
+            return RedirectToAction("ProfileDetails");
+        }
+
+        [Authorize]
+        public ActionResult FollowNewUsers(string userId)
+        {
+            var userFollowerId = User.Identity.GetUserId();
+            using (var photoSharing = new PhotoSharingContainer())
+            {
+                var savedFollower = photoSharing.Followers.Where(qry => qry.UserFollowerId == userFollowerId && qry.UserId == userId).FirstOrDefault();
+                if (savedFollower == null)
+                {
+                    Follower follower = new Follower();
+                    follower.UserFollowerId = User.Identity.GetUserId();
+                    follower.UserId = userId;
+                    photoSharing.Followers.Add(follower);
+                    photoSharing.SaveChanges();
+                }
+            }
+            return RedirectToAction("ProfileDetails");
+        }
     }
 }

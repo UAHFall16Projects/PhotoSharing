@@ -15,8 +15,10 @@ namespace PhotoSharingDataModel
     public partial class Log
     {
         public int LogID { get; set; }
-        public Nullable<System.DateTime> Date { get; set; }
+        public Nullable<System.DateTime> LogDate { get; set; }
         public string LoggerId { get; set; }
-        public int PhotoId { get; set; }
+        public Nullable<int> PhotoId { get; set; }
+        public string AffectedId { get; set; }
+        public Nullable<int> LogTypeId { get; set; }
     }
 }

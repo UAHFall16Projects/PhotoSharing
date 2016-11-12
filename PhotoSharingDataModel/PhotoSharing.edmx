@@ -51,17 +51,18 @@
             <PropertyRef Name="LogID" />
           </Key>
           <Property Name="LogID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Date" Type="datetime" />
-          <Property Name="LoggerId" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="PhotoId" Type="int" Nullable="false" />
+          <Property Name="LogDate" Type="datetime" />
+          <Property Name="LoggerId" Type="nvarchar" MaxLength="128" />
+          <Property Name="PhotoId" Type="int" />
+          <Property Name="AffectedId" Type="nvarchar" MaxLength="128" />
+          <Property Name="LogTypeId" Type="int" />
         </EntityType>
-        <EntityType Name="Notifications">
+        <EntityType Name="LogTypes">
           <Key>
-            <PropertyRef Name="NotificationID" />
+            <PropertyRef Name="LogTypeID" />
           </Key>
-          <Property Name="NotificationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="UserID" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="LogLogID" Type="int" Nullable="false" />
+          <Property Name="LogTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Type" Type="nvarchar" MaxLength="256" Nullable="false" />
         </EntityType>
         <EntityType Name="PhotoAlbums">
           <Key>
@@ -91,6 +92,7 @@
           <Property Name="TotalLikes" Type="int" />
           <Property Name="UploadedUserId" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="PhotoFileId" Type="int" Nullable="false" />
+          <Property Name="Deleted" Type="bit" />
         </EntityType>
         <EntityType Name="SharePhotoes">
           <Key>
@@ -207,20 +209,8 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_LogNotification">
-          <End Role="Logs" Type="Self.Logs" Multiplicity="1" />
-          <End Role="Notifications" Type="Self.Notifications" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Logs">
-              <PropertyRef Name="LogID" />
-            </Principal>
-            <Dependent Role="Notifications">
-              <PropertyRef Name="LogLogID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_LogPhoto">
-          <End Role="Photos" Type="Self.Photos" Multiplicity="1" />
+          <End Role="Photos" Type="Self.Photos" Multiplicity="0..1" />
           <End Role="Logs" Type="Self.Logs" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Photos">
@@ -228,6 +218,18 @@
             </Principal>
             <Dependent Role="Logs">
               <PropertyRef Name="PhotoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LogTypeLog">
+          <End Role="LogTypes" Type="Self.LogTypes" Multiplicity="0..1" />
+          <End Role="Logs" Type="Self.Logs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LogTypes">
+              <PropertyRef Name="LogTypeID" />
+            </Principal>
+            <Dependent Role="Logs">
+              <PropertyRef Name="LogTypeId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -352,7 +354,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_UserLog">
-          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
           <End Role="Logs" Type="Self.Logs" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Users">
@@ -363,15 +365,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_UserNotification">
-          <End Role="Users" Type="Self.Users" Multiplicity="1" />
-          <End Role="Notifications" Type="Self.Notifications" Multiplicity="*" />
+        <Association Name="FK_UserLog1">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Logs" Type="Self.Logs" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Users">
               <PropertyRef Name="UserID" />
             </Principal>
-            <Dependent Role="Notifications">
-              <PropertyRef Name="UserID" />
+            <Dependent Role="Logs">
+              <PropertyRef Name="AffectedId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -444,6 +446,10 @@
         <Function Name="GetPhotosByUserId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="photoShare">
           <Parameter Name="UserId" Type="nvarchar" Mode="In" />
         </Function>
+        <Function Name="GetUserLikeUserName" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="photoShare">
+          <Parameter Name="UserName" Type="nvarchar" Mode="In" />
+          <Parameter Name="UserId" Type="nvarchar" Mode="In" />
+        </Function>
         <Function Name="GetUsersByUserId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="photoShare">
           <Parameter Name="UserId" Type="nvarchar" Mode="In" />
         </Function>
@@ -457,7 +463,7 @@
           <EntitySet Name="Groups" EntityType="Self.Groups" Schema="photoShare" store:Type="Tables" />
           <EntitySet Name="Likes" EntityType="Self.Likes" Schema="photoShare" store:Type="Tables" />
           <EntitySet Name="Logs" EntityType="Self.Logs" Schema="photoShare" store:Type="Tables" />
-          <EntitySet Name="Notifications" EntityType="Self.Notifications" Schema="photoShare" store:Type="Tables" />
+          <EntitySet Name="LogTypes" EntityType="Self.LogTypes" Schema="photoShare" store:Type="Tables" />
           <EntitySet Name="PhotoAlbums" EntityType="Self.PhotoAlbums" Schema="photoShare" store:Type="Tables" />
           <EntitySet Name="PhotoFiles" EntityType="Self.PhotoFiles" Schema="photoShare" store:Type="Tables" />
           <EntitySet Name="Photos" EntityType="Self.Photos" Schema="photoShare" store:Type="Tables" />
@@ -489,12 +495,12 @@
             <End Role="Photos" EntitySet="Photos" />
             <End Role="Likes" EntitySet="Likes" />
           </AssociationSet>
-          <AssociationSet Name="FK_LogNotification" Association="Self.FK_LogNotification">
-            <End Role="Logs" EntitySet="Logs" />
-            <End Role="Notifications" EntitySet="Notifications" />
-          </AssociationSet>
           <AssociationSet Name="FK_LogPhoto" Association="Self.FK_LogPhoto">
             <End Role="Photos" EntitySet="Photos" />
+            <End Role="Logs" EntitySet="Logs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LogTypeLog" Association="Self.FK_LogTypeLog">
+            <End Role="LogTypes" EntitySet="LogTypes" />
             <End Role="Logs" EntitySet="Logs" />
           </AssociationSet>
           <AssociationSet Name="FK_PhotoAlbumPhoto" Association="Self.FK_PhotoAlbumPhoto">
@@ -541,9 +547,9 @@
             <End Role="Users" EntitySet="Users" />
             <End Role="Logs" EntitySet="Logs" />
           </AssociationSet>
-          <AssociationSet Name="FK_UserNotification" Association="Self.FK_UserNotification">
+          <AssociationSet Name="FK_UserLog1" Association="Self.FK_UserLog1">
             <End Role="Users" EntitySet="Users" />
-            <End Role="Notifications" EntitySet="Notifications" />
+            <End Role="Logs" EntitySet="Logs" />
           </AssociationSet>
           <AssociationSet Name="FK_UserPhoto" Association="Self.FK_UserPhoto">
             <End Role="Photos" EntitySet="Photos" />
@@ -575,7 +581,6 @@
           <EntitySet Name="Photos" EntityType="PhotoSharing.Photo" />
           <EntitySet Name="Albums" EntityType="PhotoSharing.Album" />
           <EntitySet Name="Groups" EntityType="PhotoSharing.Group" />
-          <EntitySet Name="Logs" EntityType="PhotoSharing.Log" />
           <EntitySet Name="TagInformations" EntityType="PhotoSharing.TagInformation" />
           <EntitySet Name="Followers" EntityType="PhotoSharing.Follower" />
           <AssociationSet Name="UserFollower" Association="PhotoSharing.UserFollower">
@@ -611,23 +616,7 @@
             <End Role="Photo" EntitySet="Photos" />
             <End Role="TagInformation" EntitySet="TagInformations" />
           </AssociationSet>
-          <EntitySet Name="Notifications" EntityType="PhotoSharing.Notification" />
-          <AssociationSet Name="UserNotification" Association="PhotoSharing.UserNotification">
-            <End Role="User" EntitySet="Users" />
-            <End Role="Notification" EntitySet="Notifications" />
-          </AssociationSet>
-          <AssociationSet Name="LogNotification" Association="PhotoSharing.LogNotification">
-            <End Role="Log" EntitySet="Logs" />
-            <End Role="Notification" EntitySet="Notifications" />
-          </AssociationSet>
-          <AssociationSet Name="UserLog" Association="PhotoSharing.UserLog">
-            <End Role="User" EntitySet="Users" />
-            <End Role="Log" EntitySet="Logs" />
-          </AssociationSet>
-          <AssociationSet Name="LogPhoto" Association="PhotoSharing.LogPhoto">
-            <End Role="Log" EntitySet="Logs" />
-            <End Role="Photo" EntitySet="Photos" />
-          </AssociationSet>
+          <EntitySet Name="LogTypes" EntityType="PhotoSharing.LogType" />
           <AssociationSet Name="AlbumPhoto" Association="PhotoSharing.AlbumPhoto">
             <End Role="Album" EntitySet="Albums" />
             <End Role="Photo" EntitySet="Photos" />
@@ -685,20 +674,45 @@
             <End Role="PhotoData" EntitySet="PhotoFiles" />
             <End Role="Photo" EntitySet="Photos" />
           </AssociationSet>
-          <FunctionImport Name="GetUsersByUserId" ReturnType="Collection(PhotoSharing.GetUsersByUserId_Result)">
-          <Parameter Name="UserId" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="ReadPhoto" ReturnType="Collection(PhotoSharing.ReadPhoto_Result)">
-          <Parameter Name="photoFileId" Mode="In" Type="Int32" />
+          <EntitySet Name="Logs" EntityType="PhotoSharing.Log" />
+          <AssociationSet Name="UserLog" Association="PhotoSharing.UserLog">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Log" EntitySet="Logs" />
+          </AssociationSet>
+          <AssociationSet Name="LogPhoto" Association="PhotoSharing.LogPhoto">
+            <End Role="Log" EntitySet="Logs" />
+            <End Role="Photo" EntitySet="Photos" />
+          </AssociationSet>
+          <AssociationSet Name="LogTypeLog" Association="PhotoSharing.LogTypeLog">
+            <End Role="LogType" EntitySet="LogTypes" />
+            <End Role="Log" EntitySet="Logs" />
+          </AssociationSet>
+          <AssociationSet Name="UserLog1" Association="PhotoSharing.UserLog1">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Log" EntitySet="Logs" />
+          </AssociationSet>
+          <FunctionImport Name="etUserLikeUserName">
+            <Parameter Name="UserName" Mode="In" Type="String" />
+            <Parameter Name="UserId" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="GetFollowersByUserId" ReturnType="Collection(PhotoSharing.GetFollowersByUserId_Result)">
-          <Parameter Name="UserId" Mode="In" Type="String" />
+            <Parameter Name="UserId" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="GetFollowingsByUserId" ReturnType="Collection(PhotoSharing.GetFollowingsByUserId_Result)">
-          <Parameter Name="UserId" Mode="In" Type="String" />
+            <Parameter Name="UserId" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="GetPhotosByUserId" ReturnType="Collection(PhotoSharing.GetPhotosByUserId_Result)">
             <Parameter Name="UserId" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetUserLikeUserName" ReturnType="Collection(PhotoSharing.GetUserLikeUserName_Result)">
+            <Parameter Name="UserName" Mode="In" Type="String" />
+            <Parameter Name="UserId" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetUsersByUserId" ReturnType="Collection(PhotoSharing.GetUsersByUserId_Result)">
+            <Parameter Name="UserId" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="ReadPhoto" ReturnType="Collection(PhotoSharing.ReadPhoto_Result)">
+            <Parameter Name="photoFileId" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <EntityType Name="User">
@@ -728,6 +742,7 @@
           <Property Name="TotalLikes" Type="Int32" Nullable="true" />
           <Property Name="UploadedUserId" Type="String" Nullable="false" Unicode="true" MaxLength="128" FixedLength="false" />
           <Property Name="PhotoFileId" Type="Int32" Nullable="false" />
+          <Property Name="Deleted" Type="Boolean" Nullable="true" />
         </EntityType>
         <EntityType Name="Album">
           <Key>
@@ -745,15 +760,6 @@
           <Property Name="GroupID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="OwnerId" Type="String" Nullable="false" Unicode="true" MaxLength="128" FixedLength="false" />
-        </EntityType>
-        <EntityType Name="Log">
-          <Key>
-            <PropertyRef Name="LogID" />
-          </Key>
-          <Property Name="LogID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Date" Type="DateTime" Nullable="true" Precision="3" />
-          <Property Name="LoggerId" Type="String" Nullable="false" Unicode="true" MaxLength="128" FixedLength="false" />
-          <Property Name="PhotoId" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="TagInformation">
           <Key>
@@ -875,62 +881,13 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="Notification">
+        <EntityType Name="LogType">
           <Key>
-            <PropertyRef Name="NotificationID" />
+            <PropertyRef Name="LogTypeID" />
           </Key>
-          <Property Name="NotificationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserID" Type="String" Nullable="false" Unicode="true" MaxLength="128" FixedLength="false" />
-          <Property Name="LogLogID" Type="Int32" Nullable="false" />
+          <Property Name="LogTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Type" Type="String" Nullable="false" Unicode="true" MaxLength="256" FixedLength="false" />
         </EntityType>
-        <Association Name="UserNotification">
-          <End Type="PhotoSharing.User" Role="User" Multiplicity="1" />
-          <End Type="PhotoSharing.Notification" Role="Notification" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="UserID" />
-            </Principal>
-            <Dependent Role="Notification">
-              <PropertyRef Name="UserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="LogNotification">
-          <End Type="PhotoSharing.Log" Role="Log" Multiplicity="1" />
-          <End Type="PhotoSharing.Notification" Role="Notification" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Log">
-              <PropertyRef Name="LogID" />
-            </Principal>
-            <Dependent Role="Notification">
-              <PropertyRef Name="LogLogID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="UserLog">
-          <End Type="PhotoSharing.User" Role="User" Multiplicity="1" />
-          <End Type="PhotoSharing.Log" Role="Log" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="UserID" />
-            </Principal>
-            <Dependent Role="Log">
-              <PropertyRef Name="LoggerId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="LogPhoto">
-          <End Type="PhotoSharing.Log" Role="Log" Multiplicity="*" />
-          <End Type="PhotoSharing.Photo" Role="Photo" Multiplicity="1" />
-          <ReferentialConstraint>
-            <Principal Role="Photo">
-              <PropertyRef Name="PhotoID" />
-            </Principal>
-            <Dependent Role="Log">
-              <PropertyRef Name="PhotoId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="AlbumPhoto">
           <End Type="PhotoSharing.Album" Role="Album" Multiplicity="*" />
           <End Type="PhotoSharing.Photo" Role="Photo" Multiplicity="1" />
@@ -1122,9 +1079,65 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <ComplexType Name="ReadPhoto_Result">
-          <Property Type="Binary" Name="Content" Nullable="false" />
-        </ComplexType>
+        <EntityType Name="Log">
+          <Key>
+            <PropertyRef Name="LogID" />
+          </Key>
+          <Property Name="LogID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LogDate" Type="DateTime" Nullable="true" Precision="3" />
+          <Property Name="LoggerId" Type="String" Unicode="true" MaxLength="128" Nullable="true" FixedLength="false" />
+          <Property Name="PhotoId" Type="Int32" Nullable="true" />
+          <Property Name="AffectedId" Type="String" Nullable="true" Unicode="true" MaxLength="128" FixedLength="false" />
+          <Property Name="LogTypeId" Type="Int32" Nullable="true" />
+        </EntityType>
+        <Association Name="UserLog">
+          <End Type="PhotoSharing.User" Role="User" Multiplicity="0..1" />
+          <End Type="PhotoSharing.Log" Role="Log" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Log">
+              <PropertyRef Name="LoggerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="LogPhoto">
+          <End Type="PhotoSharing.Log" Role="Log" Multiplicity="*" />
+          <End Type="PhotoSharing.Photo" Role="Photo" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Photo">
+              <PropertyRef Name="PhotoID" />
+            </Principal>
+            <Dependent Role="Log">
+              <PropertyRef Name="PhotoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="LogTypeLog">
+          <End Type="PhotoSharing.LogType" Role="LogType" Multiplicity="0..1" />
+          <End Type="PhotoSharing.Log" Role="Log" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LogType">
+              <PropertyRef Name="LogTypeID" />
+            </Principal>
+            <Dependent Role="Log">
+              <PropertyRef Name="LogTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UserLog1">
+          <End Type="PhotoSharing.User" Role="User" Multiplicity="0..1" />
+          <End Type="PhotoSharing.Log" Role="Log" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Log">
+              <PropertyRef Name="AffectedId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <ComplexType Name="GetFollowersByUserId_Result">
           <Property Type="Int32" Name="FollowerID" Nullable="false" />
           <Property Type="String" Name="UserId" Nullable="false" MaxLength="128" />
@@ -1138,6 +1151,23 @@
           <Property Type="String" Name="UserFollowerId" Nullable="false" MaxLength="128" />
           <Property Type="String" Name="FullName" Nullable="true" />
           <Property Type="Int32" Name="ProfilePicId" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetPhotosByUserId_Result">
+          <Property Type="Int32" Name="PhotoFileID" Nullable="false" />
+          <Property Type="String" Name="FileName" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="ContentType" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Description" Nullable="true" />
+          <Property Type="String" Name="UploadedUserId" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="TotalLikes" Nullable="true" />
+          <Property Type="Boolean" Name="PhotoOwner" Nullable="true" />
+          <Property Type="String" Name="OwnerName" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetUserLikeUserName_Result">
+          <Property Type="String" Name="label" Nullable="true" MaxLength="256" />
+          <Property Type="String" Name="value" Nullable="true" MaxLength="256" />
+          <Property Type="Int32" Name="ProfilePicId" Nullable="true" />
+          <Property Type="String" Name="UserID" Nullable="false" MaxLength="128" />
+          <Property Type="String" Name="FullName" Nullable="true" />
         </ComplexType>
         <ComplexType Name="GetUsersByUserId_Result">
           <Property Type="String" Name="UserID" Nullable="false" MaxLength="128" />
@@ -1154,13 +1184,8 @@
           <Property Type="Int32" Name="photoFileId" Nullable="true" />
           <Property Type="Binary" Name="content" Nullable="true" />
         </ComplexType>
-        <ComplexType Name="GetPhotosByUserId_Result">
-          <Property Type="Int32" Name="PhotoFileID" Nullable="false" />
-          <Property Type="String" Name="FileName" Nullable="true" MaxLength="255" />
-          <Property Type="String" Name="ContentType" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="Description" Nullable="true" />
-          <Property Type="String" Name="UploadedUserId" Nullable="false" MaxLength="128" />
-          <Property Type="Int32" Name="TotalLikes" Nullable="true" />
+        <ComplexType Name="ReadPhoto_Result">
+          <Property Type="Binary" Name="Content" Nullable="false" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1195,6 +1220,7 @@
           <ScalarProperty Name="TotalLikes" ColumnName="TotalLikes" />
           <ScalarProperty Name="UploadedUserId" ColumnName="UploadedUserId" />
           <ScalarProperty Name="PhotoFileId" ColumnName="PhotoFileId" />
+          <ScalarProperty Name="Deleted" ColumnName="Deleted" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -1214,16 +1240,6 @@
           <ScalarProperty Name="GroupID" ColumnName="GroupID" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="OwnerId" ColumnName="OwnerId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Logs">
-      <EntityTypeMapping TypeName="IsTypeOf(PhotoSharing.Log)">
-        <MappingFragment StoreEntitySet="Logs">
-          <ScalarProperty Name="LogID" ColumnName="LogID" />
-          <ScalarProperty Name="Date" ColumnName="Date" />
-          <ScalarProperty Name="LoggerId" ColumnName="LoggerId" />
-          <ScalarProperty Name="PhotoId" ColumnName="PhotoId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -1254,12 +1270,11 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Notifications">
-      <EntityTypeMapping TypeName="IsTypeOf(PhotoSharing.Notification)">
-        <MappingFragment StoreEntitySet="Notifications">
-          <ScalarProperty Name="NotificationID" ColumnName="NotificationID" />
-          <ScalarProperty Name="UserID" ColumnName="UserID" />
-          <ScalarProperty Name="LogLogID" ColumnName="LogLogID" />
+    <EntitySetMapping Name="LogTypes">
+      <EntityTypeMapping TypeName="IsTypeOf(PhotoSharing.LogType)">
+        <MappingFragment StoreEntitySet="LogTypes">
+          <ScalarProperty Name="LogTypeID" ColumnName="LogTypeID" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -1311,6 +1326,18 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Logs">
+      <EntityTypeMapping TypeName="IsTypeOf(PhotoSharing.Log)">
+        <MappingFragment StoreEntitySet="Logs">
+          <ScalarProperty Name="LogID" ColumnName="LogID" />
+          <ScalarProperty Name="LogDate" ColumnName="LogDate" />
+          <ScalarProperty Name="LoggerId" ColumnName="LoggerId" />
+          <ScalarProperty Name="PhotoId" ColumnName="PhotoId" />
+          <ScalarProperty Name="AffectedId" ColumnName="AffectedId" />
+          <ScalarProperty Name="LogTypeId" ColumnName="LogTypeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <AssociationSetMapping Name="GroupSharePhoto" TypeName="PhotoSharing.GroupSharePhoto" StoreEntitySet="SharePhotoes">
       <EndProperty Name="Group">
         <ScalarProperty Name="GroupID" ColumnName="GroupSharePhoto_SharePhoto_GroupID" />
@@ -1320,32 +1347,6 @@
       </EndProperty>
       <Condition ColumnName="GroupSharePhoto_SharePhoto_GroupID" IsNull="false" />
     </AssociationSetMapping>
-          <FunctionImportMapping FunctionImportName="GetUsersByUserId" FunctionName="PhotoSharing.Store.GetUsersByUserId">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="PhotoSharing.GetUsersByUserId_Result">
-                <ScalarProperty Name="UserID" ColumnName="UserID" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="LastLoginTime" ColumnName="LastLoginTime" />
-                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
-                <ScalarProperty Name="Sex" ColumnName="Sex" />
-                <ScalarProperty Name="Phone" ColumnName="Phone" />
-                <ScalarProperty Name="ProfilePicId" ColumnName="ProfilePicId" />
-                <ScalarProperty Name="photoFileId" ColumnName="photoFileId" />
-                <ScalarProperty Name="content" ColumnName="content" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="ReadPhoto" FunctionName="PhotoSharing.Store.ReadPhoto">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="PhotoSharing.ReadPhoto_Result">
-                <ScalarProperty Name="Content" ColumnName="Content" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="GetFollowersByUserId" FunctionName="PhotoSharing.Store.GetFollowersByUserId">
             <ResultMapping>
               <ComplexTypeMapping TypeName="PhotoSharing.GetFollowersByUserId_Result">
@@ -1377,6 +1378,45 @@
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="UploadedUserId" ColumnName="UploadedUserId" />
                 <ScalarProperty Name="TotalLikes" ColumnName="TotalLikes" />
+                <ScalarProperty Name="PhotoOwner" ColumnName="PhotoOwner" />
+                <ScalarProperty Name="OwnerName" ColumnName="OwnerName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetUserLikeUserName" FunctionName="PhotoSharing.Store.GetUserLikeUserName">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PhotoSharing.GetUserLikeUserName_Result">
+                <ScalarProperty Name="label" ColumnName="label" />
+                <ScalarProperty Name="value" ColumnName="value" />
+                <ScalarProperty Name="ProfilePicId" ColumnName="ProfilePicId" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetUsersByUserId" FunctionName="PhotoSharing.Store.GetUsersByUserId">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PhotoSharing.GetUsersByUserId_Result">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="LastLoginTime" ColumnName="LastLoginTime" />
+                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+                <ScalarProperty Name="Sex" ColumnName="Sex" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="ProfilePicId" ColumnName="ProfilePicId" />
+                <ScalarProperty Name="photoFileId" ColumnName="photoFileId" />
+                <ScalarProperty Name="content" ColumnName="content" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ReadPhoto" FunctionName="PhotoSharing.Store.ReadPhoto" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PhotoSharing.ReadPhoto_Result">
+                <ScalarProperty Name="Content" ColumnName="Content" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

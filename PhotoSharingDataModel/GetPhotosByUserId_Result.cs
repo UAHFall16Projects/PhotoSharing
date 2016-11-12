@@ -19,5 +19,7 @@ namespace PhotoSharingDataModel
         public string Description { get; set; }
         public string UploadedUserId { get; set; }
         public Nullable<int> TotalLikes { get; set; }
+        public Nullable<bool> PhotoOwner { get; set; }
+        public string OwnerName { get; set; }
     }
 }

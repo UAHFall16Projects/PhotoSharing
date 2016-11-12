@@ -31,33 +31,28 @@ namespace PhotoSharingDataModel
         public virtual DbSet<Photo> Photos { get; set; }
         public virtual DbSet<Album> Albums { get; set; }
         public virtual DbSet<Group> Groups { get; set; }
-        public virtual DbSet<Log> Logs { get; set; }
         public virtual DbSet<TagInformation> TagInformations { get; set; }
         public virtual DbSet<Follower> Followers { get; set; }
         public virtual DbSet<UserGroup> UserGroups { get; set; }
-        public virtual DbSet<Notification> Notifications { get; set; }
+        public virtual DbSet<LogType> LogTypes { get; set; }
         public virtual DbSet<PhotoAlbum> PhotoAlbums { get; set; }
         public virtual DbSet<SharePhoto> SharePhotoes { get; set; }
         public virtual DbSet<Comment> Comments { get; set; }
         public virtual DbSet<Like> Likes { get; set; }
         public virtual DbSet<PhotoFile> PhotoFiles { get; set; }
+        public virtual DbSet<Log> Logs { get; set; }
     
-        public virtual ObjectResult<GetUsersByUserId_Result> GetUsersByUserId(string userId)
+        public virtual int etUserLikeUserName(string userName, string userId)
         {
+            var userNameParameter = userName != null ?
+                new ObjectParameter("UserName", userName) :
+                new ObjectParameter("UserName", typeof(string));
+    
             var userIdParameter = userId != null ?
                 new ObjectParameter("UserId", userId) :
                 new ObjectParameter("UserId", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetUsersByUserId_Result>("GetUsersByUserId", userIdParameter);
-        }
-    
-        public virtual ObjectResult<ReadPhoto_Result> ReadPhoto(Nullable<int> photoFileId)
-        {
-            var photoFileIdParameter = photoFileId.HasValue ?
-                new ObjectParameter("photoFileId", photoFileId) :
-                new ObjectParameter("photoFileId", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ReadPhoto_Result>("ReadPhoto", photoFileIdParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("etUserLikeUserName", userNameParameter, userIdParameter);
         }
     
         public virtual ObjectResult<GetFollowersByUserId_Result> GetFollowersByUserId(string userId)
@@ -85,6 +80,37 @@ namespace PhotoSharingDataModel
                 new ObjectParameter("UserId", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetPhotosByUserId_Result>("GetPhotosByUserId", userIdParameter);
+        }
+    
+        public virtual ObjectResult<GetUserLikeUserName_Result> GetUserLikeUserName(string userName, string userId)
+        {
+            var userNameParameter = userName != null ?
+                new ObjectParameter("UserName", userName) :
+                new ObjectParameter("UserName", typeof(string));
+    
+            var userIdParameter = userId != null ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetUserLikeUserName_Result>("GetUserLikeUserName", userNameParameter, userIdParameter);
+        }
+    
+        public virtual ObjectResult<GetUsersByUserId_Result> GetUsersByUserId(string userId)
+        {
+            var userIdParameter = userId != null ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetUsersByUserId_Result>("GetUsersByUserId", userIdParameter);
+        }
+    
+        public virtual ObjectResult<ReadPhoto_Result> ReadPhoto(Nullable<int> photoFileId)
+        {
+            var photoFileIdParameter = photoFileId.HasValue ?
+                new ObjectParameter("photoFileId", photoFileId) :
+                new ObjectParameter("photoFileId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ReadPhoto_Result>("ReadPhoto", photoFileIdParameter);
         }
     }
 }

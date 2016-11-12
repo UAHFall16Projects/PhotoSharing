@@ -70,6 +70,9 @@
     <Compile Include="GetPhotosByUserId_Result.cs">
       <DependentUpon>PhotoSharing.tt</DependentUpon>
     </Compile>
+    <Compile Include="GetUserLikeUserName_Result.cs">
+      <DependentUpon>PhotoSharing.tt</DependentUpon>
+    </Compile>
     <Compile Include="GetUsersByUserId_Result.cs">
       <DependentUpon>PhotoSharing.tt</DependentUpon>
     </Compile>
@@ -82,7 +85,7 @@
     <Compile Include="Log.cs">
       <DependentUpon>PhotoSharing.tt</DependentUpon>
     </Compile>
-    <Compile Include="Notification.cs">
+    <Compile Include="LogType.cs">
       <DependentUpon>PhotoSharing.tt</DependentUpon>
     </Compile>
     <Compile Include="Photo.cs">

@@ -1,0 +1,45 @@
+﻿@model PhotoSharing.Models.FollowUserPhotoViewModel
+
+
+<div class="modal-body UserEdit">
+    <link src="@Url.Content("~/Content/Css/bundle-desktop-dp-modules-3-e85ec347.css")" rel="stylesheet" type="text/css" />
+    <script src="~/Scripts/JS/AutoCompleteFollowup.js"></script>
+    @using (Html.BeginForm("UpdateFollowUsers", "Profile", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+        <h2>Follow Users</h2>
+        <hr />
+        <div class="form-group row" style="padding-top:20px; height:350px">
+            <div class="col-md-3">
+                @Html.LabelFor(model => model.SearchUser, htmlAttributes: new { @class = "control-label" })
+            </div>
+            <div class="col-md-9">
+                @Html.EditorFor(model => model.SearchUser, new { htmlAttributes = new { @class = "form-control", @id = "searchFollowUser", @style = "min-width:100%" } })
+            </div>
+        </div>
+
+        <hr/>
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <button type="button" class="btn btn-default" data-dismiss="modal">
+                    Cancel
+                </button>
+            </div>
+            <div class="col-md-3">
+                <button type="submit" id="approve-btn" class="btn btn-danger">
+                    Follow Users
+                </button>
+            </div>
+        </div>
+    }
+    </div>
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+<script type="text/javascript">
+    $(function () {
+        $('#approve-btn').click(function () {
+            $('#modal-container').modal('hide');
+        });
+    });
+</script>

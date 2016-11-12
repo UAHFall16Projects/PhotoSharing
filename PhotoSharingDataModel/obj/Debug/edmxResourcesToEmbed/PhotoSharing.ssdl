@@ -46,17 +46,18 @@
       <PropertyRef Name="LogID" />
     </Key>
     <Property Name="LogID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Date" Type="datetime" />
-    <Property Name="LoggerId" Type="nvarchar" MaxLength="128" Nullable="false" />
-    <Property Name="PhotoId" Type="int" Nullable="false" />
+    <Property Name="LogDate" Type="datetime" />
+    <Property Name="LoggerId" Type="nvarchar" MaxLength="128" />
+    <Property Name="PhotoId" Type="int" />
+    <Property Name="AffectedId" Type="nvarchar" MaxLength="128" />
+    <Property Name="LogTypeId" Type="int" />
   </EntityType>
-  <EntityType Name="Notifications">
+  <EntityType Name="LogTypes">
     <Key>
-      <PropertyRef Name="NotificationID" />
+      <PropertyRef Name="LogTypeID" />
     </Key>
-    <Property Name="NotificationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="UserID" Type="nvarchar" MaxLength="128" Nullable="false" />
-    <Property Name="LogLogID" Type="int" Nullable="false" />
+    <Property Name="LogTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Type" Type="nvarchar" MaxLength="256" Nullable="false" />
   </EntityType>
   <EntityType Name="PhotoAlbums">
     <Key>
@@ -86,6 +87,7 @@
     <Property Name="TotalLikes" Type="int" />
     <Property Name="UploadedUserId" Type="nvarchar" MaxLength="128" Nullable="false" />
     <Property Name="PhotoFileId" Type="int" Nullable="false" />
+    <Property Name="Deleted" Type="bit" />
   </EntityType>
   <EntityType Name="SharePhotoes">
     <Key>
@@ -202,20 +204,8 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_LogNotification">
-    <End Role="Logs" Type="Self.Logs" Multiplicity="1" />
-    <End Role="Notifications" Type="Self.Notifications" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Logs">
-        <PropertyRef Name="LogID" />
-      </Principal>
-      <Dependent Role="Notifications">
-        <PropertyRef Name="LogLogID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_LogPhoto">
-    <End Role="Photos" Type="Self.Photos" Multiplicity="1" />
+    <End Role="Photos" Type="Self.Photos" Multiplicity="0..1" />
     <End Role="Logs" Type="Self.Logs" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Photos">
@@ -223,6 +213,18 @@
       </Principal>
       <Dependent Role="Logs">
         <PropertyRef Name="PhotoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LogTypeLog">
+    <End Role="LogTypes" Type="Self.LogTypes" Multiplicity="0..1" />
+    <End Role="Logs" Type="Self.Logs" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LogTypes">
+        <PropertyRef Name="LogTypeID" />
+      </Principal>
+      <Dependent Role="Logs">
+        <PropertyRef Name="LogTypeId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -347,7 +349,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_UserLog">
-    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
     <End Role="Logs" Type="Self.Logs" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Users">
@@ -358,15 +360,15 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_UserNotification">
-    <End Role="Users" Type="Self.Users" Multiplicity="1" />
-    <End Role="Notifications" Type="Self.Notifications" Multiplicity="*" />
+  <Association Name="FK_UserLog1">
+    <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+    <End Role="Logs" Type="Self.Logs" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Users">
         <PropertyRef Name="UserID" />
       </Principal>
-      <Dependent Role="Notifications">
-        <PropertyRef Name="UserID" />
+      <Dependent Role="Logs">
+        <PropertyRef Name="AffectedId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -439,6 +441,10 @@
   <Function Name="GetPhotosByUserId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="photoShare">
     <Parameter Name="UserId" Type="nvarchar" Mode="In" />
   </Function>
+  <Function Name="GetUserLikeUserName" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="photoShare">
+    <Parameter Name="UserName" Type="nvarchar" Mode="In" />
+    <Parameter Name="UserId" Type="nvarchar" Mode="In" />
+  </Function>
   <Function Name="GetUsersByUserId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="photoShare">
     <Parameter Name="UserId" Type="nvarchar" Mode="In" />
   </Function>
@@ -452,7 +458,7 @@
     <EntitySet Name="Groups" EntityType="Self.Groups" Schema="photoShare" store:Type="Tables" />
     <EntitySet Name="Likes" EntityType="Self.Likes" Schema="photoShare" store:Type="Tables" />
     <EntitySet Name="Logs" EntityType="Self.Logs" Schema="photoShare" store:Type="Tables" />
-    <EntitySet Name="Notifications" EntityType="Self.Notifications" Schema="photoShare" store:Type="Tables" />
+    <EntitySet Name="LogTypes" EntityType="Self.LogTypes" Schema="photoShare" store:Type="Tables" />
     <EntitySet Name="PhotoAlbums" EntityType="Self.PhotoAlbums" Schema="photoShare" store:Type="Tables" />
     <EntitySet Name="PhotoFiles" EntityType="Self.PhotoFiles" Schema="photoShare" store:Type="Tables" />
     <EntitySet Name="Photos" EntityType="Self.Photos" Schema="photoShare" store:Type="Tables" />
@@ -484,12 +490,12 @@
       <End Role="Photos" EntitySet="Photos" />
       <End Role="Likes" EntitySet="Likes" />
     </AssociationSet>
-    <AssociationSet Name="FK_LogNotification" Association="Self.FK_LogNotification">
-      <End Role="Logs" EntitySet="Logs" />
-      <End Role="Notifications" EntitySet="Notifications" />
-    </AssociationSet>
     <AssociationSet Name="FK_LogPhoto" Association="Self.FK_LogPhoto">
       <End Role="Photos" EntitySet="Photos" />
+      <End Role="Logs" EntitySet="Logs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LogTypeLog" Association="Self.FK_LogTypeLog">
+      <End Role="LogTypes" EntitySet="LogTypes" />
       <End Role="Logs" EntitySet="Logs" />
     </AssociationSet>
     <AssociationSet Name="FK_PhotoAlbumPhoto" Association="Self.FK_PhotoAlbumPhoto">
@@ -536,9 +542,9 @@
       <End Role="Users" EntitySet="Users" />
       <End Role="Logs" EntitySet="Logs" />
     </AssociationSet>
-    <AssociationSet Name="FK_UserNotification" Association="Self.FK_UserNotification">
+    <AssociationSet Name="FK_UserLog1" Association="Self.FK_UserLog1">
       <End Role="Users" EntitySet="Users" />
-      <End Role="Notifications" EntitySet="Notifications" />
+      <End Role="Logs" EntitySet="Logs" />
     </AssociationSet>
     <AssociationSet Name="FK_UserPhoto" Association="Self.FK_UserPhoto">
       <End Role="Photos" EntitySet="Photos" />

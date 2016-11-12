@@ -7,3 +7,4 @@ C:\Users\Rohit\Documents\GitHub\PhotoSharing\PhotoSharingDataModel\bin\Debug\Ent
 C:\Users\Rohit\Documents\GitHub\PhotoSharing\PhotoSharingDataModel\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\Rohit\Documents\GitHub\PhotoSharing\PhotoSharingDataModel\obj\Debug\PhotoSharingDataModel.dll
 C:\Users\Rohit\Documents\GitHub\PhotoSharing\PhotoSharingDataModel\obj\Debug\PhotoSharingDataModel.pdb
+C:\Users\Rohit\Documents\GitHub\PhotoSharing\PhotoSharingDataModel\obj\Debug\PhotoSharingDLL.csprojResolveAssemblyReference.cache

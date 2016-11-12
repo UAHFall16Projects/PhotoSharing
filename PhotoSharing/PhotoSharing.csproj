@@ -129,8 +129,9 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Owin">
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
@@ -283,6 +284,8 @@
     <Content Include="Content\datepicker.css" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\Images\DefaultProfilePic.png" />
+    <Content Include="Content\Images\ShareIcon.png" />
+    <Content Include="Content\Images\ui-anim_basic_16x16.gif" />
     <Content Include="Content\Images\uploadImage_Default.png" />
     <Content Include="Content\Images\webapp-common.png" />
     <Content Include="Content\jquery-ui.css" />
@@ -333,14 +336,30 @@
     <Content Include="Scripts\jquery-3.1.1.min.js" />
     <Content Include="Scripts\jquery-3.1.1.slim.js" />
     <Content Include="Scripts\jquery-3.1.1.slim.min.js" />
+    <Content Include="Scripts\JS\AutoCompleteFollowup.js" />
+    <Content Include="Scripts\JS\AutoComplete.js" />
     <Content Include="Scripts\JS\BootstrapDialog.js" />
     <Content Include="Scripts\JS\custom-file-input.js" />
     <Content Include="Scripts\JS\jquery.custom-file-input.js" />
+    <Content Include="Scripts\JS\MoalContainerLoad.js" />
     <Content Include="Scripts\JS\onLoadFunctions.js" />
     <Content Include="Scripts\knockout-2.3.0.debug.js" />
     <Content Include="Scripts\knockout-2.3.0.js" />
     <Content Include="Scripts\knockout.validation.debug.js" />
     <Content Include="Scripts\knockout.validation.js" />
+    <Content Include="Scripts\Lightbox\images\close.png" />
+    <Content Include="Scripts\Lightbox\images\loading.gif" />
+    <Content Include="Scripts\Lightbox\images\next.png" />
+    <Content Include="Scripts\Lightbox\images\prev.png" />
+    <Content Include="Scripts\Lightbox\images\recycling-bin.png" />
+    <Content Include="Scripts\Lightbox\images\recycling-bin1.png" />
+    <Content Include="Scripts\Lightbox\images\tool.png" />
+    <Content Include="Scripts\Lightbox\images\tool1.png" />
+    <Content Include="Scripts\Lightbox\images\trash_24x24.png" />
+    <Content Include="Scripts\Lightbox\images\trash_32x32.png" />
+    <Content Include="Scripts\Lightbox\lightbox.css" />
+    <Content Include="Scripts\Lightbox\lightbox.js" />
+    <Content Include="Scripts\Lightbox\lightbox.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\moment-with-locales.js" />
     <Content Include="Scripts\moment-with-locales.min.js" />
@@ -399,6 +418,9 @@
     <Content Include="Views\Profile\ProfileEditDetails.cshtml" />
     <Content Include="Views\Profile\ChangePassword.cshtml" />
     <Content Include="Views\Home\UserPhotos.cshtml" />
+    <Content Include="Views\Home\UploadPhoto.cshtml" />
+    <Content Include="Views\Home\SharePhoto.cshtml" />
+    <Content Include="Views\Profile\FollowUsers.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

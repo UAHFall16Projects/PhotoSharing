@@ -6,12 +6,47 @@
     @Scripts.Render("~/bundles/app")
 <script type="text/javascript">
     $(document).ready(function () { // JQuery not loaded here, $ is undefined
-            var urlUserPhotos = '@Url.Action("UserPhotos", "Home")';
+      
+        var urlUserPhotos = '@Url.Action("UserPhotos", "Home")';
+        reloadPhotos();
+        function reloadPhotos() {
+            $('#homeUserPhtotos').load(urlUserPhotos);
+        }
         $('#homeNavigation a').click(function () {
             $("a.active").removeClass("active");
                 $(this).addClass("active");
-                $('#homeUserPhtotos').load(urlUserPhotos);
-            })
+                reloadPhotos();
+        })
+        function loadImgFromURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#uploadedImg')
+                        .attr('src', e.target.result)
+                        .width(150)
+                        .height(200);
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $('.lb-loader, .lb-delete').on('click', function () {
+            var photoid = $(this).attr('photoid');
+            $.ajax({
+                url: "/Home/DeletePhoto",
+                type: "POST",
+                data: JSON.stringify({ 'photoId': photoid }),
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    $('#homeUserPhtotos').html(data);
+                },
+                error: function () {
+                    alert("An error has occured!!!");
+                }
+            });
+        })
+       
         });
 </script>
 }

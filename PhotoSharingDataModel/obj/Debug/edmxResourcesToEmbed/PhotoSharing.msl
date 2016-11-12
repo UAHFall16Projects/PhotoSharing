@@ -28,6 +28,7 @@
           <ScalarProperty Name="TotalLikes" ColumnName="TotalLikes" />
           <ScalarProperty Name="UploadedUserId" ColumnName="UploadedUserId" />
           <ScalarProperty Name="PhotoFileId" ColumnName="PhotoFileId" />
+          <ScalarProperty Name="Deleted" ColumnName="Deleted" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -47,16 +48,6 @@
           <ScalarProperty Name="GroupID" ColumnName="GroupID" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="OwnerId" ColumnName="OwnerId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Logs">
-      <EntityTypeMapping TypeName="IsTypeOf(PhotoSharing.Log)">
-        <MappingFragment StoreEntitySet="Logs">
-          <ScalarProperty Name="LogID" ColumnName="LogID" />
-          <ScalarProperty Name="Date" ColumnName="Date" />
-          <ScalarProperty Name="LoggerId" ColumnName="LoggerId" />
-          <ScalarProperty Name="PhotoId" ColumnName="PhotoId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -87,12 +78,11 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Notifications">
-      <EntityTypeMapping TypeName="IsTypeOf(PhotoSharing.Notification)">
-        <MappingFragment StoreEntitySet="Notifications">
-          <ScalarProperty Name="NotificationID" ColumnName="NotificationID" />
-          <ScalarProperty Name="UserID" ColumnName="UserID" />
-          <ScalarProperty Name="LogLogID" ColumnName="LogLogID" />
+    <EntitySetMapping Name="LogTypes">
+      <EntityTypeMapping TypeName="IsTypeOf(PhotoSharing.LogType)">
+        <MappingFragment StoreEntitySet="LogTypes">
+          <ScalarProperty Name="LogTypeID" ColumnName="LogTypeID" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -144,6 +134,18 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Logs">
+      <EntityTypeMapping TypeName="IsTypeOf(PhotoSharing.Log)">
+        <MappingFragment StoreEntitySet="Logs">
+          <ScalarProperty Name="LogID" ColumnName="LogID" />
+          <ScalarProperty Name="LogDate" ColumnName="LogDate" />
+          <ScalarProperty Name="LoggerId" ColumnName="LoggerId" />
+          <ScalarProperty Name="PhotoId" ColumnName="PhotoId" />
+          <ScalarProperty Name="AffectedId" ColumnName="AffectedId" />
+          <ScalarProperty Name="LogTypeId" ColumnName="LogTypeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <AssociationSetMapping Name="GroupSharePhoto" TypeName="PhotoSharing.GroupSharePhoto" StoreEntitySet="SharePhotoes">
       <EndProperty Name="Group">
         <ScalarProperty Name="GroupID" ColumnName="GroupSharePhoto_SharePhoto_GroupID" />
@@ -153,32 +155,6 @@
       </EndProperty>
       <Condition ColumnName="GroupSharePhoto_SharePhoto_GroupID" IsNull="false" />
     </AssociationSetMapping>
-    <FunctionImportMapping FunctionImportName="GetUsersByUserId" FunctionName="PhotoSharing.Store.GetUsersByUserId">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="PhotoSharing.GetUsersByUserId_Result">
-          <ScalarProperty Name="UserID" ColumnName="UserID" />
-          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-          <ScalarProperty Name="LastName" ColumnName="LastName" />
-          <ScalarProperty Name="Email" ColumnName="Email" />
-          <ScalarProperty Name="UserName" ColumnName="UserName" />
-          <ScalarProperty Name="Password" ColumnName="Password" />
-          <ScalarProperty Name="LastLoginTime" ColumnName="LastLoginTime" />
-          <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
-          <ScalarProperty Name="Sex" ColumnName="Sex" />
-          <ScalarProperty Name="Phone" ColumnName="Phone" />
-          <ScalarProperty Name="ProfilePicId" ColumnName="ProfilePicId" />
-          <ScalarProperty Name="photoFileId" ColumnName="photoFileId" />
-          <ScalarProperty Name="content" ColumnName="content" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="ReadPhoto" FunctionName="PhotoSharing.Store.ReadPhoto">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="PhotoSharing.ReadPhoto_Result">
-          <ScalarProperty Name="Content" ColumnName="Content" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="GetFollowersByUserId" FunctionName="PhotoSharing.Store.GetFollowersByUserId">
       <ResultMapping>
         <ComplexTypeMapping TypeName="PhotoSharing.GetFollowersByUserId_Result">
@@ -210,6 +186,45 @@
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="UploadedUserId" ColumnName="UploadedUserId" />
           <ScalarProperty Name="TotalLikes" ColumnName="TotalLikes" />
+          <ScalarProperty Name="PhotoOwner" ColumnName="PhotoOwner" />
+          <ScalarProperty Name="OwnerName" ColumnName="OwnerName" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetUserLikeUserName" FunctionName="PhotoSharing.Store.GetUserLikeUserName">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PhotoSharing.GetUserLikeUserName_Result">
+          <ScalarProperty Name="label" ColumnName="label" />
+          <ScalarProperty Name="value" ColumnName="value" />
+          <ScalarProperty Name="ProfilePicId" ColumnName="ProfilePicId" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="FullName" ColumnName="FullName" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetUsersByUserId" FunctionName="PhotoSharing.Store.GetUsersByUserId">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PhotoSharing.GetUsersByUserId_Result">
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="LastLoginTime" ColumnName="LastLoginTime" />
+          <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+          <ScalarProperty Name="Sex" ColumnName="Sex" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="ProfilePicId" ColumnName="ProfilePicId" />
+          <ScalarProperty Name="photoFileId" ColumnName="photoFileId" />
+          <ScalarProperty Name="content" ColumnName="content" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ReadPhoto" FunctionName="PhotoSharing.Store.ReadPhoto">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PhotoSharing.ReadPhoto_Result">
+          <ScalarProperty Name="Content" ColumnName="Content" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>

@@ -29,6 +29,7 @@ namespace PhotoSharing
                 "~/Scripts/app/home.viewmodel.js",
                 "~/Scripts/JS/jquery.custom-file-input.js",
                 "~/Scripts/JS/custom-file-input.js",
+                "~/Scripts/Lightbox/lightbox.js",
                 "~/Scripts/app/_run.js"));
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
@@ -48,8 +49,7 @@ namespace PhotoSharing
                  "~/Content/Css/bundle-desktop-dp-modules-1-3f8f9c24.css",
                  "~/Content/Css/bundle-desktop-dp-modules-2-22de1ddc.css",
                  "~/Content/Css/bundle-desktop-dp-modules-3-baf0a5d7.css",
-                 //"~/Content/Css/bundle-desktop-dp-modules-3-e85ec347.css",
-                 //"~/Content/Css/bundle-desktop-dp-modules-0-a011b3ce.css",
+                 "~/Scripts/lightbox/lightbox.css",
                  "~/Content/Css/component.css", "~/Content/Css/demo.css", "~/Content/Css/normalize.css",
                  "~/Content/Site.css"));
         }

@@ -88,18 +88,18 @@ C:\Users\Rohit\documents\visual studio 2015\Projects\PhotoSharing\PhotoSharing\b
 C:\Users\Rohit\documents\visual studio 2015\Projects\PhotoSharing\PhotoSharing\obj\Debug\PhotoSharing.csprojResolveAssemblyReference.cache
 C:\Users\Rohit\documents\visual studio 2015\Projects\PhotoSharing\PhotoSharing\obj\Debug\PhotoSharing.dll
 C:\Users\Rohit\documents\visual studio 2015\Projects\PhotoSharing\PhotoSharing\obj\Debug\PhotoSharing.pdb
+C:\Users\Rohit\Documents\GitHub\PhotoSharing\PhotoSharing\bin\ApplicationInsights.config
 C:\Users\Rohit\Documents\GitHub\PhotoSharing\PhotoSharing\bin\roslyn\csc.exe
+C:\Users\Rohit\Documents\GitHub\PhotoSharing\PhotoSharing\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
 C:\Users\Rohit\Documents\GitHub\PhotoSharing\PhotoSharing\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
 C:\Users\Rohit\Documents\GitHub\PhotoSharing\PhotoSharing\bin\roslyn\Microsoft.CodeAnalysis.dll
-C:\Users\Rohit\Documents\GitHub\PhotoSharing\PhotoSharing\bin\roslyn\System.Reflection.Metadata.dll
-C:\Users\Rohit\Documents\GitHub\PhotoSharing\PhotoSharing\bin\roslyn\VBCSCompiler.exe
-C:\Users\Rohit\Documents\GitHub\PhotoSharing\PhotoSharing\bin\ApplicationInsights.config
-C:\Users\Rohit\Documents\GitHub\PhotoSharing\PhotoSharing\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
 C:\Users\Rohit\Documents\GitHub\PhotoSharing\PhotoSharing\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
 C:\Users\Rohit\Documents\GitHub\PhotoSharing\PhotoSharing\bin\roslyn\Microsoft.CSharp.Core.targets
 C:\Users\Rohit\Documents\GitHub\PhotoSharing\PhotoSharing\bin\roslyn\Microsoft.VisualBasic.Core.targets
 C:\Users\Rohit\Documents\GitHub\PhotoSharing\PhotoSharing\bin\roslyn\System.Collections.Immutable.dll
+C:\Users\Rohit\Documents\GitHub\PhotoSharing\PhotoSharing\bin\roslyn\System.Reflection.Metadata.dll
 C:\Users\Rohit\Documents\GitHub\PhotoSharing\PhotoSharing\bin\roslyn\vbc.exe
+C:\Users\Rohit\Documents\GitHub\PhotoSharing\PhotoSharing\bin\roslyn\VBCSCompiler.exe
 C:\Users\Rohit\Documents\GitHub\PhotoSharing\PhotoSharing\bin\roslyn\VBCSCompiler.exe.config
 C:\Users\Rohit\Documents\GitHub\PhotoSharing\PhotoSharing\bin\PhotoSharing.dll.config
 C:\Users\Rohit\Documents\GitHub\PhotoSharing\PhotoSharing\bin\PhotoSharing.dll

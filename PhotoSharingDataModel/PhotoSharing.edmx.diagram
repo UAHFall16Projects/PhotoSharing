@@ -9,7 +9,6 @@
         <EntityTypeShape EntityType="PhotoSharing.Photo" Width="1.5" PointX="10.375" PointY="12" />
         <EntityTypeShape EntityType="PhotoSharing.Album" Width="1.5" PointX="13.375" PointY="10.375" />
         <EntityTypeShape EntityType="PhotoSharing.Group" Width="1.5" PointX="6.375" PointY="10.25" />
-        <EntityTypeShape EntityType="PhotoSharing.Log" Width="1.5" PointX="10.5" PointY="15" />
         <EntityTypeShape EntityType="PhotoSharing.TagInformation" Width="1.5" PointX="8.5" PointY="10.625" />
         <EntityTypeShape EntityType="PhotoSharing.Follower" Width="1.5" PointX="2.625" PointY="11.875" />
         <AssociationConnector Association="PhotoSharing.UserFollower" />
@@ -21,11 +20,7 @@
         <AssociationConnector Association="PhotoSharing.AlbumUser" />
         <AssociationConnector Association="PhotoSharing.UserTagInformation" />
         <AssociationConnector Association="PhotoSharing.PhotoTagInformation" />
-        <EntityTypeShape EntityType="PhotoSharing.Notification" Width="1.5" PointX="2.625" PointY="13.625" />
-        <AssociationConnector Association="PhotoSharing.UserNotification" />
-        <AssociationConnector Association="PhotoSharing.LogNotification" />
-        <AssociationConnector Association="PhotoSharing.UserLog" />
-        <AssociationConnector Association="PhotoSharing.LogPhoto" />
+        <EntityTypeShape EntityType="PhotoSharing.LogType" Width="1.5" PointX="2.625" PointY="13.625" />
         <AssociationConnector Association="PhotoSharing.AlbumPhoto" />
         <EntityTypeShape EntityType="PhotoSharing.PhotoAlbum" Width="1.5" PointX="10.75" PointY="9.75" />
         <AssociationConnector Association="PhotoSharing.PhotoAlbumPhoto" />
@@ -44,6 +39,11 @@
         <AssociationConnector Association="PhotoSharing.GroupSharePhoto" />
         <EntityTypeShape EntityType="PhotoSharing.PhotoFile" Width="1.5" PointX="13.125" PointY="13" />
         <AssociationConnector Association="PhotoSharing.PhotoDataPhoto" />
+        <EntityTypeShape EntityType="PhotoSharing.Log" Width="1.5" PointX="4.25" PointY="15.875" />
+        <AssociationConnector Association="PhotoSharing.UserLog" />
+        <AssociationConnector Association="PhotoSharing.LogPhoto" />
+        <AssociationConnector Association="PhotoSharing.LogTypeLog" />
+        <AssociationConnector Association="PhotoSharing.UserLog1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

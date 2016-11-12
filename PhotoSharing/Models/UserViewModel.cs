@@ -119,24 +119,52 @@ namespace PhotoSharing.Models
         {
 
         }
-        public UserPhotoViewModel(List<GetPhotosByUserId_Result> savedPhotos)
+        public UserPhotoViewModel(List<GetPhotosByUserId_Result> savedPhotos, string userId)
         {
-            FillUserPhotos(savedPhotos);
-
+            FillPhotosByUserId_Result(savedPhotos);
+            UserId = userId;
         }
 
-        public void FillUserPhotos(List<GetPhotosByUserId_Result> savedPhotos)
+        public void FillPhotosByUserId_Result(List<GetPhotosByUserId_Result> savedPhotos)
         {
-            PhotosIds = new List<int>();
-            foreach (var savedPhoto in savedPhotos)
-            {
-                PhotosIds.Add(savedPhoto.PhotoFileID);
-            }
+            PhotosByUserId_Result = new List<GetPhotosByUserId_Result>();
+            PhotosByUserId_Result = savedPhotos;
         }
 
         [Display(Name = "Photos")]
-        public List<int> PhotosIds
+        public List<GetPhotosByUserId_Result> PhotosByUserId_Result
         { get; set; }
 
-    } 
+        [Display(Name = "UserId")]
+        public string UserId
+        { get; set; }
+
+    }
+
+    public class UploadUserPhotoViewModel
+    {
+        [Display(Name = "Description")]
+        public string Description { get; set; }
+
+        [Display(Name = "Picture")]
+        public byte[] ImageData { get; set; }
+    }
+
+    public class ShareUserPhotoViewModel
+    {
+        [Display(Name = "Share With")]
+        public string SearchUser { get; set; }
+
+        [Display(Name = "Picture")]
+        public int SharedPhotoId { get; set; }
+    }
+
+    public class FollowUserPhotoViewModel
+    {
+        [Display(Name = "Search User")]
+        public string SearchUser { get; set; }
+
+
+    }
+
 }
