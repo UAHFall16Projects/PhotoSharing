@@ -32,49 +32,12 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Albums">
-      <EntityTypeMapping TypeName="IsTypeOf(PhotoSharing.Album)">
-        <MappingFragment StoreEntitySet="Albums">
-          <ScalarProperty Name="AlbumID" ColumnName="AlbumID" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="OwnerId" ColumnName="OwnerId" />
-          <ScalarProperty Name="CoverPicId" ColumnName="CoverPicId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Groups">
-      <EntityTypeMapping TypeName="IsTypeOf(PhotoSharing.Group)">
-        <MappingFragment StoreEntitySet="Groups">
-          <ScalarProperty Name="GroupID" ColumnName="GroupID" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="OwnerId" ColumnName="OwnerId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="TagInformations">
-      <EntityTypeMapping TypeName="IsTypeOf(PhotoSharing.TagInformation)">
-        <MappingFragment StoreEntitySet="TagInformations">
-          <ScalarProperty Name="TagInformationID" ColumnName="TagInformationID" />
-          <ScalarProperty Name="UserUserID" ColumnName="UserUserID" />
-          <ScalarProperty Name="PhotoId" ColumnName="PhotoId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Followers">
       <EntityTypeMapping TypeName="IsTypeOf(PhotoSharing.Follower)">
         <MappingFragment StoreEntitySet="Followers">
           <ScalarProperty Name="FollowerID" ColumnName="FollowerID" />
           <ScalarProperty Name="UserId" ColumnName="UserId" />
           <ScalarProperty Name="UserFollowerId" ColumnName="UserFollowerId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="UserGroups">
-      <EntityTypeMapping TypeName="IsTypeOf(PhotoSharing.UserGroup)">
-        <MappingFragment StoreEntitySet="UserGroups">
-          <ScalarProperty Name="UserGroupID" ColumnName="UserGroupID" />
-          <ScalarProperty Name="UserId" ColumnName="UserId" />
-          <ScalarProperty Name="GroupId" ColumnName="GroupId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -86,15 +49,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="PhotoAlbums">
-      <EntityTypeMapping TypeName="IsTypeOf(PhotoSharing.PhotoAlbum)">
-        <MappingFragment StoreEntitySet="PhotoAlbums">
-          <ScalarProperty Name="PhotoAlbumID" ColumnName="PhotoAlbumID" />
-          <ScalarProperty Name="PhotoId" ColumnName="PhotoId" />
-          <ScalarProperty Name="AlbumId" ColumnName="AlbumId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="SharePhotoes">
       <EntityTypeMapping TypeName="IsTypeOf(PhotoSharing.SharePhoto)">
         <MappingFragment StoreEntitySet="SharePhotoes">
@@ -103,24 +57,6 @@
           <ScalarProperty Name="GroupId" ColumnName="GroupId" />
           <ScalarProperty Name="PhotoId" ColumnName="PhotoId" />
           <ScalarProperty Name="AlbumId" ColumnName="AlbumId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Comments">
-      <EntityTypeMapping TypeName="IsTypeOf(PhotoSharing.Comment)">
-        <MappingFragment StoreEntitySet="Comments">
-          <ScalarProperty Name="CommentID" ColumnName="CommentID" />
-          <ScalarProperty Name="UserId" ColumnName="UserId" />
-          <ScalarProperty Name="PhotoId" ColumnName="PhotoId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Likes">
-      <EntityTypeMapping TypeName="IsTypeOf(PhotoSharing.Like)">
-        <MappingFragment StoreEntitySet="Likes">
-          <ScalarProperty Name="LikeID" ColumnName="LikeID" />
-          <ScalarProperty Name="UserId" ColumnName="UserId" />
-          <ScalarProperty Name="PhotoId" ColumnName="PhotoId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -143,18 +79,10 @@
           <ScalarProperty Name="PhotoId" ColumnName="PhotoId" />
           <ScalarProperty Name="AffectedId" ColumnName="AffectedId" />
           <ScalarProperty Name="LogTypeId" ColumnName="LogTypeId" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <AssociationSetMapping Name="GroupSharePhoto" TypeName="PhotoSharing.GroupSharePhoto" StoreEntitySet="SharePhotoes">
-      <EndProperty Name="Group">
-        <ScalarProperty Name="GroupID" ColumnName="GroupSharePhoto_SharePhoto_GroupID" />
-      </EndProperty>
-      <EndProperty Name="SharePhoto">
-        <ScalarProperty Name="SharePhotoID" ColumnName="SharePhotoID" />
-      </EndProperty>
-      <Condition ColumnName="GroupSharePhoto_SharePhoto_GroupID" IsNull="false" />
-    </AssociationSetMapping>
     <FunctionImportMapping FunctionImportName="GetFollowersByUserId" FunctionName="PhotoSharing.Store.GetFollowersByUserId">
       <ResultMapping>
         <ComplexTypeMapping TypeName="PhotoSharing.GetFollowersByUserId_Result">

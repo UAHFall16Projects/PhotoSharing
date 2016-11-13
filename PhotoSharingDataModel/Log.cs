@@ -20,5 +20,6 @@ namespace PhotoSharingDataModel
         public Nullable<int> PhotoId { get; set; }
         public string AffectedId { get; set; }
         public Nullable<int> LogTypeId { get; set; }
+        public string Description { get; set; }
     }
 }

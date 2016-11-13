@@ -51,12 +51,15 @@ namespace PhotoSharing.Controllers
             var following = new List<GetFollowingsByUserId_Result>();
             using (var photoSharing = new PhotoSharingContainer())
             {
-                users = photoSharing.GetUsersByUserId(User.Identity.GetUserId()).First();
+                users = photoSharing.GetUsersByUserId(User.Identity.GetUserId()).FirstOrDefault();
                 followers = photoSharing.GetFollowersByUserId(userId).ToList();
                 following = photoSharing.GetFollowingsByUserId(userId).ToList();
-
             };
-            ProfileViewModel profileVM = new ProfileViewModel(users, followers, following);
+            ProfileViewModel profileVM = new ProfileViewModel();
+            if (users != null)
+            {
+                profileVM = new ProfileViewModel(users, followers, following);
+            }
             return View(profileVM);
         }
 
@@ -91,6 +94,16 @@ namespace PhotoSharing.Controllers
                         photo.PhotoFileId = savedPhotoFile.PhotoFileID;
                         var savedPhoto = photoSharing.Photos.Add(photo);
                         photoSharing.SaveChanges();
+
+                        var log = new Log();
+                        log.LogDate = System.DateTime.Now;
+                        log.LoggerId = User.Identity.GetUserId();
+                        log.LogTypeId = (int)Models.LogType.Upload;
+                        log.PhotoId = savedPhoto.PhotoID;
+                        log.Description = "Profile Image Uploaded";
+                        photoSharing.Logs.Add(log);
+                        photoSharing.SaveChanges();
+
                         savedUser.ProfilePicId = savedPhoto.PhotoID;
                     }
 
@@ -101,6 +114,16 @@ namespace PhotoSharing.Controllers
                     savedUser.Sex = model.Sex;
                     savedUser.Phone = model.Phone;
                     photoSharing.SaveChanges();
+
+                    var logUpdate = new Log();
+                    logUpdate.LogDate = System.DateTime.Now;
+                    logUpdate.LoggerId = User.Identity.GetUserId();
+                    logUpdate.LogTypeId = (int)Models.LogType.Update;
+                    logUpdate.LogTypeId = (int)Models.LogType.Update;
+                    logUpdate.Description = "Profile Details Updated";
+                    photoSharing.Logs.Add(logUpdate);
+                    photoSharing.SaveChanges();
+
                 };
             }
             // If we got this far, something failed, redisplay form
@@ -165,6 +188,16 @@ namespace PhotoSharing.Controllers
                 if (user != null)
                 {
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                    using (var photoSharing = new PhotoSharingContainer())
+                    {
+                        var log = new Log();
+                        log.LogDate = System.DateTime.Now;
+                        log.LoggerId = User.Identity.GetUserId();
+                        log.LogTypeId = (int)Models.LogType.Update;
+                        log.Description = "Password Changed";
+                        photoSharing.Logs.Add(log);
+                        photoSharing.SaveChanges();
+                    }
                 }
                 return RedirectToAction("ProfileDetails");
             }
@@ -188,19 +221,29 @@ namespace PhotoSharing.Controllers
             {
                 foreach (var userName in sharedUsernames.Where(qry => !string.IsNullOrEmpty(qry.Trim())).Select(qry => qry.Trim()))
                 {
-                    var userToShare = photoSharing.Users.Where(qry => qry.UserName == userName).FirstOrDefault();
-                    var existingFollower = photoSharing.Followers.Where(qry => qry.UserFollowerId == userId && qry.UserId == userToShare.UserID).FirstOrDefault();
-                    if (userToShare != null && existingFollower == null)
+                    if (photoSharing.Users.Where(qry => qry.UserName == userName).Any())
                     {
-                        Follower follower = new Follower();
-                        follower.UserFollowerId = User.Identity.GetUserId();
-                        follower.UserId = userToShare.UserID;
-                        photoSharing.Followers.Add(follower);
+                        var userToShare = photoSharing.Users.Where(qry => qry.UserName == userName).FirstOrDefault();
+                        if (userToShare != null && !photoSharing.Followers.Where(qry => qry.UserFollowerId == userId && qry.UserId == userToShare.UserID).Any())
+                        {
+                            Follower follower = new Follower();
+                            follower.UserFollowerId = User.Identity.GetUserId();
+                            follower.UserId = userToShare.UserID;
+                            photoSharing.Followers.Add(follower);
+
+                            var log = new Log();
+                            log.LogDate = System.DateTime.Now;
+                            log.LoggerId = User.Identity.GetUserId();
+                            log.LogTypeId = (int)Models.LogType.Follow;
+                            log.AffectedId = userToShare.UserID;
+                            log.Description = "Followes User";
+                            photoSharing.Logs.Add(log);
+                            photoSharing.SaveChanges();
+                        }
                     }
                 }
                 photoSharing.SaveChanges();
             }
-
             return RedirectToAction("ProfileDetails");
         }
 
@@ -214,6 +257,15 @@ namespace PhotoSharing.Controllers
                 if (follower != null)
                 {
                     photoSharing.Followers.Remove(follower);
+                    photoSharing.SaveChanges();
+
+                    var log = new Log();
+                    log.LogDate = System.DateTime.Now;
+                    log.LoggerId = userFollowerId;
+                    log.LogTypeId = (int)Models.LogType.UnFollow;
+                    log.AffectedId = userId;
+                    log.Description = "UnFollowed User";
+                    photoSharing.Logs.Add(log);
                     photoSharing.SaveChanges();
                 }
             }
@@ -233,6 +285,15 @@ namespace PhotoSharing.Controllers
                     follower.UserFollowerId = User.Identity.GetUserId();
                     follower.UserId = userId;
                     photoSharing.Followers.Add(follower);
+                    photoSharing.SaveChanges();
+
+                    var log = new Log();
+                    log.LogDate = System.DateTime.Now;
+                    log.LoggerId = userFollowerId;
+                    log.LogTypeId = (int)Models.LogType.Follow;
+                    log.AffectedId = userId;
+                    log.Description = "UnFollowed User";
+                    photoSharing.Logs.Add(log);
                     photoSharing.SaveChanges();
                 }
             }

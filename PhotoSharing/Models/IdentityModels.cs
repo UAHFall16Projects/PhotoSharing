@@ -7,6 +7,16 @@ using System.ComponentModel.DataAnnotations;
 
 namespace PhotoSharing.Models
 {
+    public enum LogType
+    {
+        Insert = 1,
+        Update = 2,
+        Delete = 3,
+        Upload = 4,
+        Share = 5,
+        Follow = 6,
+        UnFollow = 7
+    }
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit http://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
     public class ApplicationUser : IdentityUser
     {

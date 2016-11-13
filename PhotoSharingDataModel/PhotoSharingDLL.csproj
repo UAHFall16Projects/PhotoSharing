@@ -51,13 +51,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Album.cs">
-      <DependentUpon>PhotoSharing.tt</DependentUpon>
-    </Compile>
     <Compile Include="Class1.cs" />
-    <Compile Include="Comment.cs">
-      <DependentUpon>PhotoSharing.tt</DependentUpon>
-    </Compile>
     <Compile Include="Follower.cs">
       <DependentUpon>PhotoSharing.tt</DependentUpon>
     </Compile>
@@ -76,12 +70,6 @@
     <Compile Include="GetUsersByUserId_Result.cs">
       <DependentUpon>PhotoSharing.tt</DependentUpon>
     </Compile>
-    <Compile Include="Group.cs">
-      <DependentUpon>PhotoSharing.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Like.cs">
-      <DependentUpon>PhotoSharing.tt</DependentUpon>
-    </Compile>
     <Compile Include="Log.cs">
       <DependentUpon>PhotoSharing.tt</DependentUpon>
     </Compile>
@@ -89,9 +77,6 @@
       <DependentUpon>PhotoSharing.tt</DependentUpon>
     </Compile>
     <Compile Include="Photo.cs">
-      <DependentUpon>PhotoSharing.tt</DependentUpon>
-    </Compile>
-    <Compile Include="PhotoAlbum.cs">
       <DependentUpon>PhotoSharing.tt</DependentUpon>
     </Compile>
     <Compile Include="PhotoFile.cs">
@@ -119,13 +104,7 @@
     <Compile Include="SharePhoto.cs">
       <DependentUpon>PhotoSharing.tt</DependentUpon>
     </Compile>
-    <Compile Include="TagInformation.cs">
-      <DependentUpon>PhotoSharing.tt</DependentUpon>
-    </Compile>
     <Compile Include="User.cs">
-      <DependentUpon>PhotoSharing.tt</DependentUpon>
-    </Compile>
-    <Compile Include="UserGroup.cs">
       <DependentUpon>PhotoSharing.tt</DependentUpon>
     </Compile>
   </ItemGroup>

@@ -29,31 +29,11 @@ namespace PhotoSharingDataModel
     
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Photo> Photos { get; set; }
-        public virtual DbSet<Album> Albums { get; set; }
-        public virtual DbSet<Group> Groups { get; set; }
-        public virtual DbSet<TagInformation> TagInformations { get; set; }
         public virtual DbSet<Follower> Followers { get; set; }
-        public virtual DbSet<UserGroup> UserGroups { get; set; }
         public virtual DbSet<LogType> LogTypes { get; set; }
-        public virtual DbSet<PhotoAlbum> PhotoAlbums { get; set; }
         public virtual DbSet<SharePhoto> SharePhotoes { get; set; }
-        public virtual DbSet<Comment> Comments { get; set; }
-        public virtual DbSet<Like> Likes { get; set; }
         public virtual DbSet<PhotoFile> PhotoFiles { get; set; }
         public virtual DbSet<Log> Logs { get; set; }
-    
-        public virtual int etUserLikeUserName(string userName, string userId)
-        {
-            var userNameParameter = userName != null ?
-                new ObjectParameter("UserName", userName) :
-                new ObjectParameter("UserName", typeof(string));
-    
-            var userIdParameter = userId != null ?
-                new ObjectParameter("UserId", userId) :
-                new ObjectParameter("UserId", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("etUserLikeUserName", userNameParameter, userIdParameter);
-        }
     
         public virtual ObjectResult<GetFollowersByUserId_Result> GetFollowersByUserId(string userId)
         {

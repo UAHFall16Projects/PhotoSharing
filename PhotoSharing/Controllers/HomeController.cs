@@ -54,6 +54,7 @@ namespace PhotoSharing.Controllers
                     var savedPhotoFile = photoSharing.PhotoFiles.Add(photoData);
                     photoSharing.SaveChanges();
 
+                    
                     //Photo object stored to DB
                     Photo photo = new Photo();
                     photo.Name = uploadUserPhoto.FileName;
@@ -63,6 +64,16 @@ namespace PhotoSharing.Controllers
                     photo.PhotoFileId = savedPhotoFile.PhotoFileID;
                     var savedPhoto = photoSharing.Photos.Add(photo);
                     photoSharing.SaveChanges();
+
+                    var log = new Log();
+                    log.LogDate = System.DateTime.Now;
+                    log.LoggerId = User.Identity.GetUserId();
+                    log.LogTypeId = (int)Models.LogType.Upload;
+                    log.PhotoId = savedPhotoFile.PhotoFileID;
+                    log.Description = "User Uploaded Photo";
+                    photoSharing.Logs.Add(log);
+                    photoSharing.SaveChanges();
+
                 }
             }
             return RedirectToAction("Index");
@@ -76,6 +87,15 @@ namespace PhotoSharing.Controllers
             {
                 var storedPhoto = photoSharing.Photos.Where(qry => qry.PhotoID == photoId).FirstOrDefault();
                 storedPhoto.Deleted = true;
+                photoSharing.SaveChanges();
+
+                var log = new Log();
+                log.LogDate = System.DateTime.Now;
+                log.LoggerId = User.Identity.GetUserId();
+                log.LogTypeId = (int)Models.LogType.Delete;
+                log.PhotoId = photoId;
+                log.Description = "User Deleted Photo";
+                photoSharing.Logs.Add(log);
                 photoSharing.SaveChanges();
             }
             return RedirectToAction("UserPhotos");
@@ -105,6 +125,17 @@ namespace PhotoSharing.Controllers
                         sharePhoto.PhotoId = sharephotoVM.SharedPhotoId;
                         sharePhoto.UserId = userToShare.UserID;
                         photoSharing.SharePhotoes.Add(sharePhoto);
+
+
+                        var log = new Log();
+                        log.LogDate = System.DateTime.Now;
+                        log.LoggerId = User.Identity.GetUserId();
+                        log.LogTypeId = (int)Models.LogType.Share;
+                        log.PhotoId = sharephotoVM.SharedPhotoId;
+                        log.AffectedId = userToShare.UserID;
+                        log.Description = "User Shared Photo";
+                        photoSharing.Logs.Add(log);
+                        photoSharing.SaveChanges();
                     }
                 }
                 photoSharing.SaveChanges();
