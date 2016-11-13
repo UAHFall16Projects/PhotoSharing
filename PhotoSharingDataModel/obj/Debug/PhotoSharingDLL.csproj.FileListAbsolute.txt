@@ -8,3 +8,13 @@ C:\Users\Rohit\Documents\GitHub\PhotoSharing\PhotoSharingDataModel\bin\Debug\Ent
 C:\Users\Rohit\Documents\GitHub\PhotoSharing\PhotoSharingDataModel\obj\Debug\PhotoSharingDataModel.dll
 C:\Users\Rohit\Documents\GitHub\PhotoSharing\PhotoSharingDataModel\obj\Debug\PhotoSharingDataModel.pdb
 C:\Users\Rohit\Documents\GitHub\PhotoSharing\PhotoSharingDataModel\obj\Debug\PhotoSharingDLL.csprojResolveAssemblyReference.cache
+C:\Users\Anil\Documents\GitHub\PhotoSharing\PhotoSharingDataModel\bin\Debug\PhotoSharingDataModel.dll.config
+C:\Users\Anil\Documents\GitHub\PhotoSharing\PhotoSharingDataModel\bin\Debug\PhotoSharingDataModel.dll
+C:\Users\Anil\Documents\GitHub\PhotoSharing\PhotoSharingDataModel\bin\Debug\PhotoSharingDataModel.pdb
+C:\Users\Anil\Documents\GitHub\PhotoSharing\PhotoSharingDataModel\bin\Debug\EntityFramework.dll
+C:\Users\Anil\Documents\GitHub\PhotoSharing\PhotoSharingDataModel\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Anil\Documents\GitHub\PhotoSharing\PhotoSharingDataModel\bin\Debug\EntityFramework.xml
+C:\Users\Anil\Documents\GitHub\PhotoSharing\PhotoSharingDataModel\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Anil\Documents\GitHub\PhotoSharing\PhotoSharingDataModel\obj\Debug\PhotoSharingDLL.csprojResolveAssemblyReference.cache
+C:\Users\Anil\Documents\GitHub\PhotoSharing\PhotoSharingDataModel\obj\Debug\PhotoSharingDataModel.dll
+C:\Users\Anil\Documents\GitHub\PhotoSharing\PhotoSharingDataModel\obj\Debug\PhotoSharingDataModel.pdb
