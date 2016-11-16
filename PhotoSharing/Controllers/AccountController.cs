@@ -90,6 +90,20 @@ namespace PhotoSharing.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
+                    using (var photoSharing = new PhotoSharingContainer())
+                    {
+                        var user = photoSharing.Users.FirstOrDefault(qry => qry.UserName == model.Email);
+                        if (user != null)
+                        {
+                            var log = new Log();
+                            log.LogDate = System.DateTime.Now;
+                            log.LoggerId = user.UserID;
+                            log.LogTypeId = (int)Models.LogType.Login;
+                            log.Description = string.Format("User Logged In");
+                            photoSharing.Logs.Add(log);
+                        }
+                        photoSharing.SaveChanges();
+                    }
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
@@ -137,7 +151,7 @@ namespace PhotoSharing.Controllers
                         log.LogDate = System.DateTime.Now;
                         log.LoggerId = User.Identity.GetUserId();
                         log.LogTypeId = (int)Models.LogType.Insert;
-                        log.Description = string.Format("User Registered",User.Identity.GetUserId());
+                        log.Description = string.Format("User Registered");
                         photoSharing.Logs.Add(log);
                         photoSharing.SaveChanges();
                     }
@@ -163,6 +177,23 @@ namespace PhotoSharing.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {
+            using (var photoSharing = new PhotoSharingContainer())
+            {
+                var userId = User.Identity.GetUserId();
+                var user = photoSharing.Users.FirstOrDefault(qry => qry.UserID == userId);
+                if (user != null)
+                {
+                    var log = new Log();
+                    log.LogDate = System.DateTime.Now;
+                    log.LoggerId = user.UserID;
+                    log.LogTypeId = (int)Models.LogType.Login;
+                    log.Description = string.Format("User Logged Out");
+                    photoSharing.Logs.Add(log);
+
+                    user.LastLoginTime = System.DateTime.Now;
+                }
+                photoSharing.SaveChanges();
+            }
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
             return RedirectToAction("Index", "Home");
         }
@@ -171,7 +202,7 @@ namespace PhotoSharing.Controllers
         protected override void Dispose(bool disposing)
         {
 
-           if (disposing)
+            if (disposing)
             {
                 if (_userManager != null)
                 {

@@ -189,20 +189,20 @@ CREATE PROCEDURE [photoShare].[GetFollowingsByUserId]
 GO
 
 
-
 USE [PhotoSharing]
 GO
 
-/****** Object:  StoredProcedure [photoShare].[ReadPhoto]    Script Date: 11/9/2016 7:30:44 PM ******/
+/****** Object:  StoredProcedure [photoShare].[GetPhotosByUserId]    Script Date: 11/16/2016 12:28:36 AM ******/
 DROP PROCEDURE [photoShare].[GetPhotosByUserId]
 GO
 
-/****** Object:  StoredProcedure [photoShare].[ReadPhoto]    Script Date: 11/9/2016 7:30:44 PM ******/
+/****** Object:  StoredProcedure [photoShare].[GetPhotosByUserId]    Script Date: 11/16/2016 12:28:36 AM ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
+
 
 
 
@@ -213,7 +213,6 @@ files.FileName,
 files.ContentType, 
 Photos.Description, 
 UploadedUserId, 
-TotalLikes,
  CASE
     WHEN UploadedUserId = @UserId THEN CAST(1 AS BIT)
     ELSE CAST(0 AS BIT)
@@ -237,8 +236,8 @@ WHERE follow.UserFollowerId = @UserId
 
 
 
-GO
 
+GO
 
 
 
@@ -283,6 +282,87 @@ GO
 
 
 
+USE [PhotoSharing]
+GO
+
+/****** Object:  StoredProcedure [photoShare].[GetFollowingNotifications]    Script Date: 11/16/2016 12:17:53 AM ******/
+DROP PROCEDURE [photoShare].[GetFollowingNotifications]
+GO
+
+/****** Object:  StoredProcedure [photoShare].[GetFollowingNotifications]    Script Date: 11/16/2016 12:17:53 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+
+CREATE PROCEDURE [photoShare].[GetFollowingNotifications]
+		@UserId nvarchar(128) = null
+        AS
+        BEGIN
+            -- SET NOCOUNT ON added to prevent extra result sets from
+            -- interfering with SELECT statements.
+            SET NOCOUNT ON;
+			SELECT 
+					logNotificatoin.FullName
+					,logNotificatoin.NotificationCount 
+			FROM
+				(SELECT logger.FirstName+' '+logger.LastName AS FullName, logs.LoggerId, Count([LoggerId]) NotificationCount
+				FROM [PhotoSharing].[photoShare].[Logs] logs
+				INNER JOIN photoShare.Users logger
+				ON logger.UserID = logs.LoggerId 
+				LEFT OUTER JOIN photoShare.Users usr
+				ON usr.UserId = @UserId
+				WHERE logs.LogTypeId = 4 AND usr.LastLoginTime < logs.LogDate
+				GROUP BY logs.LoggerId ,logger.FirstName, logger.LastName) AS logNotificatoin
+				INNER JOIN photoShare.Followers follower
+				ON logNotificatoin.LoggerId = follower.UserId
+				WHERE follower.UserFollowerId = @UserId
+
+        END
+
+
+GO
+
+
+USE [PhotoSharing]
+GO
+
+/****** Object:  StoredProcedure [photoShare].[GetSharingNotifications]    Script Date: 11/16/2016 12:18:11 AM ******/
+DROP PROCEDURE [photoShare].[GetSharingNotifications]
+GO
+
+/****** Object:  StoredProcedure [photoShare].[GetSharingNotifications]    Script Date: 11/16/2016 12:18:11 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+CREATE PROCEDURE [photoShare].[GetSharingNotifications]
+		@UserId nvarchar(128) = null
+        AS
+        BEGIN
+            -- SET NOCOUNT ON added to prevent extra result sets from
+            -- interfering with SELECT statements.
+            SET NOCOUNT ON;
+			SELECT	
+					logger.FirstName+' '+logger.LastName AS FullName
+					, Count([LoggerId]) NotificationCount
+			FROM [PhotoSharing].[photoShare].[Logs] logs
+				INNER JOIN photoShare.Users usr
+				ON usr.UserID = logs.AffectedId AND usr.UserID = @UserId AND usr.LastLoginTime < logs.LogDate AND logs.LogTypeId = 5
+				LEFT OUTER JOIN photoShare.Users logger
+				ON logger.UserID = logs.LoggerId 
+				GROUP BY logs.AffectedId ,logger.FirstName, logger.LastName
+        END
+
+GO
+
+
 
 
 
@@ -314,6 +394,8 @@ GO
 --INSERT [photoShare].[LogTypes] ([LogTypeID], [Type]) VALUES (6, N'Follow')
 --GO
 --INSERT [photoShare].[LogTypes] ([LogTypeID], [Type]) VALUES (7, N'UnFollow')
+--GO
+--INSERT [photoShare].[LogTypes] ([LogTypeID], [Type]) VALUES (8, N'Login')
 --GO
 --SET IDENTITY_INSERT [photoShare].[LogTypes] OFF
 --GO

@@ -55,10 +55,16 @@
     <FunctionImport Name="GetFollowersByUserId" ReturnType="Collection(PhotoSharing.GetFollowersByUserId_Result)">
       <Parameter Name="UserId" Mode="In" Type="String" />
     </FunctionImport>
+    <FunctionImport Name="GetFollowingNotifications" ReturnType="Collection(PhotoSharing.GetFollowingNotifications_Result)">
+      <Parameter Name="UserId" Mode="In" Type="String" />
+    </FunctionImport>
     <FunctionImport Name="GetFollowingsByUserId" ReturnType="Collection(PhotoSharing.GetFollowingsByUserId_Result)">
       <Parameter Name="UserId" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="GetPhotosByUserId" ReturnType="Collection(PhotoSharing.GetPhotosByUserId_Result)">
+      <Parameter Name="UserId" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="GetSharingNotifications" ReturnType="Collection(PhotoSharing.GetSharingNotifications_Result)">
       <Parameter Name="UserId" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="GetUserLikeUserName" ReturnType="Collection(PhotoSharing.GetUserLikeUserName_Result)">
@@ -77,8 +83,8 @@
       <PropertyRef Name="UserID" />
     </Key>
     <Property Name="UserID" Type="String" Nullable="false" annotation:StoreGeneratedPattern="Identity" Unicode="true" MaxLength="128" FixedLength="false" />
-    <Property Name="FirstName" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" Nullable="true" />
-    <Property Name="LastName" Type="String" cg:SetterAccess="Public" MaxLength="Max" Unicode="true" FixedLength="false" Nullable="true" />
+    <Property Name="FirstName" Type="String" MaxLength="256" Unicode="true" FixedLength="false" Nullable="true" />
+    <Property Name="LastName" Type="String" cg:SetterAccess="Public" MaxLength="256" Unicode="true" FixedLength="false" Nullable="true" />
     <Property Name="Email" Type="String" Nullable="false" Unicode="true" MaxLength="256" FixedLength="false" />
     <Property Name="UserName" Type="String" Unicode="true" MaxLength="256" FixedLength="false" />
     <Property Name="Password" Type="String" Unicode="true" MaxLength="Max" FixedLength="false" />
@@ -94,9 +100,7 @@
     </Key>
     <Property Name="PhotoID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Description" Type="String" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
-    <Property Name="GeoTag" Type="String" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
-    <Property Name="Name" Type="String" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
-    <Property Name="TotalLikes" Type="Int32" Nullable="true" />
+    <Property Name="Name" Type="String" Nullable="true" MaxLength="256" Unicode="true" FixedLength="false" />
     <Property Name="UploadedUserId" Type="String" Nullable="false" Unicode="true" MaxLength="128" FixedLength="false" />
     <Property Name="PhotoFileId" Type="Int32" Nullable="false" />
     <Property Name="Deleted" Type="Boolean" Nullable="true" />
@@ -138,7 +142,7 @@
       <PropertyRef Name="LogTypeID" />
     </Key>
     <Property Name="LogTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Type" Type="String" Nullable="false" Unicode="true" MaxLength="256" FixedLength="false" />
+    <Property Name="Type" Type="String" Nullable="false" Unicode="true" MaxLength="10" FixedLength="false" />
   </EntityType>
   <Association Name="UserPhoto">
     <End Type="PhotoSharing.User" Role="User" Multiplicity="*" />
@@ -170,9 +174,7 @@
     </Key>
     <Property Name="SharePhotoID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="UserId" Type="String" Nullable="true" Unicode="true" MaxLength="128" FixedLength="false" />
-    <Property Name="GroupId" Type="Int32" Nullable="true" />
     <Property Name="PhotoId" Type="Int32" Nullable="true" />
-    <Property Name="AlbumId" Type="Int32" Nullable="true" />
   </EntityType>
   <Association Name="UserShareUserPhoto">
     <End Type="PhotoSharing.User" Role="User" Multiplicity="0..1" />
@@ -283,14 +285,18 @@
     <Property Type="Int32" Name="FollowerID" Nullable="false" />
     <Property Type="String" Name="UserId" Nullable="false" MaxLength="128" />
     <Property Type="String" Name="UserFollowerId" Nullable="false" MaxLength="128" />
-    <Property Type="String" Name="FullName" Nullable="true" />
+    <Property Type="String" Name="FullName" Nullable="true" MaxLength="513" />
     <Property Type="Int32" Name="ProfilePicId" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="GetFollowingNotifications_Result">
+    <Property Type="String" Name="FullName" Nullable="true" MaxLength="513" />
+    <Property Type="Int32" Name="NotificationCount" Nullable="true" />
   </ComplexType>
   <ComplexType Name="GetFollowingsByUserId_Result">
     <Property Type="Int32" Name="FollowerID" Nullable="false" />
     <Property Type="String" Name="UserId" Nullable="false" MaxLength="128" />
     <Property Type="String" Name="UserFollowerId" Nullable="false" MaxLength="128" />
-    <Property Type="String" Name="FullName" Nullable="true" />
+    <Property Type="String" Name="FullName" Nullable="true" MaxLength="513" />
     <Property Type="Int32" Name="ProfilePicId" Nullable="true" />
   </ComplexType>
   <ComplexType Name="GetPhotosByUserId_Result">
@@ -299,21 +305,24 @@
     <Property Type="String" Name="ContentType" Nullable="true" MaxLength="100" />
     <Property Type="String" Name="Description" Nullable="true" />
     <Property Type="String" Name="UploadedUserId" Nullable="true" MaxLength="128" />
-    <Property Type="Int32" Name="TotalLikes" Nullable="true" />
     <Property Type="Boolean" Name="PhotoOwner" Nullable="true" />
-    <Property Type="String" Name="OwnerName" Nullable="true" />
+    <Property Type="String" Name="OwnerName" Nullable="true" MaxLength="513" />
+  </ComplexType>
+  <ComplexType Name="GetSharingNotifications_Result">
+    <Property Type="String" Name="FullName" Nullable="true" MaxLength="513" />
+    <Property Type="Int32" Name="NotificationCount" Nullable="true" />
   </ComplexType>
   <ComplexType Name="GetUserLikeUserName_Result">
     <Property Type="String" Name="label" Nullable="true" MaxLength="256" />
     <Property Type="String" Name="value" Nullable="true" MaxLength="256" />
     <Property Type="Int32" Name="ProfilePicId" Nullable="true" />
     <Property Type="String" Name="UserID" Nullable="false" MaxLength="128" />
-    <Property Type="String" Name="FullName" Nullable="true" />
+    <Property Type="String" Name="FullName" Nullable="true" MaxLength="513" />
   </ComplexType>
   <ComplexType Name="GetUsersByUserId_Result">
     <Property Type="String" Name="UserID" Nullable="false" MaxLength="128" />
-    <Property Type="String" Name="FirstName" Nullable="true" />
-    <Property Type="String" Name="LastName" Nullable="true" />
+    <Property Type="String" Name="FirstName" Nullable="true" MaxLength="256" />
+    <Property Type="String" Name="LastName" Nullable="true" MaxLength="256" />
     <Property Type="String" Name="Email" Nullable="false" MaxLength="256" />
     <Property Type="String" Name="UserName" Nullable="true" MaxLength="256" />
     <Property Type="String" Name="Password" Nullable="true" />

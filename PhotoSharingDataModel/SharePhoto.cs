@@ -16,8 +16,6 @@ namespace PhotoSharingDataModel
     {
         public int SharePhotoID { get; set; }
         public string UserId { get; set; }
-        public Nullable<int> GroupId { get; set; }
         public Nullable<int> PhotoId { get; set; }
-        public Nullable<int> AlbumId { get; set; }
     }
 }

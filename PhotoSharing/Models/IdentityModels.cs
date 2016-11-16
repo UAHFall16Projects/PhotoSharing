@@ -15,7 +15,8 @@ namespace PhotoSharing.Models
         Upload = 4,
         Share = 5,
         Follow = 6,
-        UnFollow = 7
+        UnFollow = 7,
+        Login = 8
     }
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit http://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
     public class ApplicationUser : IdentityUser

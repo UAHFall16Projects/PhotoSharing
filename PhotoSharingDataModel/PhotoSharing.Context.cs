@@ -44,6 +44,15 @@ namespace PhotoSharingDataModel
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetFollowersByUserId_Result>("GetFollowersByUserId", userIdParameter);
         }
     
+        public virtual ObjectResult<GetFollowingNotifications_Result> GetFollowingNotifications(string userId)
+        {
+            var userIdParameter = userId != null ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetFollowingNotifications_Result>("GetFollowingNotifications", userIdParameter);
+        }
+    
         public virtual ObjectResult<GetFollowingsByUserId_Result> GetFollowingsByUserId(string userId)
         {
             var userIdParameter = userId != null ?
@@ -60,6 +69,15 @@ namespace PhotoSharingDataModel
                 new ObjectParameter("UserId", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetPhotosByUserId_Result>("GetPhotosByUserId", userIdParameter);
+        }
+    
+        public virtual ObjectResult<GetSharingNotifications_Result> GetSharingNotifications(string userId)
+        {
+            var userIdParameter = userId != null ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetSharingNotifications_Result>("GetSharingNotifications", userIdParameter);
         }
     
         public virtual ObjectResult<GetUserLikeUserName_Result> GetUserLikeUserName(string userName, string userId)

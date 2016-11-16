@@ -236,9 +236,8 @@ namespace PhotoSharing.Controllers
                             log.LoggerId = User.Identity.GetUserId();
                             log.LogTypeId = (int)Models.LogType.Follow;
                             log.AffectedId = userToShare.UserID;
-                            log.Description = "Followes User";
+                            log.Description = "Follow's User";
                             photoSharing.Logs.Add(log);
-                            photoSharing.SaveChanges();
                         }
                     }
                 }
@@ -298,6 +297,29 @@ namespace PhotoSharing.Controllers
                 }
             }
             return RedirectToAction("ProfileDetails");
+        }
+
+
+        [Authorize]
+        public JsonResult GetNotifications()
+        {
+            var followingNotifications = new List<GetFollowingNotifications_Result>();
+            var sharingNotifications = new List<GetSharingNotifications_Result>();
+            using (var photoSharing = new PhotoSharingContainer())
+            {
+                followingNotifications = photoSharing.GetFollowingNotifications(User.Identity.GetUserId()).ToList();
+                sharingNotifications = photoSharing.GetSharingNotifications(User.Identity.GetUserId()).ToList();
+            }
+            var notifications = new List<string>();
+            foreach (var followingNotification in followingNotifications)
+            {
+                notifications.Add(followingNotification.FullName + " uploaded " + followingNotification.NotificationCount+ " photos.");
+            }
+            foreach (var sharingNotification in sharingNotifications)
+            {
+                notifications.Add(sharingNotification.FullName + " shared " + sharingNotification.NotificationCount + " photo/s with you.");
+            }
+            return Json(notifications, JsonRequestBehavior.AllowGet);
         }
     }
 }

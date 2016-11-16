@@ -7,6 +7,21 @@
 <script type="text/javascript">
     $(document).ready(function () { // JQuery not loaded here, $ is undefined
       
+        $.notify.addStyle('happyblue', {
+            html: "<div>☺<span data-notify-text/>☺</div>",
+            classes: {
+                base: {
+                    "white-space": "nowrap",
+                    "background-color": "lightblue",
+                    "padding": "5px"
+                },
+                superblue: {
+                    "color": "white",
+                    "background-color": "blue"
+                }
+            }
+        });
+
         var urlUserPhotos = '@Url.Action("UserPhotos", "Home")';
         reloadPhotos();
         function reloadPhotos() {
@@ -46,7 +61,7 @@
                 }
             });
         })
-       
+     
         });
 </script>
 }

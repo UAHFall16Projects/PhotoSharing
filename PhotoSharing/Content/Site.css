@@ -294,3 +294,30 @@ textarea {
     overflow: scroll;
     overflow-x: hidden;
 }
+
+.ui-notification {
+    width: 24px;
+    height: 28px;
+    top: 9px;
+    background: url('Images/webapp-common.png') -201px -260px no-repeat;
+}
+
+.notifyjs-happyblue-base {
+  white-space: nowrap;
+  background-color: lightblue;
+  padding: 5px;
+}
+.notifyjs-happyblue-superblue {
+  color: white;
+  background-color: blue;
+}
+
+.ui-notificationLink .notifyjs-bootstrap-success {
+    color: #d2322d;
+    background-color: #fff;
+    border-color: #ac2925;
+    background-image: none;
+    right: 10px !important;
+    position: fixed;
+   top: 43px;
+}

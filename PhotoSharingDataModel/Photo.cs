@@ -16,9 +16,7 @@ namespace PhotoSharingDataModel
     {
         public int PhotoID { get; set; }
         public string Description { get; set; }
-        public string GeoTag { get; set; }
         public string Name { get; set; }
-        public Nullable<int> TotalLikes { get; set; }
         public string UploadedUserId { get; set; }
         public int PhotoFileId { get; set; }
         public Nullable<bool> Deleted { get; set; }

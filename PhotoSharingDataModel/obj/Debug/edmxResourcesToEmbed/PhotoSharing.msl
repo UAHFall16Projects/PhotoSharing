@@ -23,9 +23,7 @@
         <MappingFragment StoreEntitySet="Photos">
           <ScalarProperty Name="PhotoID" ColumnName="PhotoID" />
           <ScalarProperty Name="Description" ColumnName="Description" />
-          <ScalarProperty Name="GeoTag" ColumnName="GeoTag" />
           <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="TotalLikes" ColumnName="TotalLikes" />
           <ScalarProperty Name="UploadedUserId" ColumnName="UploadedUserId" />
           <ScalarProperty Name="PhotoFileId" ColumnName="PhotoFileId" />
           <ScalarProperty Name="Deleted" ColumnName="Deleted" />
@@ -54,9 +52,7 @@
         <MappingFragment StoreEntitySet="SharePhotoes">
           <ScalarProperty Name="SharePhotoID" ColumnName="SharePhotoID" />
           <ScalarProperty Name="UserId" ColumnName="UserId" />
-          <ScalarProperty Name="GroupId" ColumnName="GroupId" />
           <ScalarProperty Name="PhotoId" ColumnName="PhotoId" />
-          <ScalarProperty Name="AlbumId" ColumnName="AlbumId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -94,6 +90,14 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetFollowingNotifications" FunctionName="PhotoSharing.Store.GetFollowingNotifications">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PhotoSharing.GetFollowingNotifications_Result">
+          <ScalarProperty Name="FullName" ColumnName="FullName" />
+          <ScalarProperty Name="NotificationCount" ColumnName="NotificationCount" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="GetFollowingsByUserId" FunctionName="PhotoSharing.Store.GetFollowingsByUserId">
       <ResultMapping>
         <ComplexTypeMapping TypeName="PhotoSharing.GetFollowingsByUserId_Result">
@@ -113,9 +117,16 @@
           <ScalarProperty Name="ContentType" ColumnName="ContentType" />
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="UploadedUserId" ColumnName="UploadedUserId" />
-          <ScalarProperty Name="TotalLikes" ColumnName="TotalLikes" />
           <ScalarProperty Name="PhotoOwner" ColumnName="PhotoOwner" />
           <ScalarProperty Name="OwnerName" ColumnName="OwnerName" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetSharingNotifications" FunctionName="PhotoSharing.Store.GetSharingNotifications">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PhotoSharing.GetSharingNotifications_Result">
+          <ScalarProperty Name="FullName" ColumnName="FullName" />
+          <ScalarProperty Name="NotificationCount" ColumnName="NotificationCount" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>

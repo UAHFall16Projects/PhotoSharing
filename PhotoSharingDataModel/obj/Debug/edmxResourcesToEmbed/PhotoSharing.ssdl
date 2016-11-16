@@ -25,7 +25,7 @@
       <PropertyRef Name="LogTypeID" />
     </Key>
     <Property Name="LogTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Type" Type="nvarchar" MaxLength="256" Nullable="false" />
+    <Property Name="Type" Type="nvarchar" MaxLength="10" Nullable="false" />
   </EntityType>
   <EntityType Name="PhotoFiles">
     <Key>
@@ -42,9 +42,7 @@
     </Key>
     <Property Name="PhotoID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Description" Type="nvarchar(max)" />
-    <Property Name="GeoTag" Type="nvarchar(max)" />
-    <Property Name="Name" Type="nvarchar(max)" />
-    <Property Name="TotalLikes" Type="int" />
+    <Property Name="Name" Type="nvarchar" MaxLength="256" />
     <Property Name="UploadedUserId" Type="nvarchar" MaxLength="128" Nullable="false" />
     <Property Name="PhotoFileId" Type="int" Nullable="false" />
     <Property Name="Deleted" Type="bit" />
@@ -55,17 +53,15 @@
     </Key>
     <Property Name="SharePhotoID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="UserId" Type="nvarchar" MaxLength="128" />
-    <Property Name="GroupId" Type="int" />
     <Property Name="PhotoId" Type="int" />
-    <Property Name="AlbumId" Type="int" />
   </EntityType>
   <EntityType Name="Users">
     <Key>
       <PropertyRef Name="UserID" />
     </Key>
     <Property Name="UserID" Type="nvarchar" MaxLength="128" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="FirstName" Type="nvarchar(max)" />
-    <Property Name="LastName" Type="nvarchar(max)" />
+    <Property Name="FirstName" Type="nvarchar" MaxLength="256" />
+    <Property Name="LastName" Type="nvarchar" MaxLength="256" />
     <Property Name="Email" Type="nvarchar" MaxLength="256" Nullable="false" />
     <Property Name="UserName" Type="nvarchar" MaxLength="256" />
     <Property Name="Password" Type="nvarchar(max)" />
@@ -210,10 +206,16 @@
   <Function Name="GetFollowersByUserId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="photoShare">
     <Parameter Name="UserId" Type="nvarchar" Mode="In" />
   </Function>
+  <Function Name="GetFollowingNotifications" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="photoShare">
+    <Parameter Name="UserId" Type="nvarchar" Mode="In" />
+  </Function>
   <Function Name="GetFollowingsByUserId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="photoShare">
     <Parameter Name="UserId" Type="nvarchar" Mode="In" />
   </Function>
   <Function Name="GetPhotosByUserId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="photoShare">
+    <Parameter Name="UserId" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="GetSharingNotifications" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="photoShare">
     <Parameter Name="UserId" Type="nvarchar" Mode="In" />
   </Function>
   <Function Name="GetUserLikeUserName" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="photoShare">

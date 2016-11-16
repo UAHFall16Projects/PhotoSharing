@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 11/12/2016 19:40:27
+-- Date Created: 11/16/2016 00:54:32
 -- Generated from EDMX file: C:\Users\Rohit\Documents\GitHub\PhotoSharing\PhotoSharingDataModel\PhotoSharing.edmx
 -- --------------------------------------------------
 
@@ -84,8 +84,8 @@ GO
 -- Creating table 'Users'
 CREATE TABLE [photoShare].[Users] (
     [UserID] nvarchar(128)  NOT NULL,
-    [FirstName] nvarchar(max)  NULL,
-    [LastName] nvarchar(max)  NULL,
+    [FirstName] nvarchar(256)  NULL,
+    [LastName] nvarchar(256)  NULL,
     [Email] nvarchar(256)  NOT NULL,
     [UserName] nvarchar(256)  NULL,
     [Password] nvarchar(max)  NULL,
@@ -93,7 +93,9 @@ CREATE TABLE [photoShare].[Users] (
     [DateOfBirth] datetime  NULL,
     [Sex] varchar(1)  NULL,
     [Phone] nvarchar(max)  NULL,
-    [ProfilePicId] int  NULL
+    [ProfilePicId] int  NULL,
+	CONSTRAINT CHK_Sex   
+   CHECK (Sex ='M' OR Sex = 'F')
 );
 GO
 
@@ -101,9 +103,7 @@ GO
 CREATE TABLE [photoShare].[Photos] (
     [PhotoID] int IDENTITY(1,1) NOT NULL,
     [Description] nvarchar(max)  NULL,
-    [GeoTag] nvarchar(max)  NULL,
-    [Name] nvarchar(max)  NULL,
-    [TotalLikes] int  NULL,
+    [Name] nvarchar(256)  NULL,
     [UploadedUserId] nvarchar(128)  NOT NULL,
     [PhotoFileId] int  NOT NULL,
     [Deleted] bit  NULL
@@ -121,7 +121,7 @@ GO
 -- Creating table 'LogTypes'
 CREATE TABLE [photoShare].[LogTypes] (
     [LogTypeID] int IDENTITY(1,1) NOT NULL,
-    [Type] nvarchar(256)  NOT NULL
+    [Type] nvarchar(10)  NOT NULL
 );
 GO
 
@@ -129,9 +129,7 @@ GO
 CREATE TABLE [photoShare].[SharePhotoes] (
     [SharePhotoID] int IDENTITY(1,1) NOT NULL,
     [UserId] nvarchar(128)  NULL,
-    [GroupId] int  NULL,
-    [PhotoId] int  NULL,
-    [AlbumId] int  NULL
+    [PhotoId] int  NULL
 );
 GO
 

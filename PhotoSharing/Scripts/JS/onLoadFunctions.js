@@ -24,5 +24,19 @@
 
     });
 
+    $('.ui-notification').on('click', function () {
+        var notifications = '';
+        $.getJSON("/Profile/GetNotifications", function (result) {
+            $.each(result, function (i, notification) {
+                notifications = notifications + notification +'\n';
+            });
+            if (notifications == '') {
+                $('#notificationDiv').notify("All Caught up!!", "success");
+            }
+            else {
+                $('#notificationDiv').notify(notifications, "success");
+            }
+        });
+    });
 
 });

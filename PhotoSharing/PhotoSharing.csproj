@@ -338,6 +338,7 @@
     <Content Include="Scripts\JS\custom-file-input.js" />
     <Content Include="Scripts\JS\jquery.custom-file-input.js" />
     <Content Include="Scripts\JS\MoalContainerLoad.js" />
+    <Content Include="Scripts\JS\notify.js" />
     <Content Include="Scripts\JS\onLoadFunctions.js" />
     <Content Include="Scripts\knockout-2.3.0.debug.js" />
     <Content Include="Scripts\knockout-2.3.0.js" />
